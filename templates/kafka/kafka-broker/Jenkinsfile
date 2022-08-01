@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'DNS_NAME', defaultValue: ' ')
+        string(name: 'DEPENDENCIES', defaultValue: ' ')
+        string(name: 'SERVERS', defaultValue: ' ')
+        string(name: 'IP_EXTERNAL', defaultValue: ' ')
+        string(name: 'IP_INTERNAL', defaultValue: ' ')
+
+    }
+
+    stages {
+        stage('Load Kafka_Broker') {
+            steps {
+              script {
+                echo "Running broker deploy"
+                def dns_arr = "${DNS_NAME}".split(",")
+                def dependencies_arr = "${DEPENDENCIES}".split(",")
+                def server_arr = "${SERVERS}".split(",")
+                def ip_external = "${IP_EXTERNAL}".split(",")
+                def ip_internal = "${IP_INTERNAL}".split(",")
+
+                for (i in dns_arr) {
+                  println "DNS ---> ${i}"
+                }
+                for (i in dependencies_arr) {
+                  println "DEPENDENCIES ---> ${i}"
+                }
+                for (i in server_arr) {
+                  println "SERVERS ---> ${i}"
+                }
+                for (i in ip_external) {
+                  println "IP_EXTERNAL ---> ${i}"
+                }
+                for (i in ip_internal) {
+                  println "IP_INTERNAL ---> ${i}"
+                }
+
+              }
+            }
+        }
+    }
+}
