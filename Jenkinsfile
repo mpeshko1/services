@@ -150,7 +150,8 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                         return inputBox = "value=<input name='value' type='list' class=' '>"
+                         return inputBox = '''value=<input name='value' type='list' class=' '>"
+                         <br> "value=<input name='value' type='list' class=' '>'''
                       }
                     """.stripIndent()
                 ]
