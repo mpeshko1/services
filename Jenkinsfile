@@ -179,30 +179,7 @@ properties([
                 ]
             ]
         ],
-
-        [$class: 'DynamicReferenceParameter',
-            choiceType: 'ET_FORMATTED_HTML',
-            name: 'Z',
-            description: 'Docker file values section connect config',
-            referencedParameters: 'Application',
-            script: [$class: 'GroovyScript',
-                fallbackScript: [
-                    classpath: [],
-                    sandbox: true,
-                    script: 'return " " '
-                ],
-                script: [
-                    classpath: [],
-                    sandbox: true,
-                    script: """
-                      if (Application == 'Broker') {
-                      return inputBox = "value=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
-                      }
-                    """.stripIndent()
-                ]
-            ]
-        ],
-
+        
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
             name: 'Docker_config_parameters',
@@ -310,7 +287,6 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_external2 = "${IP_external}".split(",")
-                def z = "${Z}".split(",")
                 def docker_config_parameters = "${Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${Docker_ssl_config_parameters}".split(",")
 
@@ -324,10 +300,6 @@ pipeline {
 
                 for (i in  ip_external2) {
                   println "ip_external2 ---> ${i}"
-                }
-
-                for (i in  z) {
-                  println "z ---> ${i}"
                 }
 
                 for (i in  docker_config_parameters) {
