@@ -150,10 +150,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "value=1<input name='value' type='list' class=' '>"
-                      }
-                      if (Application == 'Broker') {
-                      return inputBox = "value2=<input name='value2' type='list' class=' '>"
+                         return inputBox = "value=<input name='value' type='list' class=' '> value1=<input name='value2' type='list' class=' '>".split("\n")
                       }
                     """.stripIndent()
                 ]
@@ -176,7 +173,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return <p>inputBox = "<input name='value' type='list' class=' '>"</p>
+                      return inputBox = "<input name='value' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
