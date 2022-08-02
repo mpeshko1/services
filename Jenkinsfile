@@ -173,7 +173,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "<input name='value' type='list' class=' '>"
+                      return <p>inputBox = "<input name='value' type='list' class=' '>"</p>
                       }
                     """.stripIndent()
                 ]
@@ -242,7 +242,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "kafka_ssl_keystore_filename=<input name='kafka_ssl_keystore_filename' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '> kafka_ssl_truststore_filename=<input name='kafka_ssl_truststore_filename' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '>"
+                      return inputBox = "kafka_ssl_keystore_filename=<input name='kafka_ssl_keystore_filename' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '> kafka_ssl_truststore_filename=<input name='kafka_ssl_truststore_filename' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
