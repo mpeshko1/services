@@ -150,7 +150,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                         return inputBox = '''value=<input name='value' type='list' class=' '>
+                         return inputBox = '''value=<input name='value' type='list' class=' '>'''
                       }
                     """.stripIndent()
                 ]
@@ -197,8 +197,8 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      kafka_zookeeper_ssl_keystore_location=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
                       <table>
+                      <tr><td>kafka_zookeeper_ssl_keystore_location=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
                       <tr><td>kafka_zookeeper_ssl_keystore_password=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
                       <tr><td>kafka_zookeeper_ssl_key_password=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
                       <tr><td>kafka_zookeeper_ssl_truststore_location=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
