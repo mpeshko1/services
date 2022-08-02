@@ -1,2 +1,8 @@
 ---
 # tasks file for kafka-broker
+- name: copy system etcd config
+  template:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ etcd_system_template_config_path }}"
