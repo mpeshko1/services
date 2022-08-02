@@ -198,7 +198,7 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = "kafka_zookeeper_ssl_keystore_location=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> kafka_zookeeper_ssl_keystore_password=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> kafka_zookeeper_ssl_key_password=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> kafka_zookeeper_ssl_truststore_location=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> kafka_zookeeper_ssl_truststore_password=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
                       }
-                    """contains('\n')
+                    """.contains('\n')
                 ]
             ]
         ],
