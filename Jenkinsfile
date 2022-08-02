@@ -179,7 +179,30 @@ properties([
                 ]
             ]
         ],
-        
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Zookeeper',
+            description: 'Docker file values section zookeeper',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = "value=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
+                      }
+                    """.stripIndent()
+                ]
+            ]
+        ],
+
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
             name: 'Docker_config_parameters',
