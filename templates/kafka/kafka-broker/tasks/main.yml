@@ -1,6 +1,6 @@
 ---
 # tasks file for kafka-broker
-- name: copy system etcd config
+- name: copy docker-file
   template:
     src: "{{ item }}"
     dest: "/etc/systemd/system/{{ item | basename | regex_replace('.j2','') }}"

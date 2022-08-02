@@ -1,4 +1,9 @@
 ---
+# temlate files
+docker_file_template_config_path: "{{ role_path }}/templates/docker/docker-compose.yml.j2"
+sasl_adminclient_config_template_path: "{{ role_path }}/templates/sasl/adminclient-configs.conf.j2"
+sasl_kafka_config_template_path: "{{ role_path }}/templates/sasl/kafka_server_jaas.conf.j2"
+
 # vars for docker file
 container_name: test
 kafka_dns_name: test.spnode.net

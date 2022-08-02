@@ -151,6 +151,7 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = "<input name='value' type='list' class=' '>"
+                      return inputBox = "<input name='value2' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
