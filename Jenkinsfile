@@ -150,7 +150,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "value=1<input name='value' type='list' class=' ' default='ip external'> value2=<input name='value2' type='list' class=' '>"
+                      return inputBox = "value=1<input name='value' type='list' class=' '> value2=<input name='value2' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -174,6 +174,75 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = "<input name='value' type='list' class=' '>"
+                      }
+                    """.stripIndent()
+                ]
+            ]
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Docker_zookeeper_connect_config_parameters',
+            description: 'Docker file values section connect config',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = "value=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
+                      }
+                    """.stripIndent()
+                ]
+            ]
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Docker_config_parameters',
+            description: 'Docker file values section Config parameters',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = "value=<input name='kafka_replica_fetch_max_bytes' type='list' class=' '> value=<input name='kafka_message_max_bytes' type='list' class=' '> value=<input name='kafka_log_retention_hours' type='list' class=' '> value=<input name='kafka_controller_socket_timeout_ms' type='list' class=' '> value=<input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '> value=<input name='kafka_request_timeout_ms' type='list' class=' '>"
+                      }
+                    """.stripIndent()
+                ]
+            ]
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Docker_ssl_config_parameters',
+            description: 'Docker file values section SSL configs',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = "value=<input name='kafka_ssl_keystore_filename' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '> value=<input name='kafka_ssl_truststore_filename' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -241,6 +310,9 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_external2 = "${IP_external}".split(",")
+                def docker_zookeeper_connect_config_parameters = "${Docker_zookeeper_connect_config_parameters}"
+                def docker_config_parameters = "${Docker_config_parameters}"
+                def docker_ssl_config_parameters = "${Docker_ssl_config_parameters}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -252,6 +324,18 @@ pipeline {
 
                 for (i in  ip_external2) {
                   println "ip_external2 ---> ${i}"
+                }
+
+                for (i in  docker_zookeeper_connect_config_parameters) {
+                  println "docker_zookeeper_connect_config_parameters ---> ${i}"
+                }
+
+                for (i in  docker_config_parameters) {
+                  println "docker_config_parameters ---> ${i}"
+                }
+
+                for (i in  docker_ssl_config_parameters) {
+                  println "docker_ssl_config_parameters ---> ${i}"
                 }
 
             }
