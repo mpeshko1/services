@@ -182,7 +182,7 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'Docker_zoo',
+            name: 'Z',
             description: 'Docker file values section connect config',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
@@ -310,7 +310,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_external2 = "${IP_external}".split(",")
-                def docker_zoo = "${Docker_zoo}".split(",")
+                def z = "${Z}".split(",")
                 def docker_config_parameters = "${Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${Docker_ssl_config_parameters}".split(",")
 
@@ -326,8 +326,8 @@ pipeline {
                   println "ip_external2 ---> ${i}"
                 }
 
-                for (i in  docker_zoo_conn_conf_parame) {
-                  println "docker_zoo_conn_conf_parame ---> ${i}"
+                for (i in  z) {
+                  println "z ---> ${i}"
                 }
 
                 for (i in  docker_config_parameters) {
