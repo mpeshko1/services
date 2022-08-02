@@ -198,11 +198,11 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                      <tr><td>kafka_zookeeper_ssl_keystore_location=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
-                      <tr><td>kafka_zookeeper_ssl_keystore_password=</td><td><input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_key_password=</td><td><input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_location=</td><td><input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_password=</td><td><input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
+                      <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
@@ -228,12 +228,12 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      <br>kafka_replica_fetch_max_bytes=<input name='kafka_replica_fetch_max_bytes' type='list' class=' '>
-                      <br>kafka_message_max_bytes=<input name='kafka_message_max_bytes' type='list' class=' '>
-                      <br>kafka_log_retention_hours=<input name='kafka_log_retention_hours' type='list' class=' '>
-                      <br>kafka_controller_socket_timeout_ms=<input name='kafka_controller_socket_timeout_ms' type='list' class=' '>
-                      <br>kafka_connection_setup_teimeout_max_ms=<input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '>
-                      <br>kafka_request_timeout_ms=<input name='kafka_request_timeout_ms' type='list' class=' '>
+                      <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='kafka_replica_fetch_max_bytes' type='list' class=' '></td></tr>
+                      <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='kafka_message_max_bytes' type='list' class=' '></td></tr>
+                      <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='kafka_log_retention_hours' type='list' class=' '></td></tr>
+                      <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='kafka_controller_socket_timeout_ms' type='list' class=' '></td></tr>
+                      <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '></td></tr>
+                      <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='kafka_request_timeout_ms' type='list' class=' '></td></tr>
                       '''
                       }
                     """.stripIndent()
@@ -258,9 +258,9 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      <br>kafka_ssl_keystore_filename=<input name='kafka_ssl_keystore_filename' type='list' class=' '>
-                      <br>kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '>
-                      <br>kafka_ssl_truststore_filename=<input name='kafka_ssl_truststore_filename' type='list' class=' '>
+                      <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='kafka_ssl_keystore_filename' type='list' class=' '></td></tr>
+                      <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='kafka_ssl_pass_file' type='list' class=' '></td></tr>
+                      <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='kafka_ssl_truststore_filename' type='list' class=' '></td></tr>
                       '''
                       }
                     """.stripIndent()
