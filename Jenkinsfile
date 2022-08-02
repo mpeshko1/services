@@ -198,11 +198,11 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                      <tr><td>kafka_zookeeper_ssl_keystore_location=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
-                      <tr><td>kafka_zookeeper_ssl_keystore_password=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_key_password=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_location=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_password=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_keystore_location=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
+                      <tr><td>kafka_zookeeper_ssl_keystore_password=</td><td><input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_key_password=</td><td><input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_truststore_location=</td><td><input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
+                      <tr><td>kafka_zookeeper_ssl_truststore_password=</td><td><input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
