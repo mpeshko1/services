@@ -183,7 +183,7 @@ properties([
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
             name: 'Zookeeper',
-            description: 'Docker file values section zookeeper',
+            description: 'Docker file values coneect config',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -196,7 +196,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "value=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> value=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
+                      return inputBox = "kafka_zookeeper_ssl_keystore_location=<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '> kafka_zookeeper_ssl_keystore_password=<input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '> kafka_zookeeper_ssl_key_password=<input name='kafka_zookeeper_ssl_key_password' type='list' class=' '> kafka_zookeeper_ssl_truststore_location=<input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '> kafka_zookeeper_ssl_truststore_password=<input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -219,7 +219,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "value=<input name='kafka_replica_fetch_max_bytes' type='list' class=' '> value=<input name='kafka_message_max_bytes' type='list' class=' '> value=<input name='kafka_log_retention_hours' type='list' class=' '> value=<input name='kafka_controller_socket_timeout_ms' type='list' class=' '> value=<input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '> value=<input name='kafka_request_timeout_ms' type='list' class=' '>"
+                      return inputBox = "value=<input kafka_replica_fetch_max_bytes='kafka_replica_fetch_max_bytes' type='list' class=' '> kafka_message_max_bytes=<input name='kafka_message_max_bytes' type='list' class=' '> kafka_log_retention_hours=<input name='kafka_log_retention_hours' type='list' class=' '> kafka_controller_socket_timeout_ms=<input name='kafka_controller_socket_timeout_ms' type='list' class=' '> kafka_connection_setup_teimeout_max_ms=<input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '> kafka_request_timeout_ms=<input name='kafka_request_timeout_ms' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -242,7 +242,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "value=<input name='kafka_ssl_keystore_filename' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '> value=<input name='kafka_ssl_truststore_filename' type='list' class=' '> value=<input name='kafka_ssl_pass_file' type='list' class=' '>"
+                      return inputBox = "kafka_ssl_keystore_filename=<input name='kafka_ssl_keystore_filename' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '> kafka_ssl_truststore_filename=<input name='kafka_ssl_truststore_filename' type='list' class=' '> kafka_ssl_pass_file=<input name='kafka_ssl_pass_file' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -310,6 +310,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_external2 = "${IP_external}".split(",")
+                def zookeeper = "${Zookeeper}".split(",")
                 def docker_config_parameters = "${Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${Docker_ssl_config_parameters}".split(",")
 
@@ -323,6 +324,10 @@ pipeline {
 
                 for (i in  ip_external2) {
                   println "ip_external2 ---> ${i}"
+                }
+
+                for (i in  zookeeper) {
+                  println "zookeeper ---> ${i}"
                 }
 
                 for (i in  docker_config_parameters) {
