@@ -150,7 +150,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "<input name='value' type='list' class=' ' default='ip external'> ,<input name='value2' type='list' class=' '>"
+                      return inputBox = "value=1<input name='value' type='list' class=' ' default='ip external'> value2=<input name='value2' type='list' class=' '>"
                       }
                     """.stripIndent()
                 ]
@@ -239,14 +239,19 @@ pipeline {
           steps {
             script  {
                 def server_arr = "${Server}".split(",")
-                def ip_internal = "${IP_external}".split(",")
+                def ip_external = "${IP_external}".split(",")
+                def ip_external2 = "${IP_external}.value2".split(",")
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
                 }
 
-                for (i in  ip_internal) {
-                  println "ip_internal ---> ${i}"
+                for (i in  ip_external) {
+                  println "ip_external ---> ${i}"
+                }
+
+                for (i in  ip_external2) {
+                  println "ip_external2 ---> ${i}"
                 }
 
             }
