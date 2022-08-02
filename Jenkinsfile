@@ -240,7 +240,7 @@ pipeline {
             script  {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
-                def ip_external2 = "${IP_external}.value2".split(",")
+                def ip_external2 = "${IP_external}".split(",")
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
