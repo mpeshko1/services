@@ -1,5 +1,5 @@
 ---
-# tasks file for kafka-broker
+# tasks file for kafka-broker1
 - name: copy docker-file
   template:
     src: "{{ item }}"
