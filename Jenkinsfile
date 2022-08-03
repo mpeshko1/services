@@ -209,7 +209,7 @@ properties([
                             return """
                             <table>
                             <tr><td><textarea name="value" rows="5" class="setting-input"></textarea></td></tr>
-                            <tr><td><input name=\'MC_DB_PASSWORD\' type=\'text\' class="setting-input" name="value"> </input></td></tr>
+                            <tr><td><input name="value2" type="text" class="setting-input"> </input></td></tr>
                             </table>
                             """
                         }
