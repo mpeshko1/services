@@ -210,7 +210,8 @@ properties([
                       }
                       '''
                 ]
-            ]
+            ],
+            omitValueField: true
         ],
 
         [$class: 'DynamicReferenceParameter',
@@ -240,7 +241,8 @@ properties([
                       }
                     """.stripIndent()
                 ]
-            ]
+            ],
+            omitValueField: true
         ],
 
         [$class: 'DynamicReferenceParameter',
@@ -268,7 +270,8 @@ properties([
                       }
                     """.stripIndent()
                 ]
-            ]
+            ],
+            omitValueField: true
         ],
 
         [$class: 'CascadeChoiceParameter',
