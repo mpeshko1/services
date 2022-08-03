@@ -240,7 +240,7 @@ properties([
                       <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='kafka_controller_socket_timeout_ms' type='list' class=' '></td></tr>
                       <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '></td></tr>
                       <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='kafka_request_timeout_ms' type='list' class=' '></td></tr>
-                      ''' as List
+                      '''
                       }
                     """.stripIndent()
                 ]
