@@ -192,7 +192,7 @@ properties([
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
             description: 'Docker file values section Coneect config',
-            name: 'Zookeeper',
+            name: 'Docker_zookeeper_ssl_config_parameters',
             referencedParameters: 'Application',
             script:
                 [$class: 'GroovyScript',
@@ -347,11 +347,11 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def zookeeper = "${Zookeeper}".split(",")
+                def docker_zookeeper_ssl_config_parameters = "${Docker_zookeeper_ssl_config_parameters}".split(",")
                 def docker_config_parameters = "${params.Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}".split(",")
 
-                println "${params.Zookeeper}"
+                println "${params.Docker_zookeeper_ssl_config_parameters}"
                 println "${params.Docker_config_parameters}"
                 println "${params.Docker_ssl_config_parameters}"
 
@@ -368,7 +368,7 @@ pipeline {
                   println "ip_internal ---> ${i}"
                 }
 
-                for (i in  zookeeper) {
+                for (i in  docker_zookeeper_ssl_config_parameters) {
                   println "zookeeper ---> ${i}"
                 }
 
