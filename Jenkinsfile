@@ -336,7 +336,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def zookeeper = "${Zookeeper['kafka_zookeeper_ssl_keystore_location']}"
+                def zookeeper = "${Zookeeper}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
