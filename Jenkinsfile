@@ -193,7 +193,7 @@ properties([
             choiceType: 'ET_FORMATTED_HTML',
             description: 'enter job params',
             name: 'hostname',
-            referencedParameters: 'data_center',
+            referencedParameters: 'Application',
             script:
                 [$class: 'GroovyScript',
                 fallbackScript: [
