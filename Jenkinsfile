@@ -211,7 +211,7 @@ properties([
                         <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></input>
                         <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></input>
                         <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></input>
-                        '''
+                        """
                         return FullHTML
                       }
                 ]
