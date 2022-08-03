@@ -207,9 +207,13 @@ properties([
                         FullHTML = """
                         <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_keystore_location</label>
                         <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></input>
+                        <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_keystore_password</label>
                         <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></input>
+                        <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_key_password</label>                    
                         <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></input>
+                        <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_truststore_location</label>
                         <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></input>
+                        <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_truststore_password</label>
                         <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></input>
                         """
                         return FullHTML
