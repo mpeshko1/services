@@ -346,7 +346,7 @@ pipeline {
                 def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_location = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_password = "${Zookeeper}".split(",")
-
+                def a = "${Docker_ssl_config_parameters}".split(",")
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -382,6 +382,10 @@ pipeline {
 
                 for (i in  kafka_zookeeper_ssl_truststore_password) {
                   println "kafka_zookeeper_ssl_truststore_password ---> ${i}"
+                }
+
+                for (i in  a) {
+                  println "a ---> ${i}"
                 }
 
 
