@@ -208,11 +208,11 @@ properties([
                         if (Application == 'Broker') {
                             return """
                             <table>
-                              <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_keystore_location" rows="1" weight="15" class="setting-input"></textarea></td></tr>
-                              <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_keystore_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
-                              <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_key_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
-                              <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_truststore_location" rows="1" weight="15" class="setting-input"></textarea></td></tr>
-                              <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_truststore_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
                             </table>
                             """
                         }
