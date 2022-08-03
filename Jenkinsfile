@@ -237,18 +237,20 @@ properties([
                 script: [
                     classpath: [],
                     sandbox: true,
-                    script: """
+                    script: '''
                       if (Application == 'Broker') {
-                      return inputBox = '''
+                      return """
+                        <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><textarea name="value" rows="1" weight="15" class="setting-input"></textarea></td></tr>
                         <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                      '''
+                        </table>
+                        """
                       }
-                    """.stripIndent()
+                    '''.stripIndent()
                 ]
             ],
             omitValueField: true
@@ -347,6 +349,8 @@ pipeline {
                 def zookeeper = "${Zookeeper}".split(",")
 
                 println "${params.Zookeeper}"
+                println "${params.Docker_config_parameters}"
+
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
