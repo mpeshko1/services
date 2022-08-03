@@ -206,7 +206,7 @@ properties([
                         sandbox: true,
                         script: '''
                         if (Application == 'Broker') {
-                            return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
+                            return """<text name="value" rows="5" class="setting-input   "></text>"""
                         }
                         '''.stripIndent()
                     ]
