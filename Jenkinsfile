@@ -188,30 +188,35 @@ properties([
             ]
         ],
 
+
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'Zookeeper',
-            description: 'Docker file values coneect config',
-            referencedParameters: 'Application',
-            script: [$class: 'GroovyScript',
+            description: 'enter job params',
+            name: 'hostname',
+            referencedParameters: 'data_center',
+            script:
+                [$class: 'GroovyScript',
                 fallbackScript: [
-                    classpath: [],
-                    sandbox: true,
-                    script: 'return " " '
-                ],
+                        classpath: [],
+                        sandbox: false,
+                        script: "return['']"
+                        ],
                 script: [
-                    classpath: [],
-                    sandbox: true,
-                    script:
-                      '''if (Application == 'Broker') {
+                        classpath: [],
+                        sandbox: false,
+                        script: '''
+                        if (data_center.contains('DC01')){
+                            return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
 
-                        return """<input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></input>"""
+                        } else
+                        if (data_center.contains('DC02')){
+                            return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
 
-                      }
-                      '''
-                ]
+                        }
+                        '''
+                    ]
             ],
-            omitValueField: true
+        omitValueField: true
         ],
 
         [$class: 'DynamicReferenceParameter',
@@ -337,7 +342,7 @@ pipeline {
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper}"
 
-                echo "${params.Zookeeper}"
+                echo "${params.hostname}"
                 println "zookeeper --->  ${Zookeeper}"
 
                 for (i in server_arr ) {
