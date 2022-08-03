@@ -205,11 +205,7 @@ properties([
                         classpath: [],
                         sandbox: false,
                         script: '''
-                        if (data_center.contains('DC01')){
-                            return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
-
-                        } else
-                        if (data_center.contains('DC02')){
+                        if (Application == 'Broker'){
                             return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
 
                         }
@@ -218,6 +214,7 @@ properties([
             ],
         omitValueField: true
         ],
+
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
