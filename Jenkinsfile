@@ -204,7 +204,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                        return '''
+                        '''
                          <tr><td>kafka_zookeeper_ssl_keystore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
