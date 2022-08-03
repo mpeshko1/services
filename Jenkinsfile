@@ -337,7 +337,7 @@ pipeline {
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
 
-                echo "${params.hostname}"
+                println "${params.hostname}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
