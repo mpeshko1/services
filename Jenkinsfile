@@ -203,7 +203,7 @@ properties([
                     classpath: [],
                     sandbox: true,
                     script:
-                      if (Application == 'Broker') {
+                      '''if (Application == 'Broker') {
                         FullHTML = """
                         <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_keystore_location</label>
                         <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></input>
@@ -214,6 +214,7 @@ properties([
                         """
                         return FullHTML
                       }
+                      '''
                 ]
             ]
         ],
