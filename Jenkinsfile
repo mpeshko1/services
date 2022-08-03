@@ -357,6 +357,10 @@ pipeline {
                   println "zookeeper ---> ${i}"
                 }
 
+                for (i in  "${Docker_config_parameters}".split(",")) {
+                  println "Docker_config_parameters ---> ${i}"
+                }
+
                 for (i in  docker_config_parameters) {
                   println "docker_config_parameters ---> ${i}"
                 }
