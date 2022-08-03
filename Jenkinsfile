@@ -204,13 +204,13 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                        def kafka_zookeeper_ssl_keystore_location = <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
-                        def kafka_zookeeper_ssl_keystore_password = <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '>
-                        def kafka_zookeeper_ssl_key_password = <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '>
-                        def kafka_zookeeper_ssl_truststore_location = <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '>
-                        def kafka_zookeeper_ssl_truststore_password = <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>
-
-                      return kafka_zookeeper_ssl_keystore_location kafka_zookeeper_ssl_keystore_password kafka_zookeeper_ssl_key_password kafka_zookeeper_ssl_truststore_location kafka_zookeeper_ssl_truststore_password
+                        return '''
+                         kafka_zookeeper_ssl_keystore_location = <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
+                         kafka_zookeeper_ssl_keystore_password = <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '>
+                         kafka_zookeeper_ssl_key_password = <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '>
+                         kafka_zookeeper_ssl_truststore_location = <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '>
+                         kafka_zookeeper_ssl_truststore_password = <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>
+                        '''
                       }
                     """.stripIndent()
                 ]
