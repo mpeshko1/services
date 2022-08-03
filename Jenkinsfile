@@ -206,7 +206,12 @@ properties([
                         sandbox: true,
                         script: '''
                         if (Application == 'Broker') {
-                            return """<textarea name="value" rows="5" height="100px" width="50px" class="setting-input"></textarea>"""
+                            return """
+                            <table>
+                            <tr><td><textarea name="value" rows="5" class="setting-input"></textarea></td></tr>
+                            <tr><td><input name=\'MC_DB_PASSWORD\' type=\'text\' class="setting-input" name="value"> </input></td></tr>
+                            </table>
+                            """
                         }
                         '''.stripIndent()
                     ]
