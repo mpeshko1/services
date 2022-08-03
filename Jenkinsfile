@@ -198,12 +198,12 @@ properties([
                 [$class: 'GroovyScript',
                 fallbackScript: [
                         classpath: [],
-                        sandbox: true,
+                        sandbox: false,
                         script: 'return " " '
                         ],
                 script: [
                         classpath: [],
-                        sandbox: true,
+                        sandbox: false,
                         script: '''
                         if (Application == 'Broker') {
                             return """<input name='hostname' type='list' class=' '>"""
