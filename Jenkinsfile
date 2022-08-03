@@ -344,8 +344,9 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
+                def zookeeper = "${Zookeeper}".split(",")
 
-                println "${params.hostname}"
+                println "${params.Zookeeper}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -357,6 +358,10 @@ pipeline {
 
                 for (i in  ip_internal) {
                   println "ip_internal ---> ${i}"
+                }
+
+                for (i in  zookeeper) {
+                  println "zookeeper ---> ${i}"
                 }
 
             }
