@@ -204,13 +204,14 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                        '''
+                        def a =  '''
                          <tr><td>kafka_zookeeper_ssl_keystore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_truststore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
                          <tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
                         '''
+                        return a
                       }
                     """.stripIndent()
                 ]
@@ -338,7 +339,7 @@ pipeline {
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper}"
 
-                println "zookeeper --->  ${Zookeeper.kafka_zookeeper_ssl_key_password}"
+                println "zookeeper --->  ${Zookeeper.[kafka_zookeeper_ssl_key_password]}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
