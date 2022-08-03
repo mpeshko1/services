@@ -150,7 +150,11 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                         return inputBox = '''value=<input name='value' type='list' class=' '>'''
+                         return inputBox = '''
+                         <table>
+                         <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                         </table>
+                         '''
                       }
                     """.stripIndent()
                 ]
@@ -173,7 +177,11 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = "<input name='value' type='list' class=' '>"
+                      return inputBox = '''
+                      <table>
+                      <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                      </table>
+                      '''
                       }
                     """.stripIndent()
                 ]
@@ -198,7 +206,7 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                      <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
+                      <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>
                       <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
                       <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
                       <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
