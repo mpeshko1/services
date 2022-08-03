@@ -337,7 +337,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def zookeeper = "${Zookeeper}"
+                def zookeeper = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_keystore_location = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_keystore_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
