@@ -338,7 +338,7 @@ pipeline {
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper}"
 
-                println "${Zookeeper}"
+                println "zookeeper --->  ${Zookeeper}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
