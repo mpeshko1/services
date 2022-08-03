@@ -204,15 +204,13 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = '''
-                      <table>
-                      <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
-                      <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
-                      </table>
-                      '''
+                        def kafka_zookeeper_ssl_keystore_location = inputBox <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
+                        def kafka_zookeeper_ssl_keystore_password = inputBox <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '>
+                        def kafka_zookeeper_ssl_key_password = inputBox <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '>
+                        def kafka_zookeeper_ssl_truststore_location = inputBox <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '>
+                        def kafka_zookeeper_ssl_truststore_password = inputBox <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>
+
+                      return kafka_zookeeper_ssl_keystore_location kafka_zookeeper_ssl_keystore_password kafka_zookeeper_ssl_key_password kafka_zookeeper_ssl_truststore_location kafka_zookeeper_ssl_truststore_password
                       }
                     """.stripIndent()
                 ]
@@ -265,9 +263,7 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      def test=[]
-                      test.add(inputBox)
-                      inputBox = '''
+                      return inputBox = '''
                       <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='kafka_ssl_keystore_filename' type='list' class=' '></td></tr>
                       <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='kafka_ssl_pass_file' type='list' class=' '></td></tr>
                       <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='kafka_ssl_truststore_filename' type='list' class=' '></td></tr>
@@ -346,7 +342,6 @@ pipeline {
                 def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_location = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_password = "${Zookeeper}".split(",")
-                def a = "${Docker_ssl_config_parameters}".split(",")
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -383,12 +378,6 @@ pipeline {
                 for (i in  kafka_zookeeper_ssl_truststore_password) {
                   println "kafka_zookeeper_ssl_truststore_password ---> ${i}"
                 }
-
-                for (i in  a) {
-                  println "a ---> ${i}"
-                }
-
-
             }
           }
         }
