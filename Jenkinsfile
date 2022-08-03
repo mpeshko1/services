@@ -206,7 +206,7 @@ properties([
                         sandbox: false,
                         script: '''
                         if (Application == 'Broker') {
-                            return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
+                            return """<input name='hostname' type='list' class=' '>"""
                         }
                         '''
                     ]
