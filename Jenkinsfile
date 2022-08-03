@@ -205,9 +205,8 @@ properties([
                         classpath: [],
                         sandbox: false,
                         script: '''
-                        if (Application == 'Broker'){
+                        if (Application == 'Broker') {
                             return """<textarea name="value" rows="5" class="setting-input   "></textarea>"""
-
                         }
                         '''
                     ]
@@ -337,10 +336,8 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def zookeeper = "${Zookeeper}"
 
                 echo "${params.hostname}"
-                println "zookeeper --->  ${Zookeeper}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -354,9 +351,6 @@ pipeline {
                   println "ip_internal ---> ${i}"
                 }
 
-                for (i in  zookeeper) {
-                  println "zookeeper ---> ${i}"
-                }
             }
           }
         }
