@@ -337,8 +337,9 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def kafka_zookeeper_ssl_keystore_location = "${Zookeeper.kafka_replica_fetch_max_bytes}".split(",")
-                def kafka_zookeeper_ssl_keystore_password = "${Zookeeper.kafka_zookeeper_ssl_keystore_password}".split(",")
+                def zookeeper = "${Zookeeper}"
+                def kafka_zookeeper_ssl_keystore_location = "${Zookeeper}".split(",")
+                def kafka_zookeeper_ssl_keystore_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_location = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_truststore_password = "${Zookeeper}".split(",")
@@ -354,6 +355,10 @@ pipeline {
 
                 for (i in  ip_internal) {
                   println "ip_internal ---> ${i}"
+                }
+
+                for (i in  zookeeper) {
+                  println "zookeeper ---> ${i}"
                 }
 
                 for (i in  kafka_zookeeper_ssl_keystore_location) {
