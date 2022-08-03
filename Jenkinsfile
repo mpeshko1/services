@@ -265,11 +265,14 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                      return inputBox = '''
+                      def test=[]
+                      test.add(inputBox)
+                      inputBox = '''
                       <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='kafka_ssl_keystore_filename' type='list' class=' '></td></tr>
                       <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='kafka_ssl_pass_file' type='list' class=' '></td></tr>
                       <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='kafka_ssl_truststore_filename' type='list' class=' '></td></tr>
                       '''
+                      return test
                       }
                     """.stripIndent()
                 ]
