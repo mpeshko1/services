@@ -348,8 +348,8 @@ pipeline {
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper}".split(",")
-                def docker_config_parameters = "${params.Docker_config_parameters}"
-                def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}"
+                def docker_config_parameters = "${params.Docker_config_parameters}".split(",")
+                def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}".split(",")
 
                 println "${params.Zookeeper}"
                 println "${params.Docker_config_parameters}"
