@@ -204,11 +204,11 @@ properties([
                 script: [
                         classpath: [],
                         sandbox: true,
-                        script: """
+                        script: '''
                         if (Application == 'Broker') {
-                            return <input name='hostname' type='list' class=' '>
+                            return """<input name='hostname' type='list' class=' '>"""
                         }
-                        """.stripIndent()
+                        '''.stripIndent()
                     ]
             ],
         omitValueField: true
