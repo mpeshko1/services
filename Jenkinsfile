@@ -208,8 +208,8 @@ properties([
                         if (Application == 'Broker') {
                             return """
                             <table>
-                            <tr><td><textarea name="value" rows="5" class="setting-input"></textarea></td></tr>
-                            <tr><td><input name="value2" type="text" class="setting-input"> </input></td></tr>
+                            <tr><td><textarea name="value" rows="10" class="setting-input"></textarea></td></tr>
+                            <tr><td><input name="value2" class="setting-input"> </input></td></tr>
                             </table>
                             """
                         }
