@@ -204,11 +204,12 @@ properties([
                     sandbox: true,
                     script: """
                       if (Application == 'Broker') {
-                        kafka_zookeeper_ssl_keystore_location =  '''<tr><td>kafka_zookeeper_ssl_keystore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>'''
-                        kafka_zookeeper_ssl_keystore_password = '''<tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>'''
-                        kafka_zookeeper_ssl_key_password = '''<tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>'''
-                        kafka_zookeeper_ssl_truststore_location = '''<tr><td>kafka_zookeeper_ssl_truststore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>'''
-                        kafka_zookeeper_ssl_truststore_password = '''<tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>'''
+                        <label style="left: 22% position: absolute;">kafka_zookeeper_ssl_keystore_location</label>
+                        kafka_zookeeper_ssl_keystore_location =  '''<tr><td>kafka_zookeeper_ssl_keystore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></input></td></tr>'''
+                        kafka_zookeeper_ssl_keystore_password = '''<tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></input></td></tr>'''
+                        kafka_zookeeper_ssl_key_password = '''<tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></input></td></tr>'''
+                        kafka_zookeeper_ssl_truststore_location = '''<tr><td>kafka_zookeeper_ssl_truststore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></input></td></tr>'''
+                        kafka_zookeeper_ssl_truststore_password = '''<tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></input></td></tr>'''
                       }
                     """.stripIndent()
                 ]
