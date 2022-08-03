@@ -205,11 +205,11 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                         return '''
-                         kafka_zookeeper_ssl_keystore_location = <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '>
-                         kafka_zookeeper_ssl_keystore_password = <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '>
-                         kafka_zookeeper_ssl_key_password = <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '>
-                         kafka_zookeeper_ssl_truststore_location = <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '>
-                         kafka_zookeeper_ssl_truststore_password = <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '>
+                         <tr><td>kafka_zookeeper_ssl_keystore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_location' type='list' class=' '></td></tr>
+                         <tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>
+                         <tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>
+                         <tr><td>kafka_zookeeper_ssl_truststore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>
+                         <tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>
                         '''
                       }
                     """.stripIndent()
@@ -240,7 +240,7 @@ properties([
                       <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='kafka_controller_socket_timeout_ms' type='list' class=' '></td></tr>
                       <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '></td></tr>
                       <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='kafka_request_timeout_ms' type='list' class=' '></td></tr>
-                      '''
+                      ''' as List
                       }
                     """.stripIndent()
                 ]
@@ -336,7 +336,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
-                def zookeeper = "${Zookeeper}".split(",")
+                def zookeeper = "${Zookeeper.inspect()}".kafka_zookeeper_ssl_keystore_location
                 def kafka_zookeeper_ssl_keystore_location = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_keystore_password = "${Zookeeper}".split(",")
                 def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
