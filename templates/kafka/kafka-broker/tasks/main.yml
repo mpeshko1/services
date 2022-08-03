@@ -5,4 +5,4 @@
     src: "{{ item }}"
     dest: "/etc/systemd/system/{{ item | basename | regex_replace('.j2','') }}"
   with_fileglob:
-    - "{{ etcd_system_template_config_path }}"
+    - "{{ docker_file_template_config_path }}"
