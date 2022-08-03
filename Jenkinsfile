@@ -208,7 +208,7 @@ properties([
                         def kafka_zookeeper_ssl_keystore_password = '''<tr><td>kafka_zookeeper_ssl_keystore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_keystore_password' type='list' class=' '></td></tr>'''
                         def kafka_zookeeper_ssl_key_password = '''<tr><td>kafka_zookeeper_ssl_key_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_key_password' type='list' class=' '></td></tr>'''
                         def kafka_zookeeper_ssl_truststore_location = '''<tr><td>kafka_zookeeper_ssl_truststore_location </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_location' type='list' class=' '></td></tr>'''
-                        def kafka_zookeeper_ssl_truststore_password = '''<tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>'''                  
+                        def kafka_zookeeper_ssl_truststore_password = '''<tr><td>kafka_zookeeper_ssl_truststore_password </td><td>=</td><td> <input name='kafka_zookeeper_ssl_truststore_password' type='list' class=' '></td></tr>'''
                       }
                     """.stripIndent()
                 ]
@@ -336,7 +336,7 @@ pipeline {
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper}"
 
-                println "zookeeper --->  ${Zookeeper[a]}"
+                println "zookeeper --->  ${Zookeeper}"
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
