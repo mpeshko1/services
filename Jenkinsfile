@@ -336,10 +336,13 @@ pipeline {
             script  {
                 def server_arr = "${Server}".split(",")
                 def ip_external = "${IP_external}".split(",")
-                def ip_external2 = "${IP_external}".split(",")
-                def zookeeper = "${Zookeeper}".split(",")
-                def docker_config_parameters = "${Docker_config_parameters}".split(",")
-                def docker_ssl_config_parameters = "${Docker_ssl_config_parameters}".split(",")
+                def ip_internal = "${IP_internal}".split(",")
+                def kafka_zookeeper_ssl_keystore_location = "${Zookeeper}".split(",")
+                def kafka_zookeeper_ssl_keystore_password = "${Zookeeper}".split(",")
+                def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
+                def kafka_zookeeper_ssl_truststore_location = "${Zookeeper}".split(",")
+                def kafka_zookeeper_ssl_truststore_password = "${Zookeeper}".split(",")
+
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -349,25 +352,30 @@ pipeline {
                   println "ip_external ---> ${i}"
                 }
 
-                for (i in  ip_external2) {
-                  println "ip_external2 ---> ${i}"
+                for (i in  ip_internal) {
+                  println "ip_internal ---> ${i}"
                 }
 
-                for (i in  zookeeper) {
-                  println "zookeeper ---> ${i}"
+                for (i in  kafka_zookeeper_ssl_keystore_location) {
+                  println "kafka_zookeeper_ssl_keystore_location ---> ${i}"
                 }
 
-                for (i in  "${Docker_config_parameters}".split(",")) {
-                  println "Docker_config_parameters ---> ${i}"
+                for (i in  kafka_zookeeper_ssl_keystore_password) {
+                  println "kafka_zookeeper_ssl_keystore_password ---> ${i}"
                 }
 
-                for (i in  docker_config_parameters) {
-                  println "docker_config_parameters ---> ${i}"
+                for (i in  kafka_zookeeper_ssl_key_password) {
+                  println "kafka_zookeeper_ssl_key_password ---> ${i}"
                 }
 
-                for (i in  docker_ssl_config_parameters) {
-                  println "docker_ssl_config_parameters ---> ${i}"
+                for (i in  kafka_zookeeper_ssl_truststore_location) {
+                  println "kafka_zookeeper_ssl_truststore_location ---> ${i}"
                 }
+
+                for (i in  kafka_zookeeper_ssl_truststore_password) {
+                  println "kafka_zookeeper_ssl_truststore_password ---> ${i}"
+                }
+
 
             }
           }
