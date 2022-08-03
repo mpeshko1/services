@@ -337,11 +337,6 @@ pipeline {
                 def ip_external = "${IP_external}".split(",")
                 def ip_internal = "${IP_internal}".split(",")
                 def zookeeper = "${Zookeeper['kafka_zookeeper_ssl_keystore_location']}"
-                def kafka_zookeeper_ssl_keystore_location = "${Zookeeper}".split(",")
-                def kafka_zookeeper_ssl_keystore_password = "${Zookeeper}".split(",")
-                def kafka_zookeeper_ssl_key_password = "${Zookeeper}".split(",")
-                def kafka_zookeeper_ssl_truststore_location = "${Zookeeper}".split(",")
-                def kafka_zookeeper_ssl_truststore_password = "${Zookeeper}".split(",")
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -357,26 +352,6 @@ pipeline {
 
                 for (i in  zookeeper) {
                   println "zookeeper ---> ${i}"
-                }
-
-                for (i in  kafka_zookeeper_ssl_keystore_location) {
-                  println "kafka_zookeeper_ssl_keystore_location ---> ${i}"
-                }
-
-                for (i in  kafka_zookeeper_ssl_keystore_password) {
-                  println "kafka_zookeeper_ssl_keystore_password ---> ${i}"
-                }
-
-                for (i in  kafka_zookeeper_ssl_key_password) {
-                  println "kafka_zookeeper_ssl_key_password ---> ${i}"
-                }
-
-                for (i in  kafka_zookeeper_ssl_truststore_location) {
-                  println "kafka_zookeeper_ssl_truststore_location ---> ${i}"
-                }
-
-                for (i in  kafka_zookeeper_ssl_truststore_password) {
-                  println "kafka_zookeeper_ssl_truststore_password ---> ${i}"
                 }
             }
           }
