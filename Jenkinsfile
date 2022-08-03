@@ -179,7 +179,7 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                      <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
@@ -191,8 +191,8 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            description: 'enter job params',
-            name: 'hostname',
+            description: 'Docker file values section Coneect config',
+            name: 'Zookeeper',
             referencedParameters: 'Application',
             script:
                 [$class: 'GroovyScript',
@@ -208,7 +208,11 @@ properties([
                         if (Application == 'Broker') {
                             return """
                             <table>
-                            <tr><td><textarea name="value" rows="1" weight="10" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_keystore_location" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_keystore_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_key_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_truststore_location" rows="1" weight="15" class="setting-input"></textarea></td></tr>
+                              <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><textarea name="kafka_zookeeper_ssl_truststore_password" rows="1" weight="15" class="setting-input"></textarea></td></tr>
                             </table>
                             """
                         }
@@ -236,12 +240,12 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='kafka_replica_fetch_max_bytes' type='list' class=' '></td></tr>
-                      <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='kafka_message_max_bytes' type='list' class=' '></td></tr>
-                      <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='kafka_log_retention_hours' type='list' class=' '></td></tr>
-                      <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='kafka_controller_socket_timeout_ms' type='list' class=' '></td></tr>
-                      <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '></td></tr>
-                      <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='kafka_request_timeout_ms' type='list' class=' '></td></tr>
+                        <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='kafka_replica_fetch_max_bytes' type='list' class=' '></td></tr>
+                        <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='kafka_message_max_bytes' type='list' class=' '></td></tr>
+                        <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='kafka_log_retention_hours' type='list' class=' '></td></tr>
+                        <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='kafka_controller_socket_timeout_ms' type='list' class=' '></td></tr>
+                        <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='kafka_connection_setup_teimeout_max_ms' type='list' class=' '></td></tr>
+                        <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='kafka_request_timeout_ms' type='list' class=' '></td></tr>
                       '''
                       }
                     """.stripIndent()
@@ -267,9 +271,9 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='kafka_ssl_keystore_filename' type='list' class=' '></td></tr>
-                      <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='kafka_ssl_pass_file' type='list' class=' '></td></tr>
-                      <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='kafka_ssl_truststore_filename' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='kafka_ssl_keystore_filename' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='kafka_ssl_pass_file' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='kafka_ssl_truststore_filename' type='list' class=' '></td></tr>
                       '''
                       return test
                       }
