@@ -1,4 +1,7 @@
 ---
+# overall env
+dir_docker: /opt/docker/
+
 # vars for docker file
 container_name: by-kafka1-1
 kafka_dns_name: by-kafka1-1.spnode.net

@@ -1,8 +1,31 @@
 ---
+# create dir /opt/docker/container_name
+- name: "create directory for etcd bin"
+  file:
+    path: "{{ dir_docker }}/{{container_name}}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+
+# create dirs data|monitoring|secrets|sasl
+- name: "Create a data directory"
+  file:
+    path: "{{ dir_docker }}/{{container_name}}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+    - data
+    - monitoring
+    - secrets
+    - sasl
+
 # tasks file for kafka-broker
 - name: copy docker-file
   template:
     src: "{{ item }}"
-    dest: "/etc/systemd/system/{{ item | basename | regex_replace('.j2','') }}"
+    dest: "{{ dir_docker }}/{{container_name}}/{{ item | basename | regex_replace('.j2','') }}"
   with_fileglob:
     - "{{ docker_file_template_config_path }}"
