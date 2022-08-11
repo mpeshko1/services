@@ -1,5 +1,5 @@
 [kafka-node]
-192.168.1.146
+192.168.1.141
 
 [all:vars]
 ansible_ssh_user=vagrant
