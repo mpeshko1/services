@@ -307,7 +307,9 @@ pipeline {
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
 
-                println [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
+                def a = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
+
+                println  "{$a}"
             }
           }
         }
