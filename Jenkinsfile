@@ -312,6 +312,8 @@ pipeline {
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
                 mymap.each{ println it }
+
+                println [mylistkey, mylistvalue].transpose()..collectEntries{[it[0],it[1]]}
             }
           }
         }
