@@ -304,7 +304,7 @@ pipeline {
                   mylistvalue.add(i)
                   println "add_to_mylistvalue ---> ${i}"
                 }
-                mylistkey.each{ println it "<----key"}
+                mylistkey.each{ println it, "<----key"}
                 mylistvalue.each{ println it }
             }
           }
