@@ -303,10 +303,11 @@ pipeline {
                   mylistvalue.add(i)
                   println "add_to_mylistvalue ---> ${i}"
                 }
+
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
 
-                println [mylistkey, mylistvalue].transpose().collectEntries{[it[0],it[1]]}
+                println [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
             }
           }
         }
