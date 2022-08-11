@@ -151,9 +151,9 @@ properties([
                     script: """
                       if (Application == 'Broker') {
                       return inputBox = '''
-                      <table>
-                        let container_name = "<tr><td>container_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>";
-                        let kafka_dns_name = "<tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>";
+                      <table id="broker">
+                        <tr><td>container_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
                         <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
@@ -191,6 +191,14 @@ properties([
                         <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
                       </table>
+                      <script>
+                        let inputs = Broker.getElementsByTagName('input');
+
+                        for (let input of inputs) {
+                          alert( input.name + ': ' + input.value );
+                        }
+                      </script>
+
                       '''
                       }
                     """.stripIndent()
