@@ -165,7 +165,7 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'PORT_paraneters',
+            name: 'PORT_parameters',
             description: 'Dependencies kafka, external/internal/monitorng ports varibles',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
