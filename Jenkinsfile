@@ -259,7 +259,7 @@ pipeline {
       stage('Deploy') {
           steps {
             script  {
-                def mylist = [1, 2, 3]
+                def mylist = []
 
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
@@ -268,7 +268,10 @@ pipeline {
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
 
-                mylist.each {println it}
+                for (i in broker_parameters ) {
+                  mylist.add(i)
+                  println "add_to_arr ---> ${i}"
+                }
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
@@ -277,6 +280,8 @@ pipeline {
                 for (i in  broker_parameters) {
                   println "broker_parameters ---> ${i}"
                 }
+
+                mylist.eachWithIndex {it, i -> println "$i : $it"}
 
             }
           }
