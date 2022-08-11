@@ -136,8 +136,8 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'IP_external',
-            description: 'Dependencies kafka, external ip varibles',
+            name: 'IP_paraneters',
+            description: 'Dependencies kafka, external/internal/monitorng ip varibles',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -153,6 +153,8 @@ properties([
                       return inputBox = '''
                       <table>
                         <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
@@ -163,8 +165,8 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'IP_internal',
-            description: 'Dependencies kafafka, internal ip varibles',
+            name: 'PORT_paraneters',
+            description: 'Dependencies kafka, external/internal/monitorng ports varibles',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -179,7 +181,9 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
@@ -187,7 +191,6 @@ properties([
                 ]
             ]
         ],
-
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
@@ -339,14 +342,15 @@ pipeline {
     agent any
     parameters {
         string(name: 'DNS_NAME', defaultValue: ' ', description: 'Enter dns name you service/service`s')
+        string(name: 'CONTAINER_NAME', defaultValue: ' ', description: 'Enter container name to you service/service`s')
     }
     stages {
       stage('Deploy') {
           steps {
             script  {
                 def server_arr = "${Server}".split(",")
-                def ip_external = "${IP_external}".split(",")
-                def ip_internal = "${IP_internal}".split(",")
+                def ip_parameters = "${IP_parameters}".split(",")
+                def port_parameters = "${PORT_parameters}".split(",")
                 def zookeeper = "${Zookeeper}".split(",")
                 def docker_config_parameters = "${params.Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}".split(",")
@@ -360,12 +364,12 @@ pipeline {
                   println "server_arr ---> ${i}"
                 }
 
-                for (i in  ip_external) {
-                  println "ip_external ---> ${i}"
+                for (i in  ip_parameters) {
+                  println "ip_parameters ---> ${i}"
                 }
 
-                for (i in  ip_internal) {
-                  println "ip_internal ---> ${i}"
+                for (i in  port_parameters) {
+                  println "port_parameters ---> ${i}"
                 }
 
                 for (i in  zookeeper) {
@@ -392,8 +396,8 @@ pipeline {
                 string(name: 'DNS_NAME', value: "${DNS_NAME}"),
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
-                string(name: 'IP_EXTERNAL', value: "${IP_external}"),
-                string(name: 'IP_INTERNAL', value: "${IP_internal}")
+                string(name: 'IP_PARAMETERS', value: "${IP_parameters}"),
+                string(name: 'PORT_PARAMETERS', value: "${PORT_internal}")
                 ]
           }
         }
