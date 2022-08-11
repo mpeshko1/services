@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DEPENDENCIES', defaultValue: ' '),
-        string(name: 'SERVERS', defaultValue: ' '),
+        string(name: 'DEPENDENCIES', defaultValue: ' ')
+        string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'BROKER_PARAMETERS', defaultValue: ' ')
     }
 
@@ -19,9 +19,11 @@ pipeline {
                 for (i in dependencies_arr) {
                   println "DEPENDENCIES ---> ${i}"
                 }
+
                 for (i in server_arr) {
                   println "SERVERS ---> ${i}"
                 }
+
                 for (i in broker_parameters) {
                   println "BROKER_PARAMETERS ---> ${i}"
                 }
