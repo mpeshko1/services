@@ -191,16 +191,6 @@ properties([
                         <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
                       </table>
-                      <button click="alert('hi')">clk<\button>
-                      <script>
-                        alert("hi");
-                        let inputs = broker.getElementsByTagName('input');
-
-                        for (let input of inputs) {
-                          alert( input.name + ': ' + input.value );
-                        }
-                      </script>
-
                       '''
                       }
                     """.stripIndent()
@@ -269,6 +259,8 @@ pipeline {
       stage('Deploy') {
           steps {
             script  {
+                def mylist = [1, 2, 3]
+
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
@@ -276,6 +268,7 @@ pipeline {
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
 
+                mylist.each {println it}
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
