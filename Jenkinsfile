@@ -270,6 +270,7 @@ pipeline {
                 println "${params.BROKER_parameters}"
 
                 for (i in broker_parameters ) {
+                  println "${i}"
                   mylist.add(i)
                   println "add_to_arr mylist ---> ${i}"
                 }
