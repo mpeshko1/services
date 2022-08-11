@@ -47,7 +47,7 @@ pipeline {
                 def dependencies_arr = "${DEPENDENCIES}".split(",")
                 def server_arr = "${SERVERS}".split(",")
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
-                def mylistvalue = "${VALUE_LIST}".split(",")
+                def mylistvalue = []
 
                 for (i in dependencies_arr) {
                   println "DEPENDENCIES ---> ${i}"
@@ -61,8 +61,8 @@ pipeline {
                   println "BROKER_PARAMETERS ---> ${i}"
                 }
 
-                for (i in mylistvalue) {
-                  println "VALUE_LIST ---> ${i}"
+                for (i in broker_parameters ) {
+                  mylistvalue.add(i)
                 }
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
