@@ -136,8 +136,8 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'BROKER_parameters',
-            description: 'Dependencies kafka-broker',
+            name: 'IP_parameters',
+            description: 'Dependencies kafka, external/internal/monitorng ip varibles',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -155,30 +155,139 @@ properties([
                         <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-
-                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-
-                        <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-
-                          <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                          <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                          <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                       </table>
                       '''
                       }
                     """.stripIndent()
                 ]
             ]
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'PORT_parameters',
+            description: 'Dependencies kafka, external/internal/monitorng ports varibles',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = '''
+                      <table>
+                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                      </table>
+                      '''
+                      }
+                    """.stripIndent()
+                ]
+            ]
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            description: 'Docker file values section Coneect config',
+            name: 'Zookeeper',
+            referencedParameters: 'Application',
+            script:
+                [$class: 'GroovyScript',
+                fallbackScript: [
+                        classpath: [],
+                        sandbox: true,
+                        script: 'return " " '
+                        ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: '''
+                      if (Application == 'Broker') {
+                      return """
+                        <table>
+                          <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        </table>
+                        """
+                        }
+                        '''.stripIndent()
+                ]
+            ],
             omitValueField: true
         ],
 
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Docker_config_parameters',
+            description: 'Docker file values section Config parameters',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: '''
+                      if (Application == 'Broker') {
+                      return """
+                        <table>
+                          <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                          <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        </table>
+                        """
+                      }
+                    '''.stripIndent()
+                ]
+            ],
+            omitValueField: true
+        ],
+
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'Docker_ssl_config_parameters',
+            description: 'Docker file values section SSL configs',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = '''
+                      <table>
+                        <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                      </table>
+                      '''
+                      return test
+                      }
+                    """.stripIndent()
+                ]
+            ],
+            omitValueField: true
+        ],
 
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
@@ -240,20 +349,42 @@ pipeline {
           steps {
             script  {
                 def server_arr = "${Server}".split(",")
-                def broker_parameters = "${params.BROKER_parameters}".split(",")
+                def ip_parameters = "${params.IP_parameters}".split(",")
+                def port_parameters = "${params.PORT_parameters}".split(",")
+                def zookeeper = "${Zookeeper}".split(",")
+                def docker_config_parameters = "${params.Docker_config_parameters}".split(",")
+                def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}".split(",")
 
-                println "${params.DNS_NAME}"
-                println "${params.CONTAINER_NAME}"
                 println "${params.Server}"
-                println "${params.BROKER_parameters}"
+                println "${params.IP_parameters}"
+                println "${params.PORT_parameters}"
+                println "${params.Zookeeper}"
+                println "${params.Docker_config_parameters}"
+                println "${params.Docker_ssl_config_parameters}"
 
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
                 }
 
-                for (i in  broker_parameters) {
-                  println "broker_parameters ---> ${i}"
+                for (i in  ip_parameters) {
+                  println "ip_parameters ---> ${i}"
+                }
+
+                for (i in  port_parameters) {
+                  println "port_parameters ---> ${i}"
+                }
+
+                for (i in  zookeeper) {
+                  println "zookeeper ---> ${i}"
+                }
+
+                for (i in  docker_config_parameters) {
+                  println "docker_config_parameters ---> ${i}"
+                }
+
+                for (i in  docker_ssl_config_parameters) {
+                  println "docker_ssl_config_parameters ---> ${i}"
                 }
 
             }
@@ -268,7 +399,8 @@ pipeline {
                 string(name: 'DNS_NAME', value: "${DNS_NAME}"),
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
-                string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                string(name: 'IP_PARAMETERS', value: "${IP_parameters}"),
+                string(name: 'PORT_PARAMETERS', value: "${PORT_parameters}")
                 ]
           }
         }
