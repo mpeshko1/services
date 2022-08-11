@@ -299,7 +299,7 @@ pipeline {
                 println "${params.old}"
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
-                println  "{$values}"
+
 
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
@@ -308,7 +308,7 @@ pipeline {
 
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
-
+                println  "{$values}"
             }
           }
         }
