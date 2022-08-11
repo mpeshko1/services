@@ -349,12 +349,15 @@ pipeline {
           steps {
             script  {
                 def server_arr = "${Server}".split(",")
-                def ip_parameters = "${IP_parameters}".split(",")
-                def port_parameters = "${PORT_parameters}".split(",")
+                def ip_parameters = "${params.IP_parameters}".split(",")
+                def port_parameters = "${params.PORT_parameters}".split(",")
                 def zookeeper = "${Zookeeper}".split(",")
                 def docker_config_parameters = "${params.Docker_config_parameters}".split(",")
                 def docker_ssl_config_parameters = "${params.Docker_ssl_config_parameters}".split(",")
 
+                println "${params.Server}"
+                println "${params.IP_parameters}"
+                println "${params.PORT_parameters}"
                 println "${params.Zookeeper}"
                 println "${params.Docker_config_parameters}"
                 println "${params.Docker_ssl_config_parameters}"
