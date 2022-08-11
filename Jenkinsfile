@@ -400,7 +400,7 @@ pipeline {
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
                 string(name: 'IP_PARAMETERS', value: "${IP_parameters}"),
-                string(name: 'PORT_PARAMETERS', value: "${PORT_internal}")
+                string(name: 'PORT_PARAMETERS', value: "${PORT_parameters}")
                 ]
           }
         }
