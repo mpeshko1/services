@@ -57,7 +57,7 @@ pipeline {
                 println  "{$values}"
 
                 ansiblePlaybook (
-                  playbook: 'playbook.yml',
+                  playbook: 'Database/Broker/playbook.yml',
                   extraVars: [
                       broker_id: "1"
                   ]
