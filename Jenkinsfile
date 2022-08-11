@@ -296,9 +296,9 @@ pipeline {
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
                 println "${params.old}"
-                println "${params.server_parameters}"
-                println "${params.zookeeper_parameters}"
-                println "${params.broker_parameters}"
+                println "${server_parameters}"
+                println "${zookeeper_parameters}"
+                println "${broker_parameters}"
 
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
