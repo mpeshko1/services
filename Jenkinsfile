@@ -149,6 +149,7 @@ properties([
                     classpath: [],
                     sandbox: true,
                     script: """
+                      <button click="alert('hi')">clk<\button>
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table id="broker">
@@ -191,6 +192,7 @@ properties([
                         <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
                       </table>
+                      <button click="alert('hi')">clk<\button>
                       <script>
                         alert("hi");
                         let inputs = broker.getElementsByTagName('input');
