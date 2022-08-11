@@ -149,7 +149,6 @@ properties([
                     classpath: [],
                     sandbox: true,
                     script: """
-                      <button click="alert('hi')">clk<\button>
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table id="broker">
