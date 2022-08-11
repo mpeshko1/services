@@ -175,7 +175,7 @@ properties([
                       }
                     """.stripIndent()
                 ]
-            ]
+            ],
             omitValueField: true
         ],
 
@@ -200,6 +200,7 @@ properties([
                 ]
             ]
         ],
+        
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_CHECKBOX',
             name: 'Server',
