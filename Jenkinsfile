@@ -270,18 +270,14 @@ pipeline {
 
                 for (i in broker_parameters ) {
                   mylist.add(i)
-                  println "add_to_arr ---> ${i}"
+                  println "add_to_arr mylist ---> ${i}"
                 }
 
                 for (i in server_arr ) {
                   println "server_arr ---> ${i}"
                 }
 
-                for (i in  broker_parameters) {
-                  println "broker_parameters ---> ${i}"
-                }
-
-                mylist.eachWithIndex{ key, value -> println "$key : $value" }
+                mylist.each{ println it }
 
             }
           }
