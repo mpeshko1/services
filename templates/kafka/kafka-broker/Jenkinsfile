@@ -57,9 +57,10 @@ pipeline {
                   println "SERVERS ---> ${i}"
                 }
 
-                for (i in broker_parameters) {
-                  println "BROKER_PARAMETERS ---> ${i}"
-                }
+//Chck broker_parameters
+//                for (i in broker_parameters) {
+//                  println "BROKER_PARAMETERS ---> ${i}"
+//                }
 
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
