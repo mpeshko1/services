@@ -49,25 +49,20 @@ pipeline {
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
                 def mylistvalue = []
 
-                for (i in dependencies_arr) {
-                  println "DEPENDENCIES ---> ${i}"
-                }
-
-                for (i in server_arr) {
-                  println "SERVERS ---> ${i}"
-                }
-
-//Chck broker_parameters
-//                for (i in broker_parameters) {
-//                  println "BROKER_PARAMETERS ---> ${i}"
-//                }
-
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                 }
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
+
+                ansiblePlaybook (
+                  playbook: 'container-redeploy.yml',
+                  inventoryContent: "${HOST_SERVER}",
+                  extraVars: [
+                      broker_id: "1"
+                  ]
+                )
 
               }
             }
