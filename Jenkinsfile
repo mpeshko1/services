@@ -260,6 +260,7 @@ pipeline {
           steps {
             script  {
                 def mylist = []
+                def mymap = [:]
 
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
@@ -278,6 +279,8 @@ pipeline {
                 }
 
                 mylist.each{ println it }
+                mymap.put("${params.BROKER_parameters}", "${mylist}")
+                mymap.each{entry -> println "$entry.key: $entry.value"}
 
             }
           }
