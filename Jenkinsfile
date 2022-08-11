@@ -299,7 +299,6 @@ pipeline {
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
 
-
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                   println "add_to_mylistvalue ---> ${i}"
