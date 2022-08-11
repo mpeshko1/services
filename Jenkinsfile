@@ -303,11 +303,6 @@ pipeline {
                   mylistvalue.add(i)
                   println "add_to_mylistvalue ---> ${i}"
                 }
-
-                for (i in broker_parameters) {
-                    mymap.put("${mylistkey}", "${i}")
-                }
-
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
 
