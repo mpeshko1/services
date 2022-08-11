@@ -292,7 +292,7 @@ pipeline {
                 ]
                 def mylistvalue = []
                 def server_parameters = "${Server}".split(",")
-                def zookeeper_parameters = "${params.Server}"
+                def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
                 println "${params.old}"
