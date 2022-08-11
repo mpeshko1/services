@@ -291,7 +291,6 @@ pipeline {
                 "kafka_transaction_state_log_replication_factor"
                 ]
                 def mylistvalue = []
-
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
@@ -301,11 +300,10 @@ pipeline {
 
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
-                  println "add_to_mylistvalue ---> ${i}"
                 }
 
-                mylistkey.each{ println it }
-                mylistvalue.each{ println it }
+//                mylistkey.each{ println it }
+//                mylistvalue.each{ println it }
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
                 println  "{$values}"
