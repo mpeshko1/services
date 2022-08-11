@@ -294,7 +294,7 @@ pipeline {
 
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
-                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
+
 
                 println "${params.old}"
                 println "${params.Server}"
@@ -308,6 +308,8 @@ pipeline {
 
                 mylistkey.each{ println it }
                 mylistvalue.each{ println it }
+
+                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]}
                 println  "{$values}"
             }
           }
