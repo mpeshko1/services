@@ -152,13 +152,22 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>container_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
                         <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
-                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
+                        <tr><td>kafka_zookeeper_connect</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_zookeeper_ssl_keystore_location</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_zookeeper_ssl_keystore_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_zookeeper_ssl_key_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_zookeeper_ssl_truststore_location</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_zookeeper_ssl_truststore_password</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
                         <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
@@ -167,9 +176,20 @@ properties([
                         <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
 
-                          <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                          <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
-                          <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_keystore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_pass_file</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_ssl_truststore_filename</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
+                        <tr><td>kafka_ssl_secrets_dir</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
+                        <tr><td>kafka_auto_leader_rebalance_enable</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_default_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_offsets_topic_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
+                        <tr><td>kafka_min_insync_replicas</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_transaction_state_log_min_isr</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+                        <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
+
                       </table>
                       '''
                       }
@@ -200,7 +220,7 @@ properties([
                 ]
             ]
         ],
-        
+
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_CHECKBOX',
             name: 'Server',
@@ -233,8 +253,7 @@ properties([
 pipeline {
     agent any
     parameters {
-        string(name: 'DNS_NAME', defaultValue: ' ', description: 'Enter dns name you service/service`s')
-        string(name: 'CONTAINER_NAME', defaultValue: ' ', description: 'Enter container name to you service/service`s')
+        string(name: 'old', defaultValue: ' ', description: 'OLD')
     }
     stages {
       stage('Deploy') {
@@ -243,8 +262,7 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
-                println "${params.DNS_NAME}"
-                println "${params.CONTAINER_NAME}"
+                println "${params.old}"
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
 
