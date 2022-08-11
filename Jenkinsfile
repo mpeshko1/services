@@ -310,7 +310,7 @@ pipeline {
 //                mylistkey.each{ println it }
 //                mylistvalue.each{ println it }
 
-                def values = [params.mylistkey,params.mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+                def values = ["${params.mylistkey}","${params.mylistvalue}"].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
             }
           }
