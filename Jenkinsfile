@@ -152,8 +152,8 @@ properties([
                       if (Application == 'Broker') {
                       return inputBox = '''
                       <table>
-                        <tr><td>container_name</td><td>=</td><td><input name='container_name' type='list' class=' '></td></tr>
-                        <tr><td>kafka_dns_name</td><td>=</td><td><input name='kafka_dns_name' type='list' class=' '></td></tr>
+                        let container_name = "<tr><td>container_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>";
+                        let kafka_dns_name = "<tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>";
                         <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
                         <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
                         <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' '></td></tr>
