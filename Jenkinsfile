@@ -320,7 +320,8 @@ pipeline {
                 build job: 'Database/Broker', parameters: [
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
-                string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}"),
+                string(name: 'VALUE_LIST', value: "${mylistvalue}")
                 ]
           }
         }
