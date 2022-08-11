@@ -284,7 +284,6 @@ pipeline {
             script {
                 echo 'Run Load Kafka_pipeline'
                 build job: 'Database/Broker', parameters: [
-                string(name: 'DNS_NAME', value: "${DNS_NAME}"),
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
                 string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
