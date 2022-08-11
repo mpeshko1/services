@@ -281,7 +281,7 @@ pipeline {
                   println "broker_parameters ---> ${i}"
                 }
 
-                mylist.eachWithIndex {it, i -> println "$i : $it"}
+                mylist.eachWithIndex{ key, value -> println "$key : $value" }
 
             }
           }
