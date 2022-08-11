@@ -192,7 +192,7 @@ properties([
 
                       </table>
                       <script>
-                        let inputs = Broker.getElementsByTagName('input');
+                        let inputs = broker.getElementsByTagName('input');
 
                         for (let input of inputs) {
                           alert( input.name + ': ' + input.value );
