@@ -254,8 +254,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'old', defaultValue: ' ', description: 'OLD')
-        def mylistvalue = []
-        def mylistkey = [
+        mylistvalue = []
+        mylistkey = [
         "container_name",
         "kafka_dns_name",
         "ip_internal",
