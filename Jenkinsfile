@@ -262,7 +262,34 @@ pipeline {
                 def mylistkey = [
                 "container_name",
                 "kafka_dns_name",
-                "ip_internal","ip_external","ip_monitoring","broker_id","kafka_heap_opts","kafka_zookeeper_connect","kafka_zookeeper_ssl_keystore_location","kafka_zookeeper_ssl_keystore_password","kafka_zookeeper_ssl_key_password","kafka_zookeeper_ssl_truststore_location","kafka_zookeeper_ssl_truststore_password","kafka_replica_fetch_max_bytes","kafka_message_max_bytes","kafka_log_retention_hours","kafka_controller_socket_timeout_ms","kafka_connection_setup_teimeout_max_ms","kafka_request_timeout_ms","kafka_ssl_keystore_filename","kafka_ssl_pass_file","kafka_ssl_truststore_filename","kafka_ssl_secrets_dir","kafka_auto_leader_rebalance_enable","kafka_default_replication_factor","kafka_offsets_topic_replication_factor","kafka_min_insync_replicas","kafka_transaction_state_log_min_isr","kafka_transaction_state_log_replication_factor"]
+                "ip_internal",
+                "ip_external",
+                "ip_monitoring",
+                "broker_id",
+                "kafka_heap_opts",
+                "kafka_zookeeper_connect",
+                "kafka_zookeeper_ssl_keystore_location",
+                "kafka_zookeeper_ssl_keystore_password",
+                "kafka_zookeeper_ssl_key_password",
+                "kafka_zookeeper_ssl_truststore_location",
+                "kafka_zookeeper_ssl_truststore_password",
+                "kafka_replica_fetch_max_bytes",
+                "kafka_message_max_bytes",
+                "kafka_log_retention_hours",
+                "kafka_controller_socket_timeout_ms",
+                "kafka_connection_setup_teimeout_max_ms",
+                "kafka_request_timeout_ms",
+                "kafka_ssl_keystore_filename",
+                "kafka_ssl_pass_file",
+                "kafka_ssl_truststore_filename",
+                "kafka_ssl_secrets_dir",
+                "kafka_auto_leader_rebalance_enable",
+                "kafka_default_replication_factor",
+                "kafka_offsets_topic_replication_factor",
+                "kafka_min_insync_replicas",
+                "kafka_transaction_state_log_min_isr",
+                "kafka_transaction_state_log_replication_factor"
+                ]
                 def mylistvalue = []
                 def mymap = [:]
 
@@ -277,7 +304,7 @@ pipeline {
                   mylistvalue.add(i)
                   println "add_to_mylistvalue ---> ${i}"
                 }
-
+                mylistkey.each{ println it }
                 mylistvalue.each{ println it }
             }
           }
