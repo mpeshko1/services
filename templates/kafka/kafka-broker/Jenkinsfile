@@ -57,8 +57,7 @@ pipeline {
                 println  "{$values}"
 
                 ansiblePlaybook (
-                  playbook: 'container-redeploy.yml',
-                  inventoryContent: "${HOST_SERVER}",
+                  playbook: 'playbook.yml',
                   extraVars: [
                       broker_id: "1"
                   ]
