@@ -295,7 +295,6 @@ pipeline {
                 def server_arr = "${Server}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 
-
                 println "${params.old}"
                 println "${params.Server}"
                 println "${params.BROKER_parameters}"
