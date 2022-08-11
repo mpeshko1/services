@@ -136,7 +136,7 @@ properties([
 
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'IP_paraneters',
+            name: 'IP_parameters',
             description: 'Dependencies kafka, external/internal/monitorng ip varibles',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
