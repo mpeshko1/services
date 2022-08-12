@@ -4,6 +4,3 @@
 [kafka:vars]
 ansible_user=m.peshko
 ansible_ssh_user=m.peshko
-host_key_checking=False
-ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-ansible_ssh_private_key_file=templates/kafka/kafka-broker/inventories/id_rsa.pub
