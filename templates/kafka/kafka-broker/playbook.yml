@@ -1,6 +1,5 @@
 ---
-- name: test
-  hosts: 192.168.1.141
+- host: all
   remote_user: m.peshko
   become: true
   vars:
