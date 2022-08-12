@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: vagrant
+  remote_user: m.peshko
   become: true
   roles:
     - ansible-role-install-kafka
