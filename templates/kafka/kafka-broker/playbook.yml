@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: true
+  ansible_user: m.peshko
   roles:
     - ansible-role-install-kafka
 #    - ansible-role-install-preparation
