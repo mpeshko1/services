@@ -60,7 +60,7 @@ pipeline {
                   playbook: "templates/kafka/kafka-broker/playbook.yml",
                   limit: "kafka",
                   credentialsId: "m.peshko",
-                  inventory: "templates/kafka/kafka-broker/inventories/hosts.yml",
+                  inventory: "templates/kafka/kafka-broker/inventories/hosts.yaml",
                   extraVars: [
                       broker_id: "1"
                   ]
