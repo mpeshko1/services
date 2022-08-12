@@ -57,8 +57,13 @@ pipeline {
                 println  "{$values}"
 
                 ansiblePlaybook (
-                  playbook: "./playbook.yml",
-                  inventory: "./inventories/hosts",
+                  playbook: "templates/kafka/kafka-broker/playbook.yml",
+//                  inventory: "templates/kafka/kafka-broker/inventories/hosts",
+                  inventoryContent: 192.168.1.141
+                  extraVars: [
+                      ansible_user: "${REGION}-wbs-${params.PID}",
+                      ansible_ssh_private_key_file: /home/m.peshko/.ssh/id_rsa.pub
+                  ]
                   extraVars: [
                       broker_id: "1"
                   ]
