@@ -57,8 +57,8 @@ pipeline {
                 println  "{$values}"
 
                 ansiblePlaybook (
-                  playbook: "templates/kafka/kafka-broker/playbook.yml",
-                  inventory: "templates/kafka/kafka-broker/inventories/hosts",
+                  playbook: "playbook.yml",
+                  inventory: "inventories/hosts",
                   extraVars: [
                       broker_id: "1"
                   ]
