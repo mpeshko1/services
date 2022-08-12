@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: kafka
   become: true
   roles:
     - ansible-role-install-kafka
