@@ -1,9 +1,6 @@
 ---
 - hosts: all
-  remote_user: m.peshko
   become: true
-  vars:
-    ansible_private_key_file: /home/m.peshko/.ssh/id_rsa.pub
   roles:
     - ansible-role-install-kafka
 #    - ansible-role-install-preparation
