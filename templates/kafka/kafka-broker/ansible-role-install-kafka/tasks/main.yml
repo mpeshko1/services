@@ -1,4 +1,7 @@
 ---
+- hosts: 192.168.1.141
+  become: yes
+  gather_facts: no
 # create dir /opt/docker/container_name
 - name: "create directory for docker"
   file:

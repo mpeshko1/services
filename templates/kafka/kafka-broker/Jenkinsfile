@@ -57,7 +57,7 @@ pipeline {
                 println  "{$values}"
 
                 ansiblePlaybook (
-                  playbook: "templates/kafka/kafka-broker/playbook.yml",
+                  playbook: "templates/kafka/kafka-broker/ansible-role-install-kafka/tasks/main.yml",
                   inventory: "templates/kafka/kafka-broker/inventories/hosts.yaml",
                   disableHostKeyChecking: true,
                   extraVars: [
