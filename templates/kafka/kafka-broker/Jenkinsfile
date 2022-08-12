@@ -60,8 +60,7 @@ pipeline {
                   playbook: "templates/kafka/kafka-broker/playbook.yml",
                   inventory: "templates/kafka/kafka-broker/inventories/hosts",
                   inventoryContent: "192.168.1.141",
-                  ansible_user: "m.peshko",
-                  ansible_ssh_private_key_file: "templates/kafka/kafka-broker/inventories/id_rsa.pub",
+                  credentialsId: "m.peshko"
                   extraVars: [
                       broker_id: "1"
                   ]
