@@ -4,3 +4,4 @@
 [kafka:vars]
 ansible_user=m.peshko
 ansible_ssh_user=m.peshko
+host_key_checking = False
