@@ -1,52 +1,47 @@
 ---
-- hosts: 192.168.1.141
-  become: yes
-  gather_facts: no
+# create dir /opt/docker/container_name
+- name: "create directory for docker"
+  file:
+    path: "{{ dir_docker }}/{{container_name}}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
 
-  tasks:
-  # create dir /opt/docker/container_name
-    - name: "create directory for docker"
-      file:
-        path: "{{ dir_docker }}/{{container_name}}"
-        state: directory
-        owner: root
-        group: root
-        mode: 0777
+# create dirs data|monitoring|secrets|sasl
+- name: "Create a data directory"
+  file:
+    path: "{{ dir_docker }}/{{container_name}}/{{container_name}}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+  loop:
+    - data
+    - monitoring
+    - secrets
+    - sasl
 
-    # create dirs data|monitoring|secrets|sasl
-    - name: "Create a data directory"
-      file:
-        path: "{{ dir_docker }}/{{container_name}}/{{container_name}}/{{ item }}"
-        state: directory
-        owner: root
-        group: root
-        mode: 0777
-      loop:
-        - data
-        - monitoring
-        - secrets
-        - sasl
+# tasks copy docker-file for kafka-broker
+- name: copy docker-file
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_docker }}/{{container_name}}/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ docker_file_template_config_path }}"
 
-    # tasks copy docker-file for kafka-broker
-    - name: copy docker-file
-      template:
-        src: "{{ item }}"
-        dest: "{{ dir_docker }}/{{container_name}}/{{ item | basename | regex_replace('.j2','') }}"
-      with_fileglob:
-        - "{{ docker_file_template_config_path }}"
+# tasks copy configs for sasl
+- name: copy sasl-configs
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/sasl/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ sasl_kafka_admin_config_template_path }}"
 
-    # tasks copy configs for sasl
-    - name: copy sasl-configs
-      template:
-        src: "{{ item }}"
-        dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/sasl/{{ item | basename | regex_replace('.j2','') }}"
-      with_fileglob:
-        - "{{ sasl_kafka_admin_config_template_path }}"
-
-    # tasks copy monitoring file
-    - name: copy monitoring-file-configs
-      template:
-        src: "{{ item }}"
-        dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/monitoring/{{ item | basename | regex_replace('.j2','') }}"
-      with_fileglob:
-        - "{{ monitoring_file_path }}"
+# tasks copy monitoring file
+- name: copy monitoring-file-configs
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/monitoring/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ monitoring_file_path }}"
