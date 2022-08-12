@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: 192.168.1.141
   become: true
   ansible_user: m.peshko
   roles:
