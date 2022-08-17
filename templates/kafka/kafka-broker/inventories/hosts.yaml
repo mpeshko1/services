@@ -3,4 +3,3 @@
 
 [kafka:vars]
 ansible_ssh_user=m.peshko
-ansible_ssh_pass=12345678
