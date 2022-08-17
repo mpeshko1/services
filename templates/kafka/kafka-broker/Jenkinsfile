@@ -56,6 +56,8 @@ pipeline {
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
 
+                ls -la /home/m.peshko/.ssh/id_rsa.pub
+
                 ansiblePlaybook (
                   playbook: "templates/kafka/kafka-broker/playbook.yml",
                   inventory: "templates/kafka/kafka-broker/inventories/hosts.yaml",
