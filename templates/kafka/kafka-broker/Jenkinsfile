@@ -60,7 +60,7 @@ pipeline {
 
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/ansible-role-install-kafka/tasks/main.yml',
-                  inventoryContent: "192.168.0.76",
+                  inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
                       broker_id: "1"
