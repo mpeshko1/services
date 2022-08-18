@@ -13,7 +13,7 @@ pipeline {
             steps {
               script {
                 def mylistkey = [
-                "cont_name",
+                "container_name",
                 "kafka_dns_name",
                 "ip_internal",
                 "ip_external",
@@ -73,14 +73,14 @@ pipeline {
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
-                println  "{$values.cont_name}"
+                println  "{$values.container_name}"
 
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/playbook.yml',
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    cont_name: "{{ $values.cont_name | default('kafka1-1') }}",
+                    container_name: "{{ $values.container_name | default('kafka1-1') }}",
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                     port_internal: "{{ $values.port_internal | default('9092') }}",
