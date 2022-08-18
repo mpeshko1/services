@@ -81,7 +81,7 @@ pipeline {
                   disableHostKeyChecking: true,
                   extraVars: [
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
-                    cont_name: "{{ $values.cont_name|default('kafka1-1') }}",
+                    cont_name: {{ $values.cont_name | default('kafka1-1') }},
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                     port_internal: "{{ $values.port_internal | default('9092') }}",
                     ip_internal:  "{{ $values.ip_internal | default('172.17.0.1') }}",
