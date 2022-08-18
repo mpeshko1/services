@@ -79,7 +79,6 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    container_name: "{{ $values.container_name | default('kafka1-1') }}",
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                     port_internal: "{{ $values.port_internal | default('9092') }}",
@@ -136,6 +135,7 @@ pipeline {
                     jaas_server_user_debezium: "{{ $values.jaas_server_user_debezium | default('user_debezium') }}",
                     jaas_server_password_debezium_secret: "{{ $values.jaas_server_password_debezium_secret | default('debezium_secret') }}",
                     jaas_client_username: "{{ $values.jaas_client_username | default('kafka') }}",
+                      container_name: "{{ $values.container_name | default('kafka1-1') }}",
                     jaas_client_password: "{{ $values.jaas_client_password | default('kafka_secret') }}"
                   ]
                 )
