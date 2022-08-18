@@ -56,14 +56,40 @@ pipeline {
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
 
-                sh 'ls -la templates/kafka/kafka-broker/inventories/'
-
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/playbook.yml',
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                      broker_id: "1"
+                    container_name: "1",
+                    kafka_dns_name: "2",
+                    ip_internal: "3",
+                    ip_external: "4",
+                    ip_monitoring: "5",
+                    broker_id: "6",
+                    kafka_heap_opts: "7",
+                    kafka_zookeeper_connect: "8",
+                    kafka_zookeeper_ssl_keystore_location: "9",
+                    kafka_zookeeper_ssl_keystore_password: "10",
+                    kafka_zookeeper_ssl_key_password: "11",
+                    kafka_zookeeper_ssl_truststore_location: "12",
+                    kafka_zookeeper_ssl_truststore_password: "13",
+                    kafka_replica_fetch_max_bytes: "14",
+                    kafka_message_max_bytes: "15",
+                    kafka_log_retention_hours: "16",
+                    kafka_controller_socket_timeout_ms: "17",
+                    kafka_connection_setup_teimeout_max_ms: "18",
+                    kafka_request_timeout_ms: "19",
+                    kafka_ssl_keystore_filename: "20",
+                    kafka_ssl_pass_file: "21",
+                    kafka_ssl_truststore_filename: "22",
+                    kafka_ssl_secrets_dir: "23",
+                    kafka_auto_leader_rebalance_enable: "24",
+                    kafka_default_replication_factor: "25",
+                    kafka_offsets_topic_replication_factor: "26",
+                    kafka_min_insync_replicas: "27",
+                    kafka_transaction_state_log_min_isr: "28",
+                    kafka_transaction_state_log_replication_factor: "29"
                   ]
                 )
 
