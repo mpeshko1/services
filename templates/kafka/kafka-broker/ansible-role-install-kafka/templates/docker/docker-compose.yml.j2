@@ -11,7 +11,7 @@ services:
 
     environment:
       KAFKA_BROKER_ID: "{{broker_id}}"
-      KAFKA_HEAP_OPTS: "-Xmx{{kafka_heap_opts}}G" "-Xms{{kafka_heap_opts}}G"
+      KAFKA_HEAP_OPTS: "-Xmx{{kafka_heap_opts}}G -Xms{{kafka_heap_opts}}G"
 #####
 ##Coneect config
 #####
