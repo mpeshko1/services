@@ -1,47 +1,116 @@
 ---
-# create dir /opt/docker/container_name
-- name: "create directory for docker"
-  file:
-    path: "{{ dir_docker }}/{{container_name}}"
-    state: directory
-    owner: root
-    group: root
-    mode: 0777
+- hosts: all
+  become: yes
+  gather_facts: no
+  vars:
+    # overall env
+    dir_docker: /opt/docker/jenkins/
 
-# create dirs data|monitoring|secrets|sasl
-- name: "Create a data directory"
-  file:
-    path: "{{ dir_docker }}/{{container_name}}/{{container_name}}/{{ item }}"
-    state: directory
-    owner: root
-    group: root
-    mode: 0777
-  loop:
-    - data
-    - monitoring
-    - secrets
-    - sasl
+    # vars for docker file
+    container_name: kafka1-1
+    kafka_dns_name: kafka1-1.net
+    ip_internal: 172.17.0.1
+    port_internal: 9092
+    ip_external: 172.17.0.1
+    port_external: 29092
+    ip_monitoring: 172.17.0.1
+    port_monitoring: 9201
+    kafka_heap_opts: -Xmx1G -Xms1G
+    broker_id: 1
+    kafka_zookeeper_connect: zookeeper1.net:2281
+    kafka_zookeeper_ssl_keystore_location: /etc/kafka/secrets/kafka1-1.net-keystore.p12
+    kafka_zookeeper_ssl_keystore_password: strong
+    kafka_zookeeper_ssl_key_password: strong
+    kafka_zookeeper_ssl_truststore_location: /etc/kafka/secrets/truststore.p12
+    kafka_zookeeper_ssl_truststore_password: strong
 
-# tasks copy docker-file for kafka-broker
-- name: copy docker-file
-  template:
-    src: "{{ item }}"
-    dest: "{{ dir_docker }}/{{container_name}}/{{ item | basename | regex_replace('.j2','') }}"
-  with_fileglob:
-    - "{{ docker_file_template_config_path }}"
+    # vars for docker file (Config parameters)
+    kafka_replica_fetch_max_bytes: 20000000
+    kafka_message_max_bytes: 20000000
+    kafka_log_retention_hours: 168
+    kafka_controller_socket_timeout_ms: 60000
+    kafka_connection_setup_teimeout_max_ms: 40000
+    kafka_request_timeout_ms: 60000
 
-# tasks copy configs for sasl
-- name: copy sasl-configs
-  template:
-    src: "{{ item }}"
-    dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/sasl/{{ item | basename | regex_replace('.j2','') }}"
-  with_fileglob:
-    - "{{ sasl_kafka_admin_config_template_path }}"
+    # vars for docker file (SSL Configs)
+    kafka_ssl_keystore_filename: kafka1-1.net-keystore.jks
+    kafka_ssl_pass_file: ssl.creds
+    kafka_ssl_truststore_filename: truststore.jks
+    kafka_ssl_secrets_dir: /etc/kafka/secrets/
 
-# tasks copy monitoring file
-- name: copy monitoring-file-configs
-  template:
-    src: "{{ item }}"
-    dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/monitoring/{{ item | basename | regex_replace('.j2','') }}"
-  with_fileglob:
-    - "{{ monitoring_file_path }}"
+    # vars for docker file (Cluster configs)
+    kafka_auto_leader_rebalance_enable: "true"
+    kafka_default_replication_factor: 3
+    kafka_offsets_topic_replication_factor: 3
+    kafka_min_insync_replicas: 1
+    kafka_transaction_state_log_min_isr: 2
+    kafka_transaction_state_log_replication_factor: 3
+
+    # vars for adminclient-configs.conf
+    sasl_username: connect
+    sasl_password: connect-secret
+    ssl_keystore_location: /etc/kafka/secrets/kafka1-1.net-keystore.jks
+    ssl_keystore_password: strong
+    ssl_truststore_location: /etc/kafka/secrets/truststore.jks
+    ssl_truststore_password: strong
+
+    # vars for kafka_server_jaas.conf
+    jaas_server_user_kafkabroker: user_kafkabroker
+    jaas_server_password_kafkabroker_secret: kafkabroker-secret
+    jaas_server_user_kafka_broker_metric_reporter: user_kafka-broker-metric-reporter
+    jaas_server_password_kafkabroker_metric_reporter_secret: kafkabroker-metric-reporter-secret
+    jaas_server_user_client: user_client
+    jaas_server_password_client_secret: client_secret
+    jaas_server_user_connect: user_connect
+    jaas_server_password_connect_secret: connect_secret
+    jaas_server_user_debezium: user_debezium
+    jaas_server_password_debezium_secret: debezium_secret
+    jaas_client_username: kafka
+    jaas_client_password: kafka_secret
+  tasks:
+    # create dir /opt/docker/container_name
+    - name: "create directory for docker"
+      file:
+        path: "{{ dir_docker }}/{{container_name}}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0777
+
+    # create dirs data|monitoring|secrets|sasl
+    - name: "Create a data directory"
+      file:
+        path: "{{ dir_docker }}/{{container_name}}/{{container_name}}/{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0777
+      loop:
+        - data
+        - monitoring
+        - secrets
+        - sasl
+
+    # tasks copy docker-file for kafka-broker
+    - name: copy docker-file
+      template:
+        src: "{{ item }}"
+        dest: "{{ dir_docker }}/{{container_name}}/{{ item | basename | regex_replace('.j2','') }}"
+      with_fileglob:
+        - "{{ docker_file_template_config_path }}"
+
+    # tasks copy configs for sasl
+    - name: copy sasl-configs
+      template:
+        src: "{{ item }}"
+        dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/sasl/{{ item | basename | regex_replace('.j2','') }}"
+      with_fileglob:
+        - "{{ sasl_kafka_admin_config_template_path }}"
+
+    # tasks copy monitoring file
+    - name: copy monitoring-file-configs
+      template:
+        src: "{{ item }}"
+        dest: "{{ dir_docker }}/{{container_name}}/{{container_name}}/monitoring/{{ item | basename | regex_replace('.j2','') }}"
+      with_fileglob:
+        - "{{ monitoring_file_path }}"
