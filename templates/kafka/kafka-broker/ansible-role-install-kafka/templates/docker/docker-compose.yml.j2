@@ -5,7 +5,7 @@ services:
     image: "confluentinc/cp-kafka:7.1.1"
     hostname: "{{kafka_dns_name}}"
     ports:
-      - {{ip_internal}}:{{port_internal}}:{{port_internal}} #Connect internal (SASL/PLAIN)
+      - {{ip_internal | default('2.2.2.2')}}:{{port_internal}}:{{port_internal}} #Connect internal (SASL/PLAIN)
       - {{ip_external}}:{{port_external}}:{{port_external}} #Connect external
       - {{ip_monitoring}}:{{port_monitoring}}:{{port_monitoring}} # Monitoring Section JMX
 
