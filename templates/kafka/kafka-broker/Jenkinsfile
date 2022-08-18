@@ -66,7 +66,7 @@ pipeline {
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
                     port_internal: "{{ $values.port_internal | default('9092') }}",
                     ip_internal:  "{{ $values.ip_internal | default('172.17.0.1') }}",
-                    port_internal: "{{ $values.port_internal | default('29092') }}"
+                    port_internal: "{{ $values.port_internal | default('29092') }}",
                     ip_external:  "{{ $values.ip_external | default('172.17.0.1') }}",
                     ip_monitoring: "{{ $values.ip_monitoring | default('9201') }}",
                     broker_id: "{{ $values.broker_id | default('1') }}",
