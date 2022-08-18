@@ -59,6 +59,7 @@ pipeline {
                 sh 'ls -la templates/kafka/kafka-broker/inventories/'
 
                 ansiblePlaybook (
+                  playbook: 'templates/kafka/kafka-broker/playbook.yml',
                   inventoryContent: "by-kafka1-1.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
