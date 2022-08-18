@@ -1,6 +1,6 @@
 ---
 # overall env
-dir_docker: /opt/docker/
+dir_docker: /opt/docker/jenkins/
 
 # vars for docker file
 container_name: kafka1-1
