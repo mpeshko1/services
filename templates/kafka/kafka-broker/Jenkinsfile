@@ -62,7 +62,7 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    container_name: "$values.container_name",
+                    container_name: "{{ $values.container_name | default('2') }}",
                     kafka_dns_name: "$values.kafka_dns_name",
                     ip_internal: "$values.ip_internal",
                     ip_external: "$values.ip_external",
