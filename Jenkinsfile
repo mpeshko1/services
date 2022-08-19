@@ -190,6 +190,7 @@ properties([
                         <tr><td>kafka_min_insync_replicas</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
                         <tr><td>kafka_transaction_state_log_min_isr</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
                         <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
+
                         <tr><td><h5>VARS FOR adminclient-configs.conf</td><td>
                         <tr><td>sasl_username</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect"></td></tr>
                         <tr><td>sasl_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect-secret"></td></tr>
@@ -197,6 +198,7 @@ properties([
                         <tr><td>ssl_keystore_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="strong"></td></tr>
                         <tr><td>ssl_truststore_location</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="/etc/kafka/secrets/truststore.jks"></td></tr>
                         <tr><td>ssl_truststore_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="strong"></td></tr>
+
                         <tr><td><h5>VARS FOR kafka_server_jaas.conf</td><td>
                         <tr><td>jaas_server_user_kafkabroker</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="user_kafkabroker"></td></tr>
                         <tr><td>jaas_server_password_kafkabroker_secret</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="kafkabroker-secret"></td></tr>
