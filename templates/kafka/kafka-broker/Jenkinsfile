@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
-        string(name: 'BROKER_PARAMETERS')
+        string(name: 'BROKER_PARAMETERS', defaultValue: 'kafka1-1')
         string(name: 'VALUE_LIST', defaultValue: '')
     }
 
@@ -82,7 +82,7 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    container_name: "{{ $values.kafka_container_name | default('kafka') }}",
+                    container_name: "{{ $values.kafka_container_name | default('kafka1') }}",
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                     port_internal: "{{ $values.port_internal | default('9092') }}",
