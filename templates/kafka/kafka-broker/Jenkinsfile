@@ -35,12 +35,12 @@ pipeline {
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
 //Send values to Ansible
-                for (i in mylistkey) {
                   ansiblePlaybook (
                     playbook: 'templates/kafka/kafka-broker/playbook.yml',
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
+                    for (i in mylistkey) {
                       "$i": "$values.$i"
 //                     container_name: "{{ $values.container_name1 | default('kafka1-1') }}",
 //                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
@@ -100,10 +100,9 @@ pipeline {
 //                     jaas_server_password_debezium_secret: "{{ $values.jaas_server_password_debezium_secret | default('debezium_secret') }}",
 //                     jaas_client_username: "{{ $values.jaas_client_username | default('kafka') }}",
 //                     jaas_client_password: "{{ $values.jaas_client_password | default('kafka_secret') }}"
+}
                   ]
                 )
-              }
-
               }
             }
         }
