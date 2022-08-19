@@ -187,9 +187,9 @@ properties([
                         <tr><td>kafka_auto_leader_rebalance_enable</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="true"></td></tr>
                         <tr><td>kafka_default_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
                         <tr><td>kafka_offsets_topic_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
-                        <tr><td>kafka_min_insync_replicas</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
-                        <tr><td>kafka_transaction_state_log_min_isr</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
-                        <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1></td></tr>
+                        <tr><td>kafka_min_insync_replicas</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                        <tr><td>kafka_transaction_state_log_min_isr</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                        <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
 
                         <tr><td><h5>VARS FOR adminclient-configs.conf</td><td>
                         <tr><td>sasl_username</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect"></td></tr>
