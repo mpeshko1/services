@@ -72,7 +72,6 @@ pipeline {
                 }
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
-                println  "fghfhgf '{$values.kafka_container_name}'"
                 println  "{$values.kafka_dns_name}"
                 println  "{$values}"
 
