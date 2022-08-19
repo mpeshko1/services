@@ -101,8 +101,8 @@ pipeline {
 //                     jaas_client_username: "{{ $values.jaas_client_username | default('kafka') }}",
 //                     jaas_client_password: "{{ $values.jaas_client_password | default('kafka_secret') }}"
                   ]
-                }
                 )
+              }
 
               }
             }
