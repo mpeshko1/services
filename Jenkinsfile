@@ -280,10 +280,10 @@ pipeline {
           steps {
             script  {
 
-              List<String> readFileInList(String 1.txt) {
-                File file = new File(./1.txt)
-                def lines = file.readLines()
-                return lines
+              def filePath = readFile "${WORKSPACE}/1.txt"
+              def lines = filePath.readLines()
+              for (line in lines) {
+                println "${line}"
               }
 
                 def mylistvalue = []
