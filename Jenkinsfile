@@ -279,6 +279,11 @@ pipeline {
       stage('Deploy') {
           steps {
             script  {
+
+                new File("templates/1.txt").eachLine { line ->
+                  println line
+                }
+
                 def mylistvalue = []
                 def server_parameters = "${Server}".split(",")
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
