@@ -13,7 +13,7 @@ pipeline {
             steps {
               script {
                 def mylistkey = [
-                "kafka_container_name1",
+                "kafka_container_name",
                 "kafka_dns_name",
                 "ip_internal",
                 "ip_external",
@@ -75,6 +75,8 @@ pipeline {
                 println  "fghfhgf '{$values.kafka_container_name}'"
                 println  "{$values.kafka_dns_name}"
                 println  "{$values}"
+
+
 
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/playbook.yml',
