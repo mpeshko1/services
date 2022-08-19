@@ -281,7 +281,7 @@ pipeline {
             script  {
 
               List<String> readFileInList(String 1.txt) {
-                File file = new File(1.txt)
+                File file = new File(./1.txt)
                 def lines = file.readLines()
                 return lines
               }
