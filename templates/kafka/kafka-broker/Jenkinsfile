@@ -13,7 +13,7 @@ pipeline {
             steps {
               script {
                 def mylistkey = [
-                "kafka_container_name",
+                "kafka_container_name1",
                 "kafka_dns_name",
                 "ip_internal",
                 "ip_external",
