@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
-        string(name: 'BROKER_PARAMETERS', defaultValue: 'null')
+        string(name: 'BROKER_PARAMETERS')
     }
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
             steps {
               script {
                 def mylistkey = [
-                "container_name",
+                "container_name1",
                 "kafka_dns_name",
                 "port_internal",
                 "ip_internal",
