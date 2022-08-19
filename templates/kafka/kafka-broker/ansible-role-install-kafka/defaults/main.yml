@@ -8,7 +8,6 @@ sasl_kafka_admin_config_template_path: "{{ role_path }}/templates/sasl/*.j2"
 monitoring_file_path: "{{ role_path }}/templates/monitoring/*.j2"
 
 # vars for docker file
-container_name: kafka1-1
 kafka_dns_name: kafka1-1.net
 ip_internal: 172.17.0.1
 port_internal: 9092
