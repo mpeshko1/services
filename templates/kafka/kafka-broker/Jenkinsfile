@@ -13,7 +13,7 @@ pipeline {
               script {
                 echo "Read key file"
                 def mylistkey
-                def filePath = readFile "${WORKSPACE}/keyfile.txt"
+                def filePath = readFile "templates/keyfile.txt"
                 def keyfile = filePath.readLines()
 
                 for (key in keyfile) {
