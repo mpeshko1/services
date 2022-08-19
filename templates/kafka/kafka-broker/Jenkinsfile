@@ -66,7 +66,7 @@ pipeline {
                 def dependencies_arr = "${DEPENDENCIES}".split(",")
                 def server_arr = "${SERVERS}".split(",")
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
-                def mylistvalue = []
+                def mylistvalue = [" "]
 
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
