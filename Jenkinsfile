@@ -280,7 +280,7 @@ pipeline {
           steps {
             script  {
 
-                new File("templates/1.txt").eachLine { line ->
+                new File("1.txt").eachLine { line ->
                   println line
                 }
 
