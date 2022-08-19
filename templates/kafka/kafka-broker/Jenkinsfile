@@ -71,7 +71,7 @@ pipeline {
                   mylistvalue.add(i)
                 }
 
-                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[0]]} //user enter parameters -> type MAP
                 println  "{$values}"
 
                 ansiblePlaybook (
