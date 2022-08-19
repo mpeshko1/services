@@ -44,7 +44,7 @@ pipeline {
 
                 println "{ $map }"
 
-                for (i in map) {
+                for (i in mylistkey) {
                   map["i"] = mylistvalue.each{it}
                 }
 
