@@ -64,10 +64,10 @@ pipeline {
                 echo "Running broker deploy"
                 def dependencies_arr = "${DEPENDENCIES}".split(",")
                 def server_arr = "${SERVERS}".split(",")
-                def broker_parameters = "${BROKER_PARAMETERS}".split(",")
+                def value_list = "${VALUE_LIST}".split(",")
                 def mylistvalue = []
 
-                for (i in broker_parameters ) {
+                for (i in value_list ) {
                   mylistvalue.add(i)
                 }
 
