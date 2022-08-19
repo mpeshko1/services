@@ -73,7 +73,7 @@ pipeline {
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values}"
-                println  "{mylistvalue[0]}"
+                println  "{$mylistvalue[0]}"
 
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/playbook.yml',
