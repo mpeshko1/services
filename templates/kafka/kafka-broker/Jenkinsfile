@@ -5,6 +5,7 @@ pipeline {
         string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'BROKER_PARAMETERS')
+        string(name: 'VALUE_LIST')
     }
 
     stages {
@@ -73,8 +74,6 @@ pipeline {
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values.kafka_dns_name}"
                 println  "{$values}"
-
-
 
                 ansiblePlaybook (
                   playbook: 'templates/kafka/kafka-broker/playbook.yml',
