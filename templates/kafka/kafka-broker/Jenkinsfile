@@ -80,7 +80,7 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    container_name: "{{ $mylistvalue | default('kafka1-1') }}",
+                    container_name: "{{ $mylistvalue | default('kafka1') }}",
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                     port_internal: "{{ $values.port_internal | default('9092') }}",
