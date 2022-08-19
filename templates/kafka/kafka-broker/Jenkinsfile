@@ -73,6 +73,7 @@ pipeline {
 
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{$values.kafka_container_name}"
+                println  "{$values.kafka_dns_name}"
                 println  "{$values}"
 
                 ansiblePlaybook (
@@ -80,7 +81,6 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-
                     container_name: "{{ $values.kafka_container_name | default('kafka') }}",
                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
