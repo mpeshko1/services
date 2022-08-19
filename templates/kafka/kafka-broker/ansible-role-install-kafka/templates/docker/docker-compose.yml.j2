@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  {{container_name1}}:
-    container_name1: {{container_name1}}
+  {{container_name}}:
+    container_name: {{container_name}}
     image: "confluentinc/cp-kafka:7.1.1"
     hostname: "{{kafka_dns_name}}"
     ports:
@@ -85,10 +85,10 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: {{kafka_transaction_state_log_replication_factor}}     #The replication factor for the transaction topic. Critical cfg files (old param 3)
 
     volumes:
-      - ./{{container_name1}}/data/:/var/lib/kafka/data/
-      - ./{{container_name1}}/monitoring/:/opt/prometheus/
-      - ./{{container_name1}}/secrets/:{{kafka_ssl_secrets_dir}}
-      - ./{{container_name1}}/sasl/:/opt/sasl/
+      - ./{{container_name}}/data/:/var/lib/kafka/data/
+      - ./{{container_name}}/monitoring/:/opt/prometheus/
+      - ./{{container_name}}/secrets/:{{kafka_ssl_secrets_dir}}
+      - ./{{container_name}}/sasl/:/opt/sasl/
 
     restart: always
 
