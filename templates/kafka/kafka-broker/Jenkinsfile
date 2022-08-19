@@ -5,6 +5,7 @@ pipeline {
         string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'BROKER_PARAMETERS', defaultValue: ' ')
+        string(name: 'VALUE_LIST', defaultValue: ' ')
     }
 
     stages {
