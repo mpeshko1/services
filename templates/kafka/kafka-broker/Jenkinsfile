@@ -14,7 +14,7 @@ pipeline {
 
 //Read keyfile.txt and add values to mylistkey
                 echo "Read key file"
-                def mylistkey = []
+                def mylistkey = ['null']
                 def filePath = readFile "templates/kafka/kafka-broker/keyfile.txt"
                 def keyfile = filePath.readLines()
 
@@ -32,23 +32,16 @@ pipeline {
                   mylistvalue.add(i)
                 }
 //Create MAP where key=mylistkey valu=mylistvalue
-                // def values = [container_name:"kafka1-1"]
-                // def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+
+                // def map = [:]
+                // for (i in mylistkey) {
+                //   map["$i"] = "null"
+                // }
+                // println "{ $map }"
+                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 // println  "{user - > $values.container_name}"
                 // println  "{new - >  $values.container_name}"
-                // println  "{$values}"
-                def map = [:]
-                for (i in mylistkey) {
-                  map["$i"] = "null"
-                }
-
-                println "{ $map }"
-
-                for (i in mylistkey) {
-                  map["$i"] = mylistvalue.each{it}
-                }
-
-                println "{ $map }"
+                println  "{$values}"
 
 
 // //Send values to Ansible
