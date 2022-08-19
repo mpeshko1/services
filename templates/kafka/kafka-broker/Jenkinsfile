@@ -17,7 +17,7 @@ pipeline {
                 def keyfile = filePath.readLines()
 
                 for (key in keyfile) {
-                  mylistkey.add("{$key}")
+                  mylistkey.add(key)
                 }
 
                 echo "Running broker deploy"
