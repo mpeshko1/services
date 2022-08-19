@@ -40,7 +40,9 @@ pipeline {
                   inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                   disableHostKeyChecking: true,
                   extraVars: [
-                    for (i in mylistkey)
+                    for (i in mylistkey) {
+                      println  "ansible -> {$i}"
+                    }
 //                     container_name: "{{ $values.container_name1 | default('kafka1-1') }}",
 //                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 // //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
