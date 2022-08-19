@@ -280,12 +280,6 @@ pipeline {
           steps {
             script  {
 
-              def filePath = readFile "${WORKSPACE}/1.txt"
-              def lines = filePath.readLines()
-              for (line in lines) {
-                println "${line}"
-              }
-
                 def mylistvalue = []
                 def server_parameters = "${Server}".split(",")
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
