@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
-        string(name: 'BROKER_PARAMETERS', defaultValue: "")
+        string(name: 'BROKER_PARAMETERS', defaultValue: "default")
     }
 
     stages {
