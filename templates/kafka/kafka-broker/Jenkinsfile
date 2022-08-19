@@ -33,8 +33,9 @@ pipeline {
                 }
 //Create MAP where key=mylistkey valu=mylistvalue
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+                println  "user - > {$values.container_name}"
                 values["container_name"] = "kafka1-1"
-                println  "{$values.container_name}"
+                println  "new - > {$values.container_name}"
                 println  "{$values}"
 //Send values to Ansible
                   ansiblePlaybook (
