@@ -193,7 +193,7 @@ properties([
 
                         <tr><td><h5>VARS FOR adminclient-configs.conf</td><td>
                         <tr><td>sasl_username</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect"></td></tr>
-                        <tr><td>sasl_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect-secret"></td></tr>
+                        <tr><td>sasl_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="connect-syecret"></td></tr>
                         <tr><td>ssl_keystore_location</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="/etc/kafka/secrets/kafka1-1.net-keystore.jks"></td></tr>
                         <tr><td>ssl_keystore_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="strong"></td></tr>
                         <tr><td>ssl_truststore_location</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="/etc/kafka/secrets/truststore.jks"></td></tr>
