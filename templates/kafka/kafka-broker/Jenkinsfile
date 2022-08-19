@@ -37,12 +37,18 @@ pipeline {
                 // println  "{user - > $values.container_name}"
                 // println  "{new - >  $values.container_name}"
                 // println  "{$values}"
-                def values = [:]
+                def map = [:]
                 for (i in mylistkey) {
-                  values["$i"] = "null"
+                  map["$i"] = "null"
                 }
 
-                println "{ $values }"
+                println "{ $map }"
+
+                for (i in map) {
+                  map["i"] = mylistvalue.each{it}
+                }
+
+                println "{ $map }"
 
 
 // //Send values to Ansible
