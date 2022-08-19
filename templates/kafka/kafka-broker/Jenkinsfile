@@ -14,8 +14,11 @@ pipeline {
                 def mylistkey = [
                 "container_name",
                 "kafka_dns_name",
+                "port_internal",
                 "ip_internal",
+                "port_external"
                 "ip_external",
+                "port_monitoring",
                 "ip_monitoring",
                 "broker_id",
                 "kafka_heap_opts",
