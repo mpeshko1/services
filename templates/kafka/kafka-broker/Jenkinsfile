@@ -16,7 +16,7 @@ pipeline {
                 "kafka_dns_name",
                 "port_internal",
                 "ip_internal",
-                "port_external"
+                "port_external",
                 "ip_external",
                 "port_monitoring",
                 "ip_monitoring",
