@@ -14,7 +14,7 @@ pipeline {
 
 //Read keyfile.txt and add values to mylistkey
                 echo "Read key file"
-                def mylistkey = ['null']
+                def mylistkey = []
                 def filePath = readFile "templates/kafka/kafka-broker/keyfile.txt"
                 def keyfile = filePath.readLines()
 
