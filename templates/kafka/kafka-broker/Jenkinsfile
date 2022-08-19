@@ -42,7 +42,6 @@ pipeline {
                     disableHostKeyChecking: true,
                     extraVars: [
                       "{$i}": "{{ $values.$i }}"
-                    }
 //                     container_name: "{{ $values.container_name1 | default('kafka1-1') }}",
 //                     kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.net') }}",
 // //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
@@ -102,6 +101,7 @@ pipeline {
 //                     jaas_client_username: "{{ $values.jaas_client_username | default('kafka') }}",
 //                     jaas_client_password: "{{ $values.jaas_client_password | default('kafka_secret') }}"
                   ]
+                }
                 )
 
               }
