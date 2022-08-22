@@ -155,6 +155,7 @@ properties([
                         <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
                         <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="zookeeper1-1"></td></tr>
                         <tr><td>zookeeper_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="zookeeper1-1.net"></td></tr>
+                        <tr><td>ip_connect</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="172.17.0.1"></td></tr>
                         <tr><td>zookeeper_secure_client_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="2281"></td></tr>
                         <tr><td>replication_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="2888"></td></tr>
                         <tr><td>leader_selection_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="3888"></td></tr>
