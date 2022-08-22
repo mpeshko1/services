@@ -137,7 +137,7 @@ properties([
 //VALUE FOR ZOOKEEPER DOCKER TEMPLATE
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
-            name: 'BROKER_parameters',
+            name: 'ZOOKEEPER_parameters',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -149,7 +149,7 @@ properties([
                     classpath: [],
                     sandbox: true,
                     script: """
-                      if (Application == 'Broker') {
+                      if (Application == 'Zookeeper') {
                       return inputBox = '''
                       <table id="broker">
                         <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1"></td></tr>
@@ -293,9 +293,6 @@ pipeline {
 //Overall varibles
                 def server_parameters = "${Server}".split(",")
 //Varibles for ZOOKEEPER DOCKER TEMPLATE
-                def mylistvalue = []
-                def zookeeper_parameters = "${params.Dependencies}".split(",")
-                def broker_parameters = "${params.BROKER_parameters}".split(",")
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
