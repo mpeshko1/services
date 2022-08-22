@@ -23,7 +23,7 @@ pipeline {
 //Add parameters from main Jenkinsfile
                 echo "Running zookeeper deploy"
                 def server_arr = "${SERVERS}".split(",")
-                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",").join(",")
+                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",")
                 def mylistvalue = []
 //Add user values to mylistvalue
                 for (i in zookeeper_parameters ) {
