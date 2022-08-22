@@ -134,6 +134,54 @@ properties([
                 ]
             ]
         ],
+//VALUE FOR ZOOKEEPER DOCKER TEMPLATE
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'BROKER_parameters',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Broker') {
+                      return inputBox = '''
+                      <table id="broker">
+                        <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1"></td></tr>
+                        <tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1.spnode.net"></td></tr>
+
+                        <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
+                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
+                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9201"></td></tr>
+                        <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+
+                        <tr><td><h5>BROKER SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                        <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="10"></td></tr>
+
+                        <tr><td><h5>CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
+                        <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
+                        <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="168"></td></tr>
+                        <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
+                        <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="40000"></td></tr>
+                        <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
+                      </table>
+                      '''
+                      }
+                    """.stripIndent()
+                ]
+            ],
+            omitValueField: true
+        ],
 //VALUE FOR BROKER DOCKER TEMPLATE
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
@@ -242,12 +290,17 @@ pipeline {
       stage('Deploy') {
           steps {
             script  {
-
-                def mylistvalue = []
+//Overall varibles
                 def server_parameters = "${Server}".split(",")
+//Varibles for ZOOKEEPER DOCKER TEMPLATE
+                def mylistvalue = []
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
-
+//Varibles for BROKER DOCKER TEMPLATE
+                def mylistvalue = []
+                def zookeeper_parameters = "${params.Dependencies}".split(",")
+                def broker_parameters = "${params.BROKER_parameters}".split(",")
+//Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
                 println "${zookeeper_parameters}"
