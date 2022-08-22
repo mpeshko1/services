@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DEPENDENCIES', defaultValue: ' ')
         string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'ZOOKEEPER_PARAMETERS', defaultValue: ' ')
         string(name: 'BROKER_PARAMETERS')
@@ -24,7 +23,6 @@ pipeline {
                 }
 //Add parameters from main Jenkinsfile
                 echo "Running broker deploy"
-                def dependencies_arr = "${DEPENDENCIES}".split(",")
                 def server_arr = "${SERVERS}".split(",")
                 def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",")
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
