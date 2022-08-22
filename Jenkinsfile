@@ -137,7 +137,6 @@ properties([
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
             name: 'BROKER_parameters',
-            description: 'Dependencies kafka-broker',
             referencedParameters: 'Application',
             script: [$class: 'GroovyScript',
                 fallbackScript: [
@@ -166,10 +165,7 @@ properties([
                         <tr><td><h5>BROKER SECTION IN DOCKER TEMPLATE</td><td>
                         <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
                         <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="10"></td></tr>
-
-                        <tr><td><h5>CONNECT CONFIG SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>kafka_zookeeper_connect</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1:2281"></td></tr>
-
+                        
                         <tr><td><h5>CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE</td><td>
                         <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
                         <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
@@ -274,6 +270,7 @@ pipeline {
                 build job: 'Database/Broker', parameters: [
                 string(name: 'DEPENDENCIES', value: "${Dependencies}"),
                 string(name: 'SERVERS', value: "${Server}"),
+                string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
                 string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                 ]
           }

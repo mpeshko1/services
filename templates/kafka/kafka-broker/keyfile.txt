@@ -8,7 +8,6 @@ port_monitoring
 ip_monitoring
 broker_id
 kafka_heap_opts
-kafka_zookeeper_connect
 kafka_replica_fetch_max_bytes
 kafka_message_max_bytes
 kafka_log_retention_hours
