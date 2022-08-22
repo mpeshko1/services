@@ -311,7 +311,10 @@ pipeline {
                     string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                   ]
                 } else if (Application == 'Zookeeper') {
-                  string(name: 'ZOOKEEPER_PARAMETERS', value: "${ZOOKEEPER_parameters}")
+                    echo 'Run Load Broker setup'
+                    build job: 'Database/Broker', parameters: [
+                      string(name: 'ZOOKEEPER_PARAMETERS', value: "${ZOOKEEPER_parameters}")
+                    ]
                 }
           }
         }
