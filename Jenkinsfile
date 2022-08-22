@@ -29,9 +29,9 @@ def REGION = [
 def CREATED_SERVICES = [
   'Clear':[],
   'Zookeeper': [
-    ['host_service':'us-zookeeper1-1.spnode.net'],
-    ['host_service':'us-zookeeper1-2.spnode.net'],
-    ['host_service':'us-zookeeper1-3.spnode.net']
+    ['host_service':'us-zookeeper1-1.spnode.net:2281'],
+    ['host_service':'us-zookeeper1-2.spnode.net:2281'],
+    ['host_service':'us-zookeeper1-3.spnode.net:2281']
   ],
   'Broker': [
     ['host_service':'us-kafka1-1.spnode.net'],
@@ -75,7 +75,7 @@ properties([
                 ]
             ]
         ],
-        
+
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_RADIO',
             name: 'Application',
