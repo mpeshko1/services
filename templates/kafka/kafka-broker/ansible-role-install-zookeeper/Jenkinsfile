@@ -46,7 +46,7 @@ pipeline {
                       zookeeper_dns_name: "{{ $values.zookeeper_dns_name | default('zookeeper1-1.net') }}",
                       zookeeper_secure_client_port: "{{ $values.zookeeper_secure_client_port | default('zookeeper1-1.net') }}",
                       replication_port: "{{ $values.replication_port | default('2888') }}",
-                      leader_selection_port: "{{ $leader_selection_port | default('3888') }}",
+                      leader_selection_port: "{{ $values.leader_selection_port | default('3888') }}",
                       ip_connect: "{{ $values.ip_connect | default('172.17.0.1') }}",
                       zookeeper_server_id: "{{ $values.zookeeper_server_id | default('1') }}",
                       kafka_zookeeper_connect: "{{ $values.kafka_zookeeper_connect | default('zookeeper1-1.net:2888:3888') }}"
