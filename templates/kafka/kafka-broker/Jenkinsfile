@@ -58,50 +58,13 @@ pipeline {
                       kafka_heap_opts: "{{ $values.kafka_heap_opts | default('10') }}",
 //   //vars for docker file (CONNECT CONFIG SECTION IN DOCKER TEMPLATE)
                       kafka_zookeeper_connect: "{{ $values.kafka_zookeeper_connect | default('172.17.0.1:2281') }}",
-                      kafka_zookeeper_ssl_keystore_location: "{{ $values.kafka_zookeeper_ssl_keystore_location | default('/etc/kafka/secrets/kafka1-1.net-keystore.p12') }}",
-                      kafka_zookeeper_ssl_keystore_password: "{{ $values.kafka_zookeeper_ssl_keystore_password | default('strong') }}",
-                      kafka_zookeeper_ssl_key_password: "{{ $values.kafka_zookeeper_ssl_key_password | default('strong') }}",
-                      kafka_zookeeper_ssl_truststore_location: "{{ $values.kafka_zookeeper_ssl_truststore_location | default('/etc/kafka/secrets/truststore.p12') }}",
-                      kafka_zookeeper_ssl_truststore_password: "{{ $values.kafka_zookeeper_ssl_truststore_password | default('strong') }}",
 //   //vars for docker file (CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE)
                       kafka_replica_fetch_max_bytes: "{{ $values.kafka_replica_fetch_max_bytes | default('20000000') }}",
                       kafka_message_max_bytes: "{{ $values.kafka_message_max_bytes | default('20000000') }}",
                       kafka_log_retention_hours: "{{ $values.kafka_log_retention_hours | default('168') }}",
                       kafka_controller_socket_timeout_ms: "{{ $values.kafka_controller_socket_timeout_ms | default('60000') }}",
                       kafka_connection_setup_teimeout_max_ms: "{{ $values.kafka_connection_setup_teimeout_max_ms | default('40000') }}",
-                      kafka_request_timeout_ms: "{{ $values.kafka_request_timeout_ms | default('60000') }}",
-//   //vars for docker file (SSL CONFIGS SECTION IN DOCKER TEMPLATE)
-                      kafka_ssl_keystore_filename: "{{ $values.kafka_ssl_keystore_filename | default('kafka1-1.net-keystore.jks') }}",
-                      kafka_ssl_pass_file: "{{ $values.kafka_ssl_pass_file | default('ssl.creds') }}",
-                      kafka_ssl_truststore_filename: "{{ $values.kafka_ssl_truststore_filename | default('truststore.jks') }}",
-                      kafka_ssl_secrets_dir: "{{ $values.kafka_ssl_secrets_dir | default('/etc/kafka/secrets/') }}",
-//   //vars for docker file (CLUSTER CONFIGS SECTION IN DOCKER TEMPLATE)
-                      kafka_auto_leader_rebalance_enable: "{{ $values.kafka_auto_leader_rebalance_enable | default('true') }}",
-                      kafka_default_replication_factor: "{{ $values.kafka_default_replication_factor | default('1') }}",
-                      kafka_offsets_topic_replication_factor: "{{ $values.kafka_offsets_topic_replication_factor | default('1') }}",
-                      kafka_min_insync_replicas: "{{ $values.kafka_min_insync_replicas | default('1') }}",
-                      kafka_transaction_state_log_min_isr: "{{ $values.kafka_transaction_state_log_min_isr | default('1') }}",
-                      kafka_transaction_state_log_replication_factor: "{{ $values.kafka_transaction_state_log_replication_factor | default('1') }}",
-//   //vars for docker file (VARS FOR adminclient-configs.conf)
-                      sasl_username: "{{ $values.sasl_username | default('connect') }}",
-                      sasl_password: "{{ $values.sasl_password | default('connect-secret') }}",
-                      ssl_keystore_location: "{{ $values.ssl_keystore_location | default('/etc/kafka/secrets/kafka1-1.net-keystore.jks') }}",
-                      ssl_keystore_password: "{{ $values.ssl_keystore_password | default('strong') }}",
-                      ssl_truststore_location: "{{ $values.ssl_truststore_location | default('/etc/kafka/secrets/truststore.jks') }}",
-                      ssl_truststore_password: "{{ $values.ssl_truststore_password | default('strong') }}",
-//   //vars for docker file (VARS FOR kafka_server_jaas.conf)
-                      jaas_server_user_kafkabroker: "{{ $values.jaas_server_user_kafkabroker | default('user_kafkabroker') }}",
-                      jaas_server_password_kafkabroker_secret: "{{ $values.jaas_server_password_kafkabroker_secret | default('kafkabroker-secret') }}",
-                      jaas_server_user_kafka_broker_metric_reporter: "{{ $values.jaas_server_user_kafka_broker_metric_reporter | default('user_kafka-broker-metric-reporter') }}",
-                      jaas_server_password_kafkabroker_metric_reporter_secret: "{{ $values.jaas_server_password_kafkabroker_metric_reporter_secret | default('kafkabroker-metric-reporter-secret') }}",
-                      jaas_server_user_client: "{{ $values.jaas_server_user_client | default('user_client') }}",
-                      jaas_server_password_client_secret: "{{ $values.jaas_server_password_client_secret | default('client_secret') }}",
-                      jaas_server_user_connect: "{{ $values.jaas_server_user_connect | default('user_connect') }}",
-                      jaas_server_password_connect_secret: "{{ $values.jaas_server_password_connect_secret | default('connect_secret') }}",
-                      jaas_server_user_debezium: "{{ $values.jaas_server_user_debezium | default('user_debezium')}}",
-                      jaas_server_password_debezium_secret: "{{ $values.jaas_server_password_debezium_secret | default('debezium_secret') }}",
-                      jaas_client_username: "{{ $values.jaas_client_username | default('kafka') }}",
-                      jaas_client_password: "{{ $values.jaas_client_password | default('kafka_secret') }}"
+                      kafka_request_timeout_ms: "{{ $values.kafka_request_timeout_ms | default('60000') }}"
                   ]
                 )
               }
