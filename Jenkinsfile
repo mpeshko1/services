@@ -75,6 +75,7 @@ properties([
                 ]
             ]
         ],
+        
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_RADIO',
             name: 'Application',
@@ -182,7 +183,6 @@ properties([
             omitValueField: true
         ],
 
-
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select a region',
@@ -256,9 +256,6 @@ pipeline {
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                 }
-
-//                mylistkey.each{ println it }
-//                mylistvalue.each{ println it }
             }
           }
         }
