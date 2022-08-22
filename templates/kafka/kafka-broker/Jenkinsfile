@@ -17,7 +17,7 @@ pipeline {
                 def mylistkey = []
                 def filePath = readFile "templates/kafka/kafka-broker/keyfile.txt"
                 def keyfile = filePath.readLines()
-                def zookeeper = []
+                def zookeeper = ()
 
                 for (key in keyfile) {
                   mylistkey.add(key)
