@@ -3,11 +3,11 @@ services:
   "{{container_name}}":
     container_name: "{{container_name}}"
     image: "confluentinc/cp-zookeeper:7.1.1"
-    hostname: "{{kafka_dns_name}}"
+    hostname: "{{zookeeper_dns_name}}"
     ports:
-      - {{ip_connect}}:{{zookeeper_secure_client_port}}:{{zookeeper_secure_client_port}} #SecureClientPort
-      - {{ip_connect}}:2888:2888 #For follower connections, if they are the leader
-      - {{ip_connect}}:3888:3888 #For other server connections during the leader election phase
+      - {{ip_connect}}:{{zookeeper_secure_client_port}}:2281 #User SecureClientPort
+      - {{ip_connect}}:{{replication_port}}:2888 #Data replication between cluster nodes.
+      - {{ip_connect}}:{{leader_selection_port}}:3888 #Leader selection between Data replication between cluster nodes. cluster.
 
     environment:
       ZOOKEEPER_SERVER_ID: "{{zookeeper_server_id}}"

@@ -151,29 +151,17 @@ properties([
                     script: """
                       if (Application == 'Zookeeper') {
                       return inputBox = '''
-                      <table id="broker">
-                        <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1"></td></tr>
-                        <tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1.spnode.net"></td></tr>
-
+                      <table id="zookeeper">
                         <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
-                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
-                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
-                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
-                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9201"></td></tr>
-                        <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="zookeeper1-1"></td></tr>
+                        <tr><td>zookeeper_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="zookeeper1-1.net"></td></tr>
+                        <tr><td>zookeeper_secure_client_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="2281"></td></tr>
+                        <tr><td>replication_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="2888"></td></tr>
+                        <tr><td>leader_selection_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="3888"></td></tr>
 
-                        <tr><td><h5>BROKER SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
-                        <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="10"></td></tr>
-
-                        <tr><td><h5>CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>kafka_replica_fetch_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
-                        <tr><td>kafka_message_max_bytes</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="20000000"></td></tr>
-                        <tr><td>kafka_log_retention_hours</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="168"></td></tr>
-                        <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
-                        <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="40000"></td></tr>
-                        <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
+                        <tr><td><h5>ENVIROMENT SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>zookeeper_server_id</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                        <tr><td>kafka_zookeeper_connect</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="zookeeper1-1.net:2888:3888"></td></tr>
                       </table>
                       '''
                       }
@@ -293,6 +281,7 @@ pipeline {
 //Overall varibles
                 def server_parameters = "${Server}".split(",")
 //Varibles for ZOOKEEPER DOCKER TEMPLATE
+                def zoo_parameters = "${params.ZOOKEEPER_parameters}".split(",")
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
@@ -306,6 +295,7 @@ pipeline {
                 println "${server_parameters}"
                 println "${zookeeper_parameters}"
                 println "${broker_parameters}"
+                println "${zoo_parameters}"
             }
           }
         }
@@ -321,7 +311,7 @@ pipeline {
                     string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                   ]
                 } else if (Application == 'Zookeeper') {
-                  echo 'Run Load Zookeeper setup'
+                  string(name: 'ZOOKEEPER_PARAMETERS', value: "${ZOOKEEPER_parameters}")
                 }
           }
         }

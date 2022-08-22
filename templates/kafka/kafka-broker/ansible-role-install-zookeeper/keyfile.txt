@@ -1,0 +1,8 @@
+container_name
+zookeeper_dns_name
+zookeeper_secure_client_port
+replication_port
+leader_selection_port
+ip_connect
+zookeeper_server_id
+kafka_zookeeper_connect

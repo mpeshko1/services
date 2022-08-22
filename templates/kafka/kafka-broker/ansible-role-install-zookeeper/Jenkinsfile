@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'SERVERS', defaultValue: ' ')
+        string(name: 'ZOOKEEPER_PARAMETERS')
+    }
+
+    stages {
+        stage('Load Kafka_Broker') {
+            steps {
+              script {
+
+//Read keyfile.txt and add values to mylistkey
+                echo "Read key file"
+                def mylistkey = []
+                def filePath = readFile "templates/kafka/kafka-broker/ansible-role-install-zookeeper/keyfile.txt"
+                def keyfile = filePath.readLines()
+
+                for (key in keyfile) {
+                  mylistkey.add(key)
+                }
+//Add parameters from main Jenkinsfile
+                echo "Running zookeeper deploy"
+                def server_arr = "${SERVERS}".split(",")
+                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",").join(",")
+                def mylistvalue = []
+//Add user values to mylistvalue
+                for (i in zookeeper_parameters ) {
+                  mylistvalue.add(i)
+                }
+
+//Create MAP where key=mylistkey valu=mylistvalue
+                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+                println  "{mylistkey - > $mylistkey}"
+                println  "{mylistvalue - > $mylistvalue}"
+                println  "{values - > $values}"
+
+//Send values to Ansible
+                  ansiblePlaybook (
+                    playbook: 'templates/kafka/kafka-broker/playbook.yml',
+                    inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
+                    disableHostKeyChecking: true,
+                    extraVars: [
+                      container_name: "{{ $container_name | default('zookeeper1-1') }}",
+                      zookeeper_dns_name: "{{ $zookeeper_dns_name | default('zookeeper1-1.net') }}",
+                      zookeeper_secure_client_port: "{{ $zookeeper_secure_client_port | default('zookeeper1-1.net') }}",
+                      replication_port: "{{ $replication_port | default('2888') }}",
+                      leader_selection_port: "{{ $leader_selection_port | default('3888') }}",
+                      ip_connect: "{{ $ip_connect | default('172.17.0.1') }}",
+                      zookeeper_server_id: "{{ $zookeeper_server_id | default('1') }}",
+                      kafka_zookeeper_connect: "{{ $kafka_zookeeper_connect | default('zookeeper1-1.net:2888:3888') }}"
+                )
+              }
+            }
+        }
+    }
+}

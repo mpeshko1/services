@@ -8,12 +8,12 @@ sasl_kafka_admin_config_template_path: "{{ role_path }}/templates/sasl/*.j2"
 
 # vars for docker file
 container_name: zookeeper1-1
-kafka_dns_name: zookeeper1-1.net
+zookeeper_dns_name: zookeeper1-1.net
 ip_connect: 172.17.0.1
 
 # vars for docker section ZOO
 zookeeper_server_id: 1
-kafka_zookeeper_connect: zookeeper1-1.net:2888:3888
+kafka_zookeeper_connect: "zookeeper1-1.net:{{replication_port}}:{{leader_selection_port}}"
 zookeeper_ssl_quorum_location: /tmp/server/security/
 zookeeper_ssl_quorum_keystore_file: zookeeper1-1.net.p12
 zookeeper_ssl_quorum_truststore_file: truststore.p12
@@ -22,6 +22,8 @@ zookeeper_ssl_quorum_truststore_password: strong
 
 # vars for docker section Broker
 zookeeper_secure_client_port: 2281
+replication_port: 2888
+leader_selection_port: 3888
 zookeeper_ssl_location: /tmp/client/security/
 zookeeper_ssl_keystore_file: zookeeper1-1.net-keystore.jks
 zookeeper_ssl_truststore_file: zookeeper1-1.net-trustore.jks
