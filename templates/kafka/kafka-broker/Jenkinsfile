@@ -24,7 +24,7 @@ pipeline {
 //Add parameters from main Jenkinsfile
                 echo "Running broker deploy"
                 def server_arr = "${SERVERS}".split(",")
-                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",")
+                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}"
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
                 def mylistvalue = []
 //Add user values to mylistvalue
