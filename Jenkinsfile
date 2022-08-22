@@ -297,15 +297,15 @@ pipeline {
                 def mylistvalue = []
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
+//Add user value to mylistvalue
+                for (i in broker_parameters ) {
+                  mylistvalue.add(i)
+                }
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
                 println "${zookeeper_parameters}"
                 println "${broker_parameters}"
-
-                for (i in broker_parameters ) {
-                  mylistvalue.add(i)
-                }
             }
           }
         }
@@ -313,12 +313,16 @@ pipeline {
       stage('Load Kafka_pipeline') {
           steps {
             script {
-                echo 'Run Load Kafka_pipeline'
-                build job: 'Database/Broker', parameters: [
-                  string(name: 'SERVERS', value: "${Server}"),
-                  string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
-                  string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
-                ]
+                if ("{$Application}" == 'Broker') {
+                  echo 'Run Load Broker setup'
+                  build job: 'Database/Broker', parameters: [
+                    string(name: 'SERVERS', value: "${Server}"),
+                    string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
+                    string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                  ]
+                } else if ("{$Application}" == 'Zookeeper') {
+                  echo 'Run Load Zookeeper setup'
+                }
           }
         }
       }
