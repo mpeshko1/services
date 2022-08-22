@@ -1,0 +1,16 @@
+Server {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       "{{server_user_super}}"="{{server_password_super}}"
+       "{{server_user_kafka}}"="{{server_password_kafka}}";
+};
+
+QuorumServer {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       "{{quorum_server_user_kafka}}"="{{quorum_server_password_kafka}}";
+};
+
+QuorumLearner {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       username="{{quorum_learner_username}}"
+       password="{{quorum_learner_password}}";
+};

@@ -1,0 +1,67 @@
+version: '3.7'
+services:
+  "{{container_name}}":
+    container_name: "{{container_name}}"
+    image: "confluentinc/cp-zookeeper:7.1.1"
+    hostname: "{{kafka_dns_name}}"
+    ports:
+      - {{ip_connect}}:{{zookeeper_secure_client_port}}:{{zookeeper_secure_client_port}} #SecureClientPort
+      - {{ip_connect}}:2888:2888 #For follower connections, if they are the leader
+      - {{ip_connect}}:3888:3888 #For other server connections during the leader election phase
+
+    environment:
+      ZOOKEEPER_SERVER_ID: "{{zookeeper_server_id}}"
+      ZOOKEEPER_SERVERS: "{{kafka_zookeeper_connect}}"
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 300
+      ZOOKEEPER_SYNC_LIMIT: 10
+      ZOOKEEPER_MAX_CLIENT_CNXNS: 2000
+      ZOOKEEPER_STANDALONE_ENABLED: 'false'
+##
+#ZOO
+##
+      ZOOKEEPER_SSL_QUORUM: 'true'
+      ZOOKEEPER_SERVER_CNXN_FACTORY: 'org.apache.zookeeper.server.NettyServerCnxnFactory'
+      ZOOKEEPER_SSL_QUORUM_KEYSTORE_LOCATION: "{{zookeeper_ssl_quorum_location}}{{zookeeper_ssl_quorum_keystore_file}}"
+      ZOOKEEPER_SSL_QUORUM_KEYSTORE_PASSWORD: "{{zookeeper_ssl_quorum_keystore_password}}"
+      ZOOKEEPER_SSL_QUORUM_TRUSTSTORE_LOCATION: "{{zookeeper_ssl_quorum_location}}{{zookeeper_ssl_quorum_truststore_file}}"
+      ZOOKEEPER_SSL_QUORUM_TRUSTSTORE_PASSWORD: "{{zookeeper_ssl_quorum_truststore_password}}"
+##
+#Broker
+##
+      ZOOKEEPER_CLIENT_SECURE: "true"
+      ZOOKEEPER_SECURE_CLIENT_PORT: "{{zookeeper_secure_client_port}}"
+      ZOOKEEPER_AUTH_PROVIDER_X509: 'org.apache.zookeeper.server.auth.X509AuthenticationProvider'
+      ZOOKEEPER_SSL_KEYSTORE_LOCATION: "{{zookeeper_ssl_location}}{{zookeeper_ssl_keystore_file}}"
+      ZOOKEEPER_SSL_KEYSTORE_PASSWORD: "{{zookeeper_ssl_keystore_password}}"
+      ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: "{{zookeeper_ssl_location}}{{zookeeper_ssl_truststore_file}}"
+      ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: "{{zookeeper_ssl_truststore_password}}"
+
+      ZOOKEEPER_JAASLOGINRENEW: 3600000
+#####
+##SASL_SSL/PLAIN Configs
+#####
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/zookeeper_jaas.conf -Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider -Dzookeeper.requireClientAuthScheme=sasl"
+
+    volumes:
+      - ./{{container_name}}/data:/var/lib/zookeeper/data
+      - ./{{container_name}}/datalog:/var/lib/zookeeper/log
+      - ./{{container_name}}/security/server:{{zookeeper_ssl_location}}
+      - ./{{container_name}}/security/client:{{zookeeper_ssl_quorum_location}}
+      - ./{{container_name}}/sasl/zookeeper_jaas.conf:/etc/kafka/zookeeper_jaas.conf
+
+    restart: always
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "1"
+
+    networks:
+      - kafka
+
+networks:
+  kafka:
+    name: kafka
+    driver: bridge
