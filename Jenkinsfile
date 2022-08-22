@@ -315,9 +315,9 @@ pipeline {
             script {
                 echo 'Run Load Kafka_pipeline'
                 build job: 'Database/Broker', parameters: [
-                string(name: 'SERVERS', value: "${Server}"),
-                string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
-                string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                  string(name: 'SERVERS', value: "${Server}"),
+                  string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
+                  string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                 ]
           }
         }

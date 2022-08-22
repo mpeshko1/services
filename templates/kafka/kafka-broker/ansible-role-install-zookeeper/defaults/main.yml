@@ -1,6 +1,6 @@
 ---
 # overall env
-dir_docker: /opt/docker/
+dir_docker: /opt/docker/jenkins
 
 # temlate files
 docker_file_template_config_path: "{{ role_path }}/templates/docker/docker-compose.yml.j2"
