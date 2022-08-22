@@ -63,7 +63,7 @@ pipeline {
                       broker_id: "{{ $values.broker_id | default('1') }}",
                       kafka_heap_opts: "{{ $values.kafka_heap_opts | default('10') }}",
 //vars for docker file (CONNECT CONFIG SECTION IN DOCKER TEMPLATE)
-                      kafka_zookeeper_connect: "$zookeeper_parameters",
+                      kafka_zookeeper_connect: "{{ $zookeeper_parameters | default('172.17.0.1:2281') }}",
 //vars for docker file (CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE)
                       kafka_replica_fetch_max_bytes: "{{ $values.kafka_replica_fetch_max_bytes | default('20000000') }}",
                       kafka_message_max_bytes: "{{ $values.kafka_message_max_bytes | default('20000000') }}",
