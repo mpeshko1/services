@@ -49,7 +49,7 @@ pipeline {
                       replication_port: "{{ $values.replication_port | default('2888') }}",
                       leader_selection_port: "{{ $values.leader_selection_port | default('3888') }}",
                       zookeeper_server_id: "{{ $values.zookeeper_server_id | default('1') }}",
-                      kafka_zookeeper_connect: "{{ $values.kafka_zookeeper_connect | default('zookeeper1-1.net:2888:3888') }}"
+                      kafka_zookeeper_connect: "{{ '$values.kafka_zookeeper_connect' | default('zookeeper1-1.net:2888:3888') }}"
                     ]
                 )
               }
