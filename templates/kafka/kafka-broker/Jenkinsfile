@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'SERVERS', defaultValue: ' ')
-        string(name: 'ZOOKEEPER_PARAMETERS', defaultValue: ' ')
+        string(name: 'ZOOKEEPER_PARAMETERS')
         string(name: 'BROKER_PARAMETERS')
     }
 
@@ -17,6 +17,7 @@ pipeline {
                 def mylistkey = []
                 def filePath = readFile "templates/kafka/kafka-broker/keyfile.txt"
                 def keyfile = filePath.readLines()
+                def zookeeper = []
 
                 for (key in keyfile) {
                   mylistkey.add(key)
@@ -24,13 +25,19 @@ pipeline {
 //Add parameters from main Jenkinsfile
                 echo "Running broker deploy"
                 def server_arr = "${SERVERS}".split(",")
-                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}"
+                def zookeeper_parameters = "${ZOOKEEPER_PARAMETERS}".split(",")
                 def broker_parameters = "${BROKER_PARAMETERS}".split(",")
                 def mylistvalue = []
 //Add user values to mylistvalue
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                 }
+
+//Add zookeeper values to zookeeper
+                for (i in zookeeper_parameters ) {
+                  zookeeper.add(i)
+                }
+
 //Create MAP where key=mylistkey valu=mylistvalue
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{mylistkey - > $mylistkey}"
@@ -56,7 +63,7 @@ pipeline {
                       broker_id: "{{ $values.broker_id | default('1') }}",
                       kafka_heap_opts: "{{ $values.kafka_heap_opts | default('10') }}",
 //vars for docker file (CONNECT CONFIG SECTION IN DOCKER TEMPLATE)
-                      kafka_zookeeper_connect: "{{ $zookeeper_parameters | default('172.17.0.1:2281') }}",
+                      kafka_zookeeper_connect: "{{ $zookeeper | default('172.17.0.1:2281') }}",
 //vars for docker file (CONFIG PARAMETERS SECTION IN DOCKER TEMPLATE)
                       kafka_replica_fetch_max_bytes: "{{ $values.kafka_replica_fetch_max_bytes | default('20000000') }}",
                       kafka_message_max_bytes: "{{ $values.kafka_message_max_bytes | default('20000000') }}",
