@@ -313,14 +313,14 @@ pipeline {
       stage('Load Kafka_pipeline') {
           steps {
             script {
-                if ("{$Application}" == 'Broker') {
+                if (Application == 'Broker') {
                   echo 'Run Load Broker setup'
                   build job: 'Database/Broker', parameters: [
                     string(name: 'SERVERS', value: "${Server}"),
                     string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
                     string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                   ]
-                } else if ("{$Application}" == 'Zookeeper') {
+                } else if (Application == 'Zookeeper') {
                   echo 'Run Load Zookeeper setup'
                 }
           }
