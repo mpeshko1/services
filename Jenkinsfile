@@ -333,7 +333,7 @@ pipeline {
                 def zoo_parameters = "${params.ZOOKEEPER_parameters}".split(",")
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
-                def cafka_connector_parameters = "${params.KAFKA_CONNECTOR}".split(",")
+                def cafka_connector_parameters = "${params.KAFKA_CONNECTOR_parameters}".split(",")
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 //Add user value to mylistvalue
@@ -371,7 +371,7 @@ pipeline {
                     echo 'Run Load Kafka_Connector setup'
                     build job: 'Database/Kafka_Connector', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
-                      string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR}"),
+                      string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR_parameters}"),
                       string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                     ]
                 } else if (Application == ' ') {
