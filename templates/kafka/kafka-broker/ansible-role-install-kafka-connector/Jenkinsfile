@@ -43,7 +43,7 @@ pipeline {
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
-                      container_name: "{{ '$values.container_name '| default('kafka-connector1-1') }}",
+                      container_name: "{{ '$values.container_name'| default('kafka-connector1-1') }}",
                       connector_dns_name: "{{ '$values.connector_dns_name' | default('kafka-connector1-1.net') }}",
                       ip_internal: "{{ '$values.ip_internal' | default('172.17.0.1') }}",
                       connect_rest_port: "{{ '$values.connect_rest_port' | default('8083') }}",
