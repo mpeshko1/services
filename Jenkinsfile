@@ -374,8 +374,8 @@ pipeline {
                       string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR}"),
                       string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                     ]
-                } else (Application == ' ') {ing(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
-                      println "Nothing to do. By-By."
+                } else if (Application == ' ') {
+                      println "Nothing to do. By-By"
                 }
           }
         }
