@@ -3,6 +3,8 @@ def DEPLOY_SERVICE = [
   'Database': [
     ['service_name': 'Zookeeper'],
     ['service_name': 'Broker'],
+    ['service_name': 'Kafka_Connector'],
+    ['service_name': 'Connector'],
     ['service_name': 'MySQL'],
     ['service_name': 'MongoDB'],
     ['service_name': 'ClickHouse']
@@ -125,6 +127,9 @@ properties([
                             if (Application == 'Broker') {
                               return c_service['Zookeeper'].host_service
                             }
+                            if (Application == 'Kafka_Connector') {
+                              return c_service['Broker'].host_service
+                            }
                             if (Application == 'ClickHouse') {
                               return c_service['Zookeeper'].host_service
                             }
@@ -134,6 +139,49 @@ properties([
                 ]
             ]
         ],
+//VALUE FOR KAFKA CONNECTOR DOCKER TEMPLATE
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'KAFKA_CONNECTOR_parameters',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Kafka_Connector') {
+                      return inputBox = '''
+                      <table id="kafka_connector">
+                        <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>container_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka-connector1-1"></td></tr>
+                        <tr><td>connector_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka-connector1-1.net"></td></tr>
+                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>connect_rest_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="8083"></td></tr>
+                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>connect_advertised_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="28083"></td></tr>
+                        <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>monitoring_port</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="9202"></td></tr>
+
+                        <tr><td><h5>CLUSTER SETTINGS SECTION IN DOCKER TEMPLATE</td><td>
+                        <tr><td>connect_group_id</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                        <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                        <tr><td>connect_config_storage_replication_factor</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                        <tr><td>connect_offset_storage_replication_factor</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                        <tr><td>connect_status_storage_replication_factor</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                      </table>
+                      '''
+                      }
+                    """.stripIndent()
+                ]
+            ],
+            omitValueField: true
+        ],
+
 //VALUE FOR ZOOKEEPER DOCKER TEMPLATE
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
@@ -285,6 +333,7 @@ pipeline {
                 def zoo_parameters = "${params.ZOOKEEPER_parameters}".split(",")
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
+                def cafka_connector_parameters = "${params.KAFKA_CONNECTOR}".split(",")
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 //Add user value to mylistvalue
@@ -294,6 +343,7 @@ pipeline {
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
+                println "${cafka_connector_parameters}"
                 println "${zookeeper_parameters}"
                 println "${broker_parameters}"
                 println "${zoo_parameters}"
@@ -314,7 +364,15 @@ pipeline {
                 } else if (Application == 'Zookeeper') {
                     echo 'Run Load Zookeeper setup'
                     build job: 'Database/Zookeeper', parameters: [
+                      string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'ZOOKEEPER_PARAMETERS', value: "${ZOOKEEPER_parameters}")
+                    ]
+                } else if (Application == 'Kafka_Connector') {
+                    echo 'Run Load Kafka_Connector setup'
+                    build job: 'Database/Kafka_Connector', parameters: [
+                      string(name: 'SERVERS', value: "${Server}"),
+                      string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR}"),
+                      string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                     ]
                 }
           }

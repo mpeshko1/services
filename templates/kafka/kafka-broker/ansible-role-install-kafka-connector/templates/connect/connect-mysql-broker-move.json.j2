@@ -1,0 +1,73 @@
+{
+    "name": "{{schema_name}}-connect-mysql-broker-move",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": "1",
+        "topic.creation.default.replication.factor": "{{replication_factor}}",
+        "topic.creation.default.partitions": "{{creation_partitions}}",
+
+        "database.server.name": "connect_db",
+        "database.hostname": "{{database_hostname}}",
+        "database.port": "{{database_port}}",
+        "database.user": "{{database_user}}",
+        "database.password": "{{database_password}}",
+        "database.allowPublicKeyRetrieval":"true",
+
+        "database.include.list": "{{database_include_list}}",
+        "table.include.list": "{{table_include_list}}",
+
+        "database.history.kafka.bootstrap.servers": "{{connect_bootstrap_servers}}",
+        "database.history.kafka.topic": "dbhistory.{{schema_name}}",
+
+        "connect.timeout.ms": "{{connect_connection_setup_timeout_max_ms}}",
+        "database.history.producer.request.timeout.ms": "{{connect_producer_request_timeout_ms}}",
+        "database.history.producer.socket.connection.setup.timeout.max.ms": "{{connect_producer_socket_connection_setup_timeout_max_ms}}",
+        "database.history.producer.socket.connection.setup.timeout.ms": "{{connect_producer_socket_connection_setup_timeout_ms}}",
+
+        "database.history.consumer.request.timeout.ms": "{{connect_consumer_request_timeout_ms}}",
+        "database.history.consumer.socket.connection.setup.timeout.max.ms": "{{connect_consumer_socker_connection_setup_timeout_max_ms}}",
+        "database.history.consumer.socket.connection.setup.timeout.ms": "{{connect_consumer_socker_connection_setup_timeout_ms}}",
+
+        "database.history.request.timeout.ms": "{{connect_request_timeout_ms}}",
+        "database.history.socket.connection.setup.timeout.max.ms": "{{connect_socker_connection_setup_timeout_msx_ms}}",
+        "database.history.socket.connection.setup.timeout.ms": "{{connect_socker_connection_setup_timeout_ms}}",
+
+        "database.history.consumer.security.protocol": "{{connect_consumer_security_protocol}}",
+        "database.history.consumer.sasl.mechanism": "{{connect_consumer_sasl_mechanism}}",
+        "database.history.consumer.ssl.keystore.location": "{{ssl_path}}{{keystore_file_name}}",
+        "database.history.consumer.ssl.keystore.password": "{{key_password}}",
+        "database.history.consumer.ssl.truststore.location": "{{ssl_path}}{{truststore_file_name}}",
+        "database.history.consumer.ssl.truststore.password": "{{key_password}}",
+        "database.history.consumer.ssl.key.password": "{{key_password}}",
+        "database.history.consumer.bootstrap.servers": "{{connect_consumer_servers}}",
+        "database.history.consumer.ssl.endpoint.identification.algorithm": " ",
+
+        "database.history.producer.security.protocol": "{{connect_producer_security_protocol}}",
+        "database.history.producer.sasl.mechanism": "{{connect_producer_sasl_mechanism}}",
+        "database.history.producer.ssl.keystore.location": "{{ssl_path}}{{keystore_file_name}}",
+        "database.history.producer.ssl.keystore.password": "{{key_password}}",
+        "database.history.producer.ssl.truststore.location": "{{ssl_path}}{{truststore_file_name}}",
+        "database.history.producer.ssl.truststore.password": "{{key_password}}",
+        "database.history.producer.ssl.key.password": "{{key_password}}",
+        "database.history.producer.bootstrap.servers": "{{connect_producer_servers}}",
+
+        "database.history.consumer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{connect_consumer_user}}\" password=\"{{connect_consumer_password}}\";",
+        "database.history.producer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{connect_producer_user}}\" password=\"{{connect_producer_password}}\";",
+
+        "database.history.producer.ssl.endpoint.identification.algorithm": " ",
+
+        "include.schema.changes": "true",
+        "time.precision.mode": "connect",
+        "database.history.store.only.captured.tables.ddl": "true",
+
+        "transforms": "InsertFieldToKey,route",
+        "transforms.InsertFieldToKey.type": "org.apache.kafka.connect.transforms.InsertField$Key",
+
+        "transforms.InsertFieldToKey.static.field":"{{add_colum}}",
+        "transforms.InsertFieldToKey.static.value":"{{colum_name}}",
+
+        "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)",
+        "transforms.route.replacement": "{{schema_name}}.to.db.$3"
+    }
+}

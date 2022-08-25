@@ -1,0 +1,53 @@
+{
+    "name": "{{schema_name}}-connect-broker-mysql-move",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics.regex": "{{database_include_list}}.*",
+        "connection.url": "jdbc:mysql://{{connect_database_hostname}}:{{connect_database_port}}/{{connect_schema_name}}?nullCatalogMeansCurrent=true&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true",
+        "connection.user": "{{connect_database_user}}",
+        "connection.password": "{{connect_database_password}}",
+
+        "database.history.kafka.topic": "dbhistory.{{schema_name}}",
+
+        "database.history.consumer.security.protocol": "{{connect_consumer_security_protocol}}",
+        "database.history.consumer.sasl.mechanism": "{{connect_consumer_sasl_mechanism}}",
+        "database.history.consumer.ssl.keystore.location": "{{ssl_path}}{{keystore_file_name}}",
+        "database.history.consumer.ssl.keystore.password": "{{key_password}}",
+        "database.history.consumer.ssl.truststore.location": "{{ssl_path}}{{truststore_file_name}}",
+        "database.history.consumer.ssl.truststore.password": "{{key_password}}",
+        "database.history.consumer.ssl.key.password": "{{key_password}}",
+        "database.history.consumer.bootstrap.servers": "{{connect_consumer_servers}}",
+        "database.history.consumer.ssl.endpoint.identification.algorithm": " ",
+
+        "database.history.producer.security.protocol": "{{connect_producer_security_protocol}}",
+        "database.history.producer.sasl.mechanism": "{{connect_producer_sasl_mechanism}}",
+        "database.history.producer.ssl.keystore.location": "{{ssl_path}}{{keystore_file_name}}",
+        "database.history.producer.ssl.keystore.password": "{{key_password}}",
+        "database.history.producer.ssl.truststore.location": "{{ssl_path}}{{truststore_file_name}}",
+        "database.history.producer.ssl.truststore.password": "{{key_password}}",
+        "database.history.producer.ssl.key.password": "{{key_password}}",
+        "database.history.producer.bootstrap.servers": "{{connect_producer_servers}}",
+
+        "database.history.consumer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{connect_consumer_user}}\" password=\"{{connect_consumer_password}}\";",
+        "database.history.producer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{connect_producer_user}}\" password=\"{{connect_producer_password}}\";",
+
+        "database.history.producer.ssl.endpoint.identification.algorithm": " ",
+
+        "transforms": "unwrap,route",
+
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.drop.tombstones": "false",
+
+        "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)\\.([^.]+)",
+        "transforms.route.replacement": "$4",
+
+        "auto.create": "false",
+        "auto.evolve": "false",
+        "insert.mode": "upsert",
+        "delete.enabled": "true",
+        "pk.mode": "record_key",
+        "dialect.name": "MySqlDatabaseDialect"
+    }
+}

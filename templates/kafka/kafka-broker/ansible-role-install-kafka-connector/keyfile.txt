@@ -1,0 +1,13 @@
+container_name
+connector_dns_name
+ip_internal
+connect_rest_port
+ip_external
+connect_advertised_port
+ip_monitoring
+monitoring_port
+connect_group_id
+kafka_heap_opts
+connect_config_storage_replication_factor
+connect_offset_storage_replication_factor
+connect_status_storage_replication_factor

@@ -1,0 +1,172 @@
+version: '3.7'
+services:
+  {{container_name}}:
+    container_name: "{{container_name}}"
+    image: "confluentinc/cp-kafka-connect:7.1.1"
+    hostname: "{{connector_dns_name}}"
+
+    ports:
+      - {{ip_internal}}:{{connect_rest_port}}:8083 #Connect
+      - {{ip_external}}:{{connect_advertised_port}}:28083 #External onnect
+      - {{ip_monitoring}}:{{monitoring_port}}:{{monitoring_port}} # Monitoring Section JMX
+
+    environment:
+######
+##Cluster settings
+#####
+      CONNECT_GROUP_ID: "{{connect_group_id}}"      #The name of the distributed Kafka Connect cluster. This must be unique and must not conflict with another consumer group ID.
+#####
+##Server config
+#####
+      CONNECT_NAME: "{{connector_dns_name}}"
+      CONNECT_REST_HOST_NAME: "{{connector_dns_name}}"
+      CONNECT_REST_PORT: "{{connect_rest_port}}"
+      CONNECT_REST_ADVERTISED_HOST_NAME: "{{connector_dns_name}}"
+      CONNECT_ADVERTISED_HOST_NAME: "{{connector_dns_name}}"
+      CONNECT_ADVERTISED_PORT: "{{connect_advertised_port}}"
+
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter     #The class used to convert message keys to and from Kafka format.
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter     #The class used to convert message payloads to and from Kafka format.
+      CONNECT_CONNECTOR_CLASS: org.apache.kafka.connect.file.FileStreamSinkConnector
+#########################################
+###########CONNECTION SECTION############
+#########################################
+#####
+##Connector config
+#####
+      CONNECT_CONTROLLER_SOCKET_TIMEOUT_MS: "{{connect_controller_socker_timeout_ms}}"
+      CONNECT_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_connection_setup_timeout_max_ms}}"
+      CONNECT_REQUEST_TIMEOUT_MS: "{{connect_request_timeout_ms}}"
+      CONNECT_SOCKET_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_socker_connection_setup_timeout_msx_ms}}"
+      CONNECT_SOCKET_CONNECTION_SETUP_TIMEOUT_MS: "{{connect_socker_connection_setup_timeout_ms}}"
+#####
+##Producer config
+#####
+      CONNECT_PRODUCER_ACKS: "{{connect_producer_acks}}"   #Производитель получает от брокера ответ об успешном получении сразу же, как только ведущая реплика получит сообщение.
+      CONNECT_PRODUCER_BATCH_SIZE: {{connect_producer_batch_size}}   #Этот параметр определяет объем памяти в байтах (не число сообщений!) для каждого пакета.
+      CONNECT_PRODUCER_LINGER_MS: {{connect_producer_linger_ms}}   #Управляет длительностью ожидания дополнительных сообщений перед отправкой текущего пакета.
+      CONNECT_PRODUCER_MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION: {{connect_producer_max_in_flight_requests_per_connection}}   #Количеством сообщений, которые производитель может отправить серверу, не получая ответов.
+      CONNECT_PRODUCER_MAX_REQUEST_SIZE: {{connect_producer_max_request_size}}   #Этот параметр задает максимальный размер отправляемого производителем запроса
+      CONNECT_PRODUCER_RECEIVE_BUFFER_BYTES: {{connect_producer_receive_buffer_bytes}}   #Это размеры TCP-буферов отправки, будут использоваться значения операционной системы.
+      CONNECT_PRODUCER_SEND_BUFFER_BYTES: {{connect_producer_send_buffer_bytes}}   #Это размеры TCP-буферов получения, будут использоваться значения операционной системы.
+      CONNECT_PRODUCER_REQUEST_TIMEOUT_MS: "{{connect_producer_request_timeout_ms}}"
+      CONNECT_PRODUCER_CONTROLLER_SOCKET_TIMEOUT_MS: "{{connect_producer_controller_socket_timeout_ms}}"
+      CONNECT_PRODUCER_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_producer_connection_setup_timeout_msx_ms}}"
+      CONNECT_PRODUCER_SOCKET_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_producer_socket_connection_setup_timeout_max_ms}}"
+      CONNECT_PRODUCER_SOCKET_CONNECTION_SETUP_TIMEOUT_MS: "{{connect_producer_socket_connection_setup_timeout_ms}}"
+#####
+##Consumer config
+#####
+#      CONNECT_CONSUMER_AUTO_OFFSET_RESET: latest   #В отсутствие корректного смещения потребитель начинает читать самые свежие записи.
+      CONNECT_CONSUMER_ENABLE_AUTO_COMMIT: "{{connect_consumer_enable_auto_commit}}"   #Определяет, будет ли потребитель фиксировать смещения автоматически.
+      CONNECT_CONSUMER_RECEIVE_BUFFER_BYTES: {{connect_consumer_receive_buffer_bytes}}   #Это размеры TCP-буферов отправки, будут использоваться значения операционной системы.
+      CONNECT_CONSUMER_SEND_BUFFER_BYTES: {{connect_consumer_send_buffer_bytes}}   #Это размеры TCP-буферов получения, будут использоваться значения операционной системы.
+      CONNECT_CONSUMER_REQUEST_TIMEOUT_MS: "{{connect_consumer_request_timeout_ms}}"
+      CONNECT_CONSUMER_CONTROLLER_SOCKET_TIMEOUT_MS: "{{connect_consumer_controller_socket_timeout_ms}}"
+      CONNECT_CONSUMER_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_consumer_connection_setup_timeout_max_ms}}"
+      CONNECT_CONSUMER_SOCKET_CONNECTION_SETUP_TIMEOUT_MAX_MS: "{{connect_consumer_socker_connection_setup_timeout_max_ms}}"
+      CONNECT_CONSUMER_SOCKET_CONNECTION_SETUP_TIMEOUT_MS: "{{connect_consumer_socker_connection_setup_timeout_ms}}"
+#########################################
+############SASL_SSL SECTION#############
+#########################################
+#####
+##Connector SASL_SSL/PLAIN Configs
+#####
+      CONNECT_REST_EXTENSION_CLASSES: "org.apache.kafka.connect.rest.basic.auth.extension.BasicAuthSecurityRestExtension"
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/opt/kafkaconnect_jaas.conf"
+
+      CONNECT_SECURITY_PROTOCOL: {{connect_security_protocol}}
+      CONNECT_SASL_MECHANISM: {{connect_sasl_mechanism}}
+      CONNECT_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required username={{connect_user}} password={{connect_password}};"
+#####
+##Consumer SASL_SSL/PLAIN Configs
+#####
+      CONNECT_CONSUMER_SECURITY_PROTOCOL: {{connect_consumer_security_protocol}}
+      CONNECT_CONSUMER_SASL_MECHANISM: {{connect_consumer_sasl_mechanism}}
+      CONNECT_CONSUMER_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required username={{connect_consumer_user}} password={{connect_consumer_password}};"
+#####
+##Producer SASL_SSL/PLAIN Configs
+#####
+      CONNECT_PRODUCER_SECURITY_PROTOCOL: {{connect_producer_security_protocol}}
+      CONNECT_PRODUCER_SASL_MECHANISM: {{connect_producer_sasl_mechanism}}
+      CONNECT_PRODUCER_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required username={{connect_producer_user}} password={{connect_producer_password}};"
+#########################################
+###############SSL SECTION###############
+#########################################
+#####
+##Connector SSL
+#####
+      CONNECT_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      CONNECT_SSL_TRUSTSTORE_LOCATION: {{ssl_path}}{{truststore_file_name}}
+      CONNECT_SSL_TRUSTSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_SSL_KEYSTORE_LOCATION: {{ssl_path}}{{keystore_file_name}}
+      CONNECT_SSL_KEYSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_SSL_KEY_PASSWORD: {{key_password}}
+#####
+##Consumer SSL
+#####
+      CONNECT_CONSUMER_SSL_TRUSTSTORE_LOCATION: {{ssl_path}}{{truststore_file_name}}
+      CONNECT_CONSUMER_SSL_TRUSTSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_CONSUMER_SSL_KEYSTORE_LOCATION:  {{ssl_path}}{{keystore_file_name}}
+      CONNECT_CONSUMER_SSL_KEYSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_CONSUMER_SSL_KEY_PASSWORD: {{key_password}}
+#####
+##Producer SSL
+#####
+      CONNECT_PRODUCER_SSL_TRUSTSTORE_LOCATION: {{ssl_path}}{{truststore_file_name}}
+      CONNECT_PRODUCER_SSL_TRUSTSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_PRODUCER_SSL_KEYSTORE_LOCATION:  {{ssl_path}}{{keystore_file_name}}
+      CONNECT_PRODUCER_SSL_KEYSTORE_PASSWORD: {{ssl_path}}{{password_file_name}}
+      CONNECT_PRODUCER_SSL_KEY_PASSWORD: {{key_password}}
+#########################################
+#####
+##Kafka connect
+#####
+      CONNECT_BOOTSTRAP_SERVERS: {{connect_bootstrap_servers}}     #A list of Kafka broker addresses used as bootstrap connections to Kafka.
+      CONNECT_PRODUCER_BOOTSTRAP_SERVERS: {{connect_producer_servers}}     #A list of Kafka broker addresses used as bootstrap connections to Kafka.
+      CONNECT_CONSUMER_BOOTSTRAP_SERVERS: {{connect_consumer_servers}}     #A list of Kafka broker addresses used as bootstrap connections to Kafka.
+#####
+##Merick configs
+#####
+      JMX_OPTS: "-{{jmx_opts_heap}} -{{jmx_opts_heap}} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port={{monitoring_port}} -Djava.rmi.server.hostname={{connector_dns_name}} -Djava.security.auth.login.config=/opt/kafkaconnect_jaas.conf"
+#####
+##Monitoring Prometheus (takes a lot of cpu)
+#####
+      EXTRA_ARGS: "-javaagent:/opt/prometheus/jmx_prometheus_javaagent.jar={{monitoring_port}}:/opt/prometheus/kafka_connect.yml"
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=DEBUG,kafka.producer.async.DefaultEventHandler=DEBUG,state.change.logger=DEBUG"
+#####
+##Where save status (topic name)
+#####
+      CONNECT_CONFIG_STORAGE_TOPIC: connector-config     #The Kafka topic used to store connector configurations.
+      CONNECT_OFFSET_STORAGE_TOPIC: connector-offsets     #The Kafka topic used to store offsets.
+      CONNECT_STATUS_STORAGE_TOPIC: connector-status     #The Kafka topic used for worker node statuses.
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: {{connect_config_storage_replication_factor}}
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: {{connect_offset_storage_replication_factor}}
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: {{connect_status_storage_replication_factor}}
+
+      CONNECT_PLUGIN_PATH: /usr/share/java,/etc/kafka-connect/jars
+
+    volumes:
+     - "./{{container_name}}/plugins/confluentinc-kafka-connect-jdbc-10.4.1:/etc/kafka-connect/jars/confluentinc-kafka-connect-jdbc-10.4.1"
+     - "./{{container_name}}/plugins/debezium-connector-mysql:/etc/kafka-connect/jars/debezium-connector-mysql"
+     - "./{{container_name}}/secrets/:{{ssl_path}}"
+     - "./{{container_name}}/monitoring/:/opt/prometheus/"
+     - "./{{container_name}}/sasl/kafkaconnect_jaas.conf:/opt/kafkaconnect_jaas.conf"
+     - "./{{container_name}}/sasl/connect.password:{{password_path}}{{password_file_name}}"
+     - "./{{container_name}}/log:/var/lib/kafka/"
+
+    restart: always
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "1"
+
+    networks:
+      - kafka
+
+networks:
+  kafka:
+    name: kafka
+    driver: bridge
