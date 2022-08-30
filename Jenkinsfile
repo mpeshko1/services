@@ -289,7 +289,7 @@ properties([
                     script: """
                       if (Application == 'Connectors') {
                       return inputBox = '''
-                      <table id="broker">
+                      <table id="Connectors">
                         <tr><td><h5>CONNECT-MYSQL-BROKER-SYNC</td><td>
                         <tr><td>schema_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="schema_name"></td></tr>
                         <tr><td>replication_factor</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
