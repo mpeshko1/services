@@ -407,27 +407,27 @@ pipeline {
             script {
                 if (Application == 'Broker') {
                   echo 'Run Load Broker setup'
-                  build job: 'Database/Broker', parameters: [
+                  build job: 'Kafka/Broker', parameters: [
                     string(name: 'SERVERS', value: "${Server}"),
                     string(name: 'ZOOKEEPER_PARAMETERS', value: "${Dependencies}"),
                     string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                   ]
                 } else if (Application == 'Zookeeper') {
                     echo 'Run Load Zookeeper setup'
-                    build job: 'Database/Zookeeper', parameters: [
+                    build job: 'Kafka/Zookeeper', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'ZOOKEEPER_PARAMETERS', value: "${ZOOKEEPER_parameters}")
                     ]
                 } else if (Application == 'Kafka_Connector') {
                     echo 'Run Load Kafka_Connector setup'
-                    build job: 'Database/Kafka_Connector', parameters: [
+                    build job: 'Kafka/Kafka_Connector', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR_parameters}"),
                       string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                     ]
                 } else if (Application == 'Connectors') {
                     echo 'Run Load Connectors setup'
-                    build job: 'Database/Connectors', parameters: [
+                    build job: 'Kafka/Connectors', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'CONNECTORS', value: "${CONNECTORS_parameters}"),
                       string(name: 'KAFKA_CONNECTOR', value: "${Dependencies}")
