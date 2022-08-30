@@ -2,7 +2,7 @@
 # create dir /opt/docker/container_name
 - name: "create directory for docker"
   file:
-    path: "{{ dir_docker }}/connectors"
+    path: "{{ dir_docker }}/connectors/{{ schema_name }}"
     state: directory
     owner: root
     group: root

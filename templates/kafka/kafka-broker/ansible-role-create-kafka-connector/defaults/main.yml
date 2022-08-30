@@ -1,6 +1,6 @@
 ---
 # overall env
-dir_docker: /opt/docker/jenkins/"{{schema_name}}"
+dir_docker: /opt/docker/jenkins/
 
 # temlate files
 conectors_file_path: "{{ role_path }}/templates/connect/*.j2"
