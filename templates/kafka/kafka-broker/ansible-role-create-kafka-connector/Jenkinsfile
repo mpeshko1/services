@@ -47,7 +47,7 @@ pipeline {
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
-                      schema_name: "{{ '$values.schema_name' | default('schema_name') }}",
+                      schema_name: "{{ $values.schema_name | default('schema_name') }}",
                       replication_factor: "{{ '$values.replication_factor' | default('1') }}",
                       partitions: "{{ '$values.partitions' | default('3') }}",
                       src_database_hostname: "{{ '$values.src_database_hostname' | default('172.17.0.1') }}",
