@@ -6,7 +6,6 @@ src_database_port
 src_database_user
 src_database_password
 server_timezone
-kafka_servers
 dst_database_hostname
 dst_database_port
 dst_connection_user

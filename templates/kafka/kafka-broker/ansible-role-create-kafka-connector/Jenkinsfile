@@ -55,7 +55,7 @@ pipeline {
                       src_database_user: "{{ '$values.src_database_user' | default('root') }}",
                       src_database_password: "{{ '$values.src_database_password' | default('12345678qazXSW') }}",
                       server_timezone: "{{ '$values.server_timezone' | default('America/New_York') }}",
-                      kafka_servers: "{{ '$kafka_servers' }}",
+                      kafka_servers: "$kafka_servers",
                       dst_database_hostname: "{{ '$values.dst_database_hostname' | default('172.17.0.1') }}",
                       dst_database_port: "{{ '$values.dst_database_port' | default('13306') }}",
                       dst_connection_user: "{{ '$values.dst_connection_user' | default('root') }}",
