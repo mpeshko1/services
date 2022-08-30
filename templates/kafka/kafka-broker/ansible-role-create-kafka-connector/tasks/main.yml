@@ -8,7 +8,7 @@
     group: root
     mode: 0777
 
-# tasks copy configs for sasl
+# tasks copy templates
 - name: copy sasl-configs
   template:
     src: "{{ item }}"
