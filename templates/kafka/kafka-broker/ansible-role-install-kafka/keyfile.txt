@@ -8,9 +8,3 @@ port_monitoring
 ip_monitoring
 broker_id
 kafka_heap_opts
-kafka_replica_fetch_max_bytes
-kafka_message_max_bytes
-kafka_log_retention_hours
-kafka_controller_socket_timeout_ms
-kafka_connection_setup_teimeout_max_ms
-kafka_request_timeout_ms
