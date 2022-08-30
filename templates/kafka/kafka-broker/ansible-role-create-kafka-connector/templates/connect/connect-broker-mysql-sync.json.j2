@@ -1,0 +1,54 @@
+{
+    "name": "{{schema_name}}-connect-broker-mysql-sync",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics.regex": "{{schema_name}}.*",
+        "connection.url": "jdbc:mysql://{{dst_database_hostname}}:{{dst_database_port}}/{{schema_name}}?nullCatalogMeansCurrent=true&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true",
+        "connection.user":"{{dst_connection_user}}",
+        "connection.password":"{{dst_connection_password}}",
+
+        "database.history.kafka.bootstrap.servers": "{{kafka_servers}}",
+        "database.history.kafka.topic": "dbhistory.{{schema_name}}",
+
+        "database.history.consumer.security.protocol": "SASL_SSL",
+        "database.history.consumer.sasl.mechanism": "PLAIN",
+        "database.history.consumer.ssl.keystore.location": "/var/private/ssl/keystore.jks",
+        "database.history.consumer.ssl.keystore.password": "strong",
+        "database.history.consumer.ssl.truststore.location": "/var/private/ssl/trustore.jks",
+        "database.history.consumer.ssl.truststore.password": "strong",
+        "database.history.consumer.ssl.key.password": "strong",
+        "database.history.consumer.bootstrap.servers": "{{kafka_servers}}",
+        "database.history.consumer.ssl.endpoint.identification.algorithm": " ",
+
+        "database.history.producer.security.protocol": "SASL_SSL",
+        "database.history.producer.sasl.mechanism": "PLAIN",
+        "database.history.producer.ssl.keystore.location": "/var/private/ssl/keystore.jks",
+        "database.history.producer.ssl.keystore.password": "strong",
+        "database.history.producer.ssl.truststore.location": "/var/private/ssl/trustore.jks",
+        "database.history.producer.ssl.truststore.password": "strong",
+        "database.history.producer.ssl.key.password": "strong",
+        "database.history.producer.bootstrap.servers": "{{kafka_servers}}",
+        "database.history.producer.ssl.endpoint.identification.algorithm": " ",
+
+        "database.history.consumer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"connect\" password=\"connect-secret\";",
+        "database.history.producer.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"connect\" password=\"connect-secret\";",
+
+        "transforms": "unwrap,route",
+
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.drop.tombstones": "false",
+
+        "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)\\.([^.]+)",
+        "transforms.route.replacement": "$4",
+
+        "time.precision.mode": "connect",
+        "auto.create": "false",
+        "auto.evolve": "false",
+        "insert.mode": "upsert",
+        "delete.enabled": "true",
+        "pk.mode": "record_key",
+        "dialect.name": "MySqlDatabaseDialect"
+    }
+}

@@ -1,0 +1,17 @@
+---
+# create dir /opt/docker/container_name
+- name: "create directory for docker"
+  file:
+    path: "{{ dir_docker }}/connectors"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+
+# tasks copy configs for sasl
+- name: copy sasl-configs
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_docker }}/connectors/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ conectors_file_path }}"

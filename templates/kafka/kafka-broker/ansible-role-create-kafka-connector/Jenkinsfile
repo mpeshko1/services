@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'SERVERS', defaultValue: ' ')
+        string(name: 'CONNECTORS', defaultValue: ' ')
+        string(name: 'BROKER_PARAMETERS')
+    }
+
+    stages {
+        stage('Load Kafka_Broker') {
+            steps {
+              script {
+
+//Add parameters from main Jenkinsfile
+                echo "Selected kafka brokers"
+                def kafka_servers = "${BROKER_PARAMETERS}".split(",")
+//Read keyfile.txt and add values to mylistkey
+                echo "Read key file"
+                def mylistkey = []
+                def filePath = readFile "templates/kafka/kafka-broker/ansible-role-create-kafka-connector/keyfile.txt"
+                def keyfile = filePath.readLines()
+
+                for (key in keyfile) {
+                  mylistkey.add(key)
+                }
+//Add parameters from main Jenkinsfile
+                echo "Running kafka-connector deploy"
+                def server_arr = "${SERVERS}".split(",")
+                def connectors_parameters = "${CONNECTORS}".split(",")
+                def mylistvalue = []
+//Add user values to mylistvalue
+                for (i in kafka_connector_parameters ) {
+                  mylistvalue.add(i)
+                }
+
+//Create MAP where key=mylistkey valu=mylistvalue
+                def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
+                println  "{mylistkey - > $mylistkey}"
+                println  "{mylistvalue - > $mylistvalue}"
+                println  "{values - > $values}"
+
+//Send values to Ansible
+                  ansiblePlaybook (
+                    playbook: 'templates/kafka/kafka-broker/playbook.yml',
+                    inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
+                    disableHostKeyChecking: true,
+                    extraVars: [
+                      schema_name: "{{ '$values.schema_name' | default('schema_name') }}",
+                      replication_factor: "{{ '$values.replication_factor' | default('1') }}",
+                      partitions: "{{ '$values.partitions' | default('3') }}",
+                      src_database_hostname: "{{ '$values.src_database_hostname' | default('172.17.0.1') }}",
+                      src_database_port: "{{ '$values.src_database_port' | default('3306') }}",
+                      src_database_user: "{{ '$values.src_database_user' | default('root') }}",
+                      src_database_password: "{{ '$values.src_database_password' | default('12345678qazXSW') }}",
+                      server_timezone: "{{ '$values.server_timezone' | default('America/New_York') }}",
+                      kafka_servers: "{{ '$kafka_servers' | default('kafka1-1') }}",
+                      dst_database_hostname: "{{ '$values.dst_database_hostname' | default('172.17.0.1') }}",
+                      dst_database_port: "{{ '$values.dst_database_port' | default('13306') }}",
+                      dst_connection_user: "{{ '$values.dst_connection_user' | default('root') }}",
+                      dst_connection_password: "{{ '$values.dst_connection_password' | default('XSWqaz87654321') }}"
+                    ]
+                )
+              }
+            }
+        }
+    }
+}

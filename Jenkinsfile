@@ -141,6 +141,7 @@ properties([
                 ]
             ]
         ],
+
 //VALUE FOR KAFKA CONNECTOR DOCKER TEMPLATE
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
@@ -221,6 +222,7 @@ properties([
             ],
             omitValueField: true
         ],
+
 //VALUE FOR BROKER DOCKER TEMPLATE
         [$class: 'DynamicReferenceParameter',
             choiceType: 'ET_FORMATTED_HTML',
@@ -261,6 +263,49 @@ properties([
                         <tr><td>kafka_controller_socket_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
                         <tr><td>kafka_connection_setup_teimeout_max_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="40000"></td></tr>
                         <tr><td>kafka_request_timeout_ms</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="60000"></td></tr>
+                      </table>
+                      '''
+                      }
+                    """.stripIndent()
+                ]
+            ],
+            omitValueField: true
+        ],
+
+//VALUE FOR CONNECTORs
+        [$class: 'DynamicReferenceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            name: 'CONNECTORS_parameters',
+            referencedParameters: 'Application',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: true,
+                    script: 'return " " '
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                      if (Application == 'Connectors') {
+                      return inputBox = '''
+                      <table id="broker">
+                        <tr><td><h5>CONNECT-MYSQL-BROKER-SYNC</td><td>
+                        <tr><td>schema_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="schema_name"></td></tr>
+                        <tr><td>replication_factor</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="1"></td></tr>
+                        <tr><td>partitions</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="3"></td></tr>
+                        <tr><td>src_database_hostname</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>src_database_port</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="3306"></td></tr>
+                        <tr><td>src_database_user</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="root"></td></tr>
+                        <tr><td>src_database_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="12345678qazXSW"></td></tr>
+                        <tr><td>server_timezone</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="America/New_York"></td></tr>
+
+                        <tr><td><h5>CONNECT-BROKER-MYSQL-SYNC</td><td>
+                        <tr><td>kafka_servers</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="kafka1-1.net"></td></tr>
+                        <tr><td>dst_database_hostname</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                        <tr><td>dst_database_port</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="13306"></td></tr>
+                        <tr><td>dst_connection_user</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="root"></td></tr>
+                        <tr><td>dst_connection_password</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="12345678qazXSW"></td></tr>
                       </table>
                       '''
                       }
@@ -333,9 +378,11 @@ pipeline {
                 def server_parameters = "${Server}".split(",")
 //Varibles for ZOOKEEPER DOCKER TEMPLATE
                 def zoo_parameters = "${params.ZOOKEEPER_parameters}".split(",")
+
+                def connectors_parameters = "${params.CONNECTORS_parameters}".split(",")
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
-                def cafka_connector_parameters = "${params.KAFKA_CONNECTOR_parameters}".split(",")
+                def kafka_connector_parameters = "${params.KAFKA_CONNECTOR_parameters}".split(",")
                 def zookeeper_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 //Add user value to mylistvalue
@@ -345,10 +392,11 @@ pipeline {
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
-                println "${cafka_connector_parameters}"
+                println "${kafka_connector_parameters}"
                 println "${zookeeper_parameters}"
                 println "${broker_parameters}"
                 println "${zoo_parameters}"
+                println "${connectors_parameters}"
             }
           }
         }
@@ -376,7 +424,14 @@ pipeline {
                       string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR_parameters}"),
                       string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
                     ]
-                } else if (Application == ' ') {
+                } else if (Application == 'Connectors') {
+                    echo 'Run Load Connectors setup'
+                    build job: 'Database/Connectors', parameters: [
+                      string(name: 'SERVERS', value: "${Server}"),
+                      string(name: 'CONNECTORS', value: "${CONNECTORS_parameters}"),
+                      string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                    ]
+                }  else if (Application == ' ') {
                       println "Nothing to do. By-By"
                 }
           }
