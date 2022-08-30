@@ -47,19 +47,19 @@ pipeline {
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
-                      schema_name: "{{ $values.schema_name | default('schema_name') }}",
+                      schema_name: "{{ '$values.schema_name' | default('schema_name') }}",
                       replication_factor: "{{ $values.replication_factor | default('1') }}",
                       partitions: "{{ $values.partitions | default('3') }}",
-                      src_database_hostname: "{{ $values.src_database_hostname | default('172.17.0.1') }}",
+                      src_database_hostname: "{{ '$values.src_database_hostname' | default('172.17.0.1') }}",
                       src_database_port: "{{ $values.src_database_port | default('3306') }}",
-                      src_database_user: "{{ $values.src_database_user | default('root') }}",
-                      src_database_password: "{{ $values.src_database_password | default('12345678qazXSW') }}",
+                      src_database_user: "{{ '$values.src_database_user' | default('root') }}",
+                      src_database_password: "{{ '$values.src_database_password' | default('12345678qazXSW') }}",
                       server_timezone: "{{ '$values.server_timezone' | default('America/New_York') }}",
                       kafka_servers: "$kafka_connector_parameters",
-                      dst_database_hostname: "{{ $values.dst_database_hostname | default('172.17.0.1') }}",
+                      dst_database_hostname: "{{ '$values.dst_database_hostname' | default('172.17.0.1') }}",
                       dst_database_port: "{{ $values.dst_database_port | default('13306') }}",
-                      dst_connection_user: "{{ $values.dst_connection_user | default('root') }}",
-                      dst_connection_password: "{{ $values.dst_connection_password | default('XSWqaz87654321') }}"
+                      dst_connection_user: "{{ '$values.dst_connection_user' | default('root') }}",
+                      dst_connection_password: "{{ '$values.dst_connection_password' | default('XSWqaz87654321') }}"
                     ]
                 )
               }
