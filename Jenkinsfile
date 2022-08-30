@@ -304,7 +304,6 @@ properties([
                         <tr><td>server_timezone</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="America/New_York"></td></tr>
 
                         <tr><td><h5>CONNECT-BROKER-MYSQL-SYNC</td><td>
-                        <tr><td>kafka_servers</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="kafka1-1.net"></td></tr>
                         <tr><td>dst_database_hostname</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
                         <tr><td>dst_database_port</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="13306"></td></tr>
                         <tr><td>dst_connection_user</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="root"></td></tr>
