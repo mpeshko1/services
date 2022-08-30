@@ -384,7 +384,7 @@ pipeline {
 //Varibles for BROKER DOCKER TEMPLATE
                 def mylistvalue = []
                 def kafka_connector_parameters = "${params.KAFKA_CONNECTOR_parameters}".split(",")
-                def zookeeper_parameters = "${params.Dependencies}".split(",")
+                def broker_used_parameters = "${params.Dependencies}".split(",")
                 def broker_parameters = "${params.BROKER_parameters}".split(",")
 //Add user value to mylistvalue
                 for (i in broker_parameters ) {
@@ -394,7 +394,7 @@ pipeline {
                 println "${params.old}"
                 println "${server_parameters}"
                 println "${kafka_connector_parameters}"
-                println "------------- ${zookeeper_parameters}"
+                println "broker_used_parameters ->>> ${broker_used_parameters}"
                 println "${broker_parameters}"
                 println "${zoo_parameters}"
                 println "${connectors_parameters}"
@@ -430,7 +430,7 @@ pipeline {
                     build job: 'Database/Connectors', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'CONNECTORS', value: "${CONNECTORS_parameters}"),
-                      string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR_parameters}")
+                      string(name: 'KAFKA_CONNECTOR', value: "${Dependencies}")
                     ]
                 }  else if (Application == ' ') {
                       println "Nothing to do. By-By"
