@@ -431,7 +431,7 @@ pipeline {
                     build job: 'Database/Connectors', parameters: [
                       string(name: 'SERVERS', value: "${Server}"),
                       string(name: 'CONNECTORS', value: "${CONNECTORS_parameters}"),
-                      string(name: 'BROKER_PARAMETERS', value: "${BROKER_parameters}")
+                      string(name: 'KAFKA_CONNECTOR', value: "${KAFKA_CONNECTOR_parameters}"),
                     ]
                 }  else if (Application == ' ') {
                       println "Nothing to do. By-By"

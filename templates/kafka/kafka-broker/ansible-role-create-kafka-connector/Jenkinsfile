@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'CONNECTORS', defaultValue: ' ')
-        string(name: 'BROKER_PARAMETERS')
+        string(name: 'KAFKA_CONNECTOR')
     }
 
     stages {
@@ -14,7 +14,7 @@ pipeline {
 
 //Add parameters from main Jenkinsfile
                 echo "Selected kafka brokers"
-                def kafka_servers = "${BROKER_PARAMETERS}".split(",").join(",")
+                def kafka_servers = "${KAFKA_CONNECTOR}".split(",").join(",")
                 println "{kafka_servers - > $kafka_servers}"
 //Read keyfile.txt and add values to mylistkey
                 echo "Read key file"
