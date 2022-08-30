@@ -1,10 +1,12 @@
 def DEPLOY_SERVICE = [
   'Clear':[],
-  'Database': [
+  'Kafka': [
     ['service_name': 'Zookeeper'],
     ['service_name': 'Broker'],
     ['service_name': 'Kafka_Connector'],
     ['service_name': 'Connector'],
+  ],
+  'Database': [
     ['service_name': 'MySQL'],
     ['service_name': 'MongoDB'],
     ['service_name': 'ClickHouse']
