@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'SERVERS', defaultValue: ' ')
         string(name: 'CONNECTORS', defaultValue: ' ')
-        string(name: 'KAFKA_CONNECTOR')
+        string(name: 'KAFKA_CONNECTOR', defaultValue: ' ')
     }
 
     stages {
