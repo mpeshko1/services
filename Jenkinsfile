@@ -132,6 +132,9 @@ properties([
                             if (Application == 'Kafka_Connector') {
                               return c_service['Broker'].host_service
                             }
+                            if (Application == 'Connectors') {
+                              return c_service['Broker'].host_service
+                            }
                             if (Application == 'ClickHouse') {
                               return c_service['Zookeeper'].host_service
                             }
