@@ -9,7 +9,7 @@
     mode: 0777
 
 # tasks copy templates
-- name: copy sasl-configs
+- name: copy templates
   template:
     src: "{{ item }}"
     dest: "{{ dir_docker }}/connectors/{{ schema_name }}/{{ item | basename | regex_replace('.j2','') }}"
