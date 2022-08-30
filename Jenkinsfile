@@ -4,7 +4,7 @@ def DEPLOY_SERVICE = [
     ['service_name': 'Zookeeper'],
     ['service_name': 'Broker'],
     ['service_name': 'Kafka_Connector'],
-    ['service_name': 'Connector'],
+    ['service_name': 'Connectors'],
   ],
   'Database': [
     ['service_name': 'MySQL'],
