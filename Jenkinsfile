@@ -393,8 +393,8 @@ pipeline {
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
-                println "------------- ${kafka_connector_parameters}"
-                println "${zookeeper_parameters}"
+                println "${kafka_connector_parameters}"
+                println "------------- ${zookeeper_parameters}"
                 println "${broker_parameters}"
                 println "${zoo_parameters}"
                 println "${connectors_parameters}"
