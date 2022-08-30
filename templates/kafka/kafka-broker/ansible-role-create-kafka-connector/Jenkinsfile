@@ -14,7 +14,8 @@ pipeline {
 
 //Add parameters from main Jenkinsfile
                 echo "Selected kafka brokers"
-                def kafka_servers = "${BROKER_PARAMETERS}".split(",")
+                def kafka_servers = "${BROKER_PARAMETERS}".split(",").join(",")
+                println "{kafka_servers - > $kafka_servers}"
 //Read keyfile.txt and add values to mylistkey
                 echo "Read key file"
                 def mylistkey = []
