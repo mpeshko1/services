@@ -30,7 +30,7 @@ pipeline {
                 def connectors_parameters = "${CONNECTORS}".split(",")
                 def mylistvalue = []
 //Add user values to mylistvalue
-                for (i in kafka_connector_parameters ) {
+                for (i in connectors_parameters ) {
                   mylistvalue.add(i)
                 }
 
