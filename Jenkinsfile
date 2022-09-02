@@ -382,6 +382,7 @@ pipeline {
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                 }
+                              
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
