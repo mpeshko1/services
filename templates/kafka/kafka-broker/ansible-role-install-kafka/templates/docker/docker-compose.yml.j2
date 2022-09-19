@@ -80,7 +80,7 @@ services:
       KAFKA_DEFAULT_REPLICATION_FACTOR: {{kafka_default_replication_factor}}     #Default replication factors for automatically created topics (old 3)
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: {{kafka_offsets_topic_replication_factor}}     #The replication factor for the offsets topic (set higher to ensure availability). Internal topic creation will fail until the cluster size meets this replication factor requirement. Critical cfg files (old param 3)
 
-      KAFKA_MIN_INSYNC_REPLICAS: {{kafka_min_insync_replicas | default('42')}}      #Ecifies the minimum number of replicas that must acknowledge a write for the write to be considered successful (old 1)
+      KAFKA_MIN_INSYNC_REPLICAS: {{kafka_min_insync_replicas}}      #Ecifies the minimum number of replicas that must acknowledge a write for the write to be considered successful (old 1)
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: {{kafka_transaction_state_log_min_isr}}      #Overridden min.insync.replicas config for the transaction topic. Critical cfg files (old param 2)
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: {{kafka_transaction_state_log_replication_factor}}     #The replication factor for the transaction topic. Critical cfg files (old param 3)
 
