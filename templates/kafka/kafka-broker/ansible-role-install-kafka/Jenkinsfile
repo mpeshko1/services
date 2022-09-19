@@ -44,8 +44,8 @@ pipeline {
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
-                      container_name: "$values.container_name",
-                      kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.by') }}",
+                      container_name: "{{ $values.container_name| default('kafka1-1') }}",
+                      kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.spnode.net') }}",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                       port_internal: "{{ $values.port_internal | default('9092') }}",
                       ip_internal:  "{{ $values.ip_internal | default('172.17.0.1') }}",
