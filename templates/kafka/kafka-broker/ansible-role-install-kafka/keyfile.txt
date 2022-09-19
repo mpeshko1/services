@@ -8,3 +8,8 @@ port_monitoring
 ip_monitoring
 broker_id
 kafka_heap_opts
+kafka_default_replication_factor
+kafka_offsets_topic_replication_factor
+kafka_min_insync_replicas
+kafka_transaction_state_log_min_isr
+kafka_transaction_state_log_replication_factor

@@ -248,16 +248,23 @@ properties([
                         <tr><td>kafka_dns_name</td><td>=</td><td><input name='value' type='text' class=' ' placeholder="kafka1-1.spnode.net"></td></tr>
 
                         <tr><td><h5>IP SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
-                        <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
-                        <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
-                        <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
-                        <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9201"></td></tr>
-                        <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                          <tr><td>port_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
+                          <tr><td>ip_internal</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                          <tr><td>port_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9092"></td></tr>
+                          <tr><td>ip_external</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
+                          <tr><td>port_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="9201"></td></tr>
+                          <tr><td>ip_monitoring</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="172.17.0.1"></td></tr>
 
                         <tr><td><h5>BROKER SECTION IN DOCKER TEMPLATE</td><td>
-                        <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
-                        <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="10"></td></tr>
+                          <tr><td>broker_id</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                          <tr><td>kafka_heap_opts</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="10"></td></tr>
+
+                        <tr><td><h5>CLUSTER CONFIGS</td><td>
+                          <tr><td>kafka_default_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                          <tr><td>kafka_offsets_topic_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                          <tr><td>kafka_min_insync_replicas</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                          <tr><td>kafka_transaction_state_log_min_isr</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
+                          <tr><td>kafka_transaction_state_log_replication_factor</td><td>=</td><td><input name='value' type='list' class=' ' placeholder="1"></td></tr>
                       </table>
                       '''
                       }
@@ -382,7 +389,7 @@ pipeline {
                 for (i in broker_parameters ) {
                   mylistvalue.add(i)
                 }
-                              
+
 //Print Varibles in output states
                 println "${params.old}"
                 println "${server_parameters}"
