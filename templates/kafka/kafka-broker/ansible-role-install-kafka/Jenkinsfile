@@ -55,7 +55,7 @@ pipeline {
                       ip_monitoring: "{{ $values.ip_monitoring | default('172.17.0.1') }}",
 //vars for docker file (BROKER SECTION IN DOCKER TEMPLATE)
                       broker_id: "{{ $values.broker_id | default('1') }}",
-                      kafka_heap_opts: "{{ $values.kafka_heap_opts | default('3') }}",
+                      kafka_heap_opts: "{{ $values.kafka_heap_opts | default('10') }}",
 //vars for docker file (BROKER SECTION IN CLUSTER CONFIGS)
                       kafka_default_replication_factor: "{{ $values.kafka_default_replication_factor | default('1') }}",
                       kafka_offsets_topic_replication_factor: "{{ $values.kafka_offsets_topic_replication_factor | default('1') }}",
