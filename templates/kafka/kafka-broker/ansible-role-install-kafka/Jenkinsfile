@@ -57,11 +57,11 @@ pipeline {
                       broker_id: "$values.broker_id",
                       kafka_heap_opts: "$values.kafka_heap_opts",
 //vars for docker file (BROKER SECTION IN CLUSTER CONFIGS)
-                      kafka_default_replication_factor: "{{ $values.kafka_default_replication_factor | default('10') }}",
-                      kafka_offsets_topic_replication_factor: "$values.kafka_offsets_topic_replication_factor",
-                      kafka_min_insync_replicas: "$values.kafka_min_insync_replicas",
-                      kafka_transaction_state_log_min_isr: "$values.kafka_transaction_state_log_min_isr",
-                      kafka_transaction_state_log_replication_factor: "$values.kafka_transaction_state_log_replication_factor",
+                      kafka_default_replication_factor: "{{ $values.kafka_default_replication_factor | default('1') }}",
+                      kafka_offsets_topic_replication_factor: "{{ $values.kafka_offsets_topic_replication_factor | default('1') }}",
+                      kafka_min_insync_replicas: "{{ $values.kafka_min_insync_replicas | default('1') }}",
+                      kafka_transaction_state_log_min_isr: "{{ $values.kafka_transaction_state_log_min_isr | default('1') }}",
+                      kafka_transaction_state_log_replication_factor: "{{ $values.kafka_transaction_state_log_replication_factor | default('1') }}",
 //vars for docker file (CONNECT CONFIG SECTION IN DOCKER TEMPLATE)
                       kafka_zookeeper_connect: "$zookeeper_parameters"
                   ]
