@@ -39,16 +39,16 @@ pipeline {
                 println  "{dictvalues - > $values}"
 
 //Set default values
-                if ($values.container_name == null) {
-                    $values.container_name == 'kafka1-1'
+                if (values.container_name == null) {
+                    values.container_name == 'kafka1-1'
                 }
 
-                if ($values.kafka_dns_name == null) {
-                    $values.kafka_dns_name == 'kafka1-1.net'
+                if (values.kafka_dns_name == null) {
+                    values.kafka_dns_name == 'kafka1-1.net'
                 }
 
-                if ($values.port_internal == null) {
-                    $values.port_internal == '9092'
+                if (values.port_internal == null) {
+                    values.port_internal == '9092'
                 }
 
 //Send values to Ansible
