@@ -36,7 +36,7 @@ pipeline {
                 def values = [mylistkey,mylistvalue].transpose().collectEntries{[it[0],it[1]]} //user enter parameters -> type MAP
                 println  "{mylistkey - > $mylistkey}"
                 println  "{mylistvalue - > $mylistvalue}"
-                println  "{values - > $values}"
+                println  "{dictvalues - > $values}"
 
 //Send values to Ansible
                   ansiblePlaybook (
