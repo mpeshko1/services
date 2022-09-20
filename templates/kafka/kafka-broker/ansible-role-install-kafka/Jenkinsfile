@@ -38,16 +38,29 @@ pipeline {
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{dictvalues - > $values}"
 
+//Set default values
+                if ($values.container_name == null) {
+                    $values.container_name == 'kafka1-1'
+                }
+
+                if ($values.kafka_dns_name == null) {
+                    $values.kafka_dns_name == 'kafka1-1.net'
+                }
+
+                if ($values.port_internal == null) {
+                    $values.port_internal == '9092'
+                }
+
 //Send values to Ansible
                   ansiblePlaybook (
                     playbook: 'templates/kafka/kafka-broker/playbook.yml',
                     inventoryContent: "by-kafka1-vm-1-vpn.spnode.net",
                     disableHostKeyChecking: true,
                     extraVars: [
-                      container_name: "{{ $values.container_name | default('kafka1-1') }}",
-                      kafka_dns_name: "{{ $values.kafka_dns_name | default('kafka1-1.spnode.net') }}",
+                      container_name: "$values.container_name",
+                      kafka_dns_name: "$values.kafka_dns_name",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
-                      port_internal: "{{ $values.port_internal | default('9092') }}",
+                      port_internal: "$values.port_internal",
                       ip_internal:  "{{ $values.ip_internal | default('172.17.0.1') }}",
                       port_external: "{{ $values.port_external | default('9092') }}",
                       ip_external:  "{{ $values.ip_external | default('172.17.0.1') }}",
