@@ -37,6 +37,8 @@ pipeline {
                 println  "{mylistkey - > $mylistkey}"
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{dictvalues - > $values}"
+                
+                println  "{dictvalues - > $values.container_name}"
 
 //Set default values
                 if (values.container_name == null) {
