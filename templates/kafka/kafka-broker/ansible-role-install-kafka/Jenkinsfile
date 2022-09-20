@@ -61,20 +61,20 @@ pipeline {
                       kafka_dns_name: "$values.kafka_dns_name",
 //vars for docker file (IP SECTION IN DOCKER TEMPLATE)
                       port_internal: "$values.port_internal",
-                      ip_internal:  "{{ $values.ip_internal | default('172.17.0.1') }}",
-                      port_external: "{{ $values.port_external | default('9092') }}",
-                      ip_external:  "{{ $values.ip_external | default('172.17.0.1') }}",
-                      port_monitoring: "{{ $values.port_monitoring | default('9092') }}",
-                      ip_monitoring: "{{ $values.ip_monitoring | default('172.17.0.1') }}",
+                      ip_internal:  "$values.ip_internal",
+                      port_external: "$values.port_external",
+                      ip_external:  "$values.ip_external",
+                      port_monitoring: "$values.port_monitoring",
+                      ip_monitoring: "$values.ip_monitoring",
 //vars for docker file (BROKER SECTION IN DOCKER TEMPLATE)
-                      broker_id: "{{ $values.broker_id | default('1') }}",
-                      kafka_heap_opts: "{{ $values.kafka_heap_opts | default('10') }}",
+                      broker_id: "$values.broker_id",
+                      kafka_heap_opts: "$values.kafka_heap_opts",
 //vars for docker file (BROKER SECTION IN CLUSTER CONFIGS)
-                      kafka_default_replication_factor: "{{ $values.kafka_default_replication_factor | default('1') }}",
-                      kafka_offsets_topic_replication_factor: "{{ $values.kafka_offsets_topic_replication_factor | default('1') }}",
-                      kafka_min_insync_replicas: "{{ $values.kafka_min_insync_replicas | default('1') }}",
-                      kafka_transaction_state_log_min_isr: "{{ $values.kafka_transaction_state_log_min_isr | default('1') }}",
-                      kafka_transaction_state_log_replication_factor: "{{ $values.kafka_transaction_state_log_replication_factor | default('1') }}",
+                      kafka_default_replication_factor: "$values.kafka_default_replication_factor",
+                      kafka_offsets_topic_replication_factor: "$values.kafka_offsets_topic_replication_factor",
+                      kafka_min_insync_replicas: "$values.kafka_min_insync_replicas",
+                      kafka_transaction_state_log_min_isr: "$values.kafka_transaction_state_log_min_isr",
+                      kafka_transaction_state_log_replication_factor: "$values.kafka_transaction_state_log_replication_factor",
 //vars for docker file (CONNECT CONFIG SECTION IN DOCKER TEMPLATE)
                       kafka_zookeeper_connect: "$zookeeper_parameters"
                   ]
