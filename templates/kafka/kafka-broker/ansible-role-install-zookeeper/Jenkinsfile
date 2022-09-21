@@ -37,6 +37,47 @@ pipeline {
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{values - > $values}"
 
+//Set default values
+                if ("$values.container_name" == 'null') {
+                    values.container_name = 'zookeeper1-1'
+                    println  "{default values.container_name - > $values.container_name}"
+                }
+
+                if ("$values.zookeeper_dns_name" == 'null') {
+                    values.zookeeper_dns_name = 'zookeeper1-1.net'
+                    println  "{default values.zookeeper_dns_name - > $values.zookeeper_dns_name}"
+                }
+
+                if ("$values.ip_connect" == 'null') {
+                    values.ip_connect = '172.17.0.1'
+                    println  "{default values.ip_connect - > $values.ip_connect}"
+                }
+
+                if ("$values.zookeeper_secure_client_port" == 'null') {
+                    values.zookeeper_secure_client_port = '2281'
+                    println  "{default values.zookeeper_secure_client_port - > $values.zookeeper_secure_client_port}"
+                }
+
+                if ("$values.replication_port" == 'null') {
+                    values.replication_port = '2888'
+                    println  "{default values.replication_port - > $values.replication_port}"
+                }
+
+                if ("$values.leader_selection_port" == 'null') {
+                    values.leader_selection_port = '3888'
+                    println  "{default values.leader_selection_port - > $values.leader_selection_port}"
+                }
+
+                if ("$values.zookeeper_server_id" == 'null') {
+                    values.zookeeper_server_id = '1'
+                    println  "{default values.zookeeper_server_id - > $values.zookeeper_server_id}"
+                }
+
+                if ("$values.kafka_zookeeper_connect" == 'null') {
+                    values.kafka_zookeeper_connect = 'zookeeper1-1.net:2888:3888'
+                    println  "{default values.kafka_zookeeper_connect - > $values.kafka_zookeeper_connect}"
+                }
+
 //Send values to Ansible
                   ansiblePlaybook (
                     playbook: 'templates/kafka/kafka-broker/playbook.yml',
