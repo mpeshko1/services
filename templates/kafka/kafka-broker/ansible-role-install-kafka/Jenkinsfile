@@ -41,7 +41,7 @@ pipeline {
                 println  "{values.container_name - > $values.container_name}"
 
 //Set default values
-                if ("$values.container_name" == null) {
+                if ("$values.container_name" == '') {
                     values.container_name == 'kafka1-1'
                 }
 
