@@ -116,7 +116,7 @@ pipeline {
                     println  "{default values.kafka_transaction_state_log_replication_factor - > $values.kafka_transaction_state_log_replication_factor}"
                 }
 
-                if ("$zookeeper_parameters" == 'null') {
+                if ("$zookeeper_parameters" == '') {
                     zookeeper_parameters = '172.17.0.1:2281'
                     println  "{default values.zookeeper_parameters - > $zookeeper_parameters}"
                 }
