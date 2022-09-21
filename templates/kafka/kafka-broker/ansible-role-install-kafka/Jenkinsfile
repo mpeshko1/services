@@ -38,7 +38,7 @@ pipeline {
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{dictvalues - > $values}"
 
-                println  "{values.container_name - > $values.container_name}"
+                println  "{zookeeper_parameters - > $zookeeper_parameters}"
 
 //Set default values
                 if ("$values.container_name" == 'null') {
