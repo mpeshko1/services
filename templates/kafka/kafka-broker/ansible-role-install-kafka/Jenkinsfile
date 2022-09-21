@@ -37,7 +37,6 @@ pipeline {
                 println  "{mylistkey - > $mylistkey}"
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{dictvalues - > $values}"
-
                 println  "{zookeeper_parameters - > $zookeeper_parameters}"
 
 //Set default values
