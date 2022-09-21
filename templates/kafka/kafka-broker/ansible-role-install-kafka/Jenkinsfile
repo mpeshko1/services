@@ -42,7 +42,7 @@ pipeline {
 
 //Set default values
                 if ("$values.container_name" == '') {
-                    values.container_name == 'kafka1-1'
+                    "$values.container_name" == 'kafka1-1'
                 }
 
                 if (values.kafka_dns_name == null) {
