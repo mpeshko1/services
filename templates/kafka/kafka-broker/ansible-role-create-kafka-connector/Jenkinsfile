@@ -41,6 +41,67 @@ pipeline {
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{values - > $values}"
 
+//Set default values
+                if ("$values.schema_name" == 'null') {
+                    values.schema_name = 'schema_name'
+                    println  "{default values.schema_name - > $values.schema_name}"
+                }
+
+                if ("$values.replication_factor" == 'null') {
+                    values.replication_factor = '1'
+                    println  "{default values.replication_factor - > $values.replication_factor}"
+                }
+
+                if ("$values.partitions" == 'null') {
+                    values.partitions = '3'
+                    println  "{default values.partitions - > $values.partitions}"
+                }
+
+                if ("$values.src_database_hostname" == 'null') {
+                    values.src_database_hostname = '172.17.0.1'
+                    println  "{default values.src_database_hostname - > $values.src_database_hostname}"
+                }
+
+                if ("$values.src_database_port" == 'null') {
+                    values.src_database_port = '3306'
+                    println  "{default values.src_database_port - > $values.src_database_port}"
+                }
+
+                if ("$values.src_database_user" == 'null') {
+                    values.src_database_user = 'root'
+                    println  "{default values.src_database_user - > $values.src_database_user}"
+                }
+
+                if ("$values.src_database_password" == 'null') {
+                    values.src_database_password = '12345678qazXSW'
+                    println  "{default values.src_database_password - > $values.src_database_password}"
+                }
+
+                if ("$values.server_timezone" == 'null') {
+                    values.server_timezone = 'America/New_York'
+                    println  "{default values.server_timezone - > $values.server_timezone}"
+                }
+
+                if ("$values.dst_database_hostname" == 'null') {
+                    values.dst_database_hostname = '172.17.0.1'
+                    println  "{default values.dst_database_hostname - > $values.dst_database_hostname}"
+                }
+
+                if ("$values.dst_database_port" == 'null') {
+                    values.dst_database_port = '13306'
+                    println  "{default values.dst_database_port - > $values.dst_database_port}"
+                }
+
+                if ("$values.dst_connection_user" == 'null') {
+                    values.dst_connection_user = 'root'
+                    println  "{default values.dst_connection_user - > $values.dst_connection_user}"
+                }
+
+                if ("$values.dst_connection_password" == 'null') {
+                    values.dst_connection_password = '12345678qazXSW'
+                    println  "{default values.dst_connection_password - > $values.dst_connection_password}"
+                }
+
 //Send values to Ansible
                   ansiblePlaybook (
                     playbook: 'templates/kafka/kafka-broker/playbook.yml',
@@ -55,7 +116,6 @@ pipeline {
                       src_database_user: "$values.src_database_user",
                       src_database_password: "$values.src_database_password",
                       server_timezone: "$values.server_timezone",
-                      kafka_servers: "$kafka_connector_parameters",
                       dst_database_hostname: "$values.dst_database_hostname",
                       dst_database_port: "$values.dst_database_port",
                       dst_connection_user: "$values.dst_connection_user",

@@ -37,6 +37,72 @@ pipeline {
                 println  "{mylistvalue - > $mylistvalue}"
                 println  "{values - > $values}"
 
+//Set default values
+                if ("$values.container_name" == 'null') {
+                    values.container_name = 'kafka-connector1-1'
+                    println  "{default values.container_name - > $values.container_name}"
+                }
+
+                if ("$values.connector_dns_name" == 'null') {
+                    values.connector_dns_name = 'kafka-connector1-1.spnode.net'
+                    println  "{default values.connector_dns_name - > $values.connector_dns_name}"
+                }
+
+                if ("$values.ip_internal" == 'null') {
+                    values.ip_internal = '172.17.0.1'
+                    println  "{default values.ip_internal - > $values.ip_internal}"
+                }
+
+                if ("$values.connect_rest_port" == 'null') {
+                    values.connect_rest_port = '8083'
+                    println  "{default values.connect_rest_port - > $values.connect_rest_port}"
+                }
+
+                if ("$values.ip_external" == 'null') {
+                    values.ip_external = '172.17.0.1'
+                    println  "{default values.ip_external - > $values.ip_external}"
+                }
+
+                if ("$values.connect_advertised_port" == 'null') {
+                    values.connect_advertised_port = '28083'
+                    println  "{default values.connect_advertised_port - > $values.connect_advertised_port}"
+                }
+
+                if ("$values.ip_monitoring" == 'null') {
+                    values.ip_monitoring = '172.17.0.1'
+                    println  "{default values.ip_monitoring - > $values.ip_monitoring}"
+                }
+
+                if ("$values.monitoring_port" == 'null') {
+                    values.monitoring_port = '9202'
+                    println  "{default values.monitoring_port - > $values.monitoring_port}"
+                }
+
+                if ("$values.connect_group_id" == 'null') {
+                    values.connect_group_id = '1'
+                    println  "{default values.connect_group_id - > $values.connect_group_id}"
+                }
+
+                if ("$values.kafka_heap_opts" == 'null') {
+                    values.kafka_heap_opts = '1'
+                    println  "{default values.kafka_heap_opts - > $values.kafka_heap_opts}"
+                }
+
+                if ("$values.connect_config_storage_replication_factor" == 'null') {
+                    values.connect_config_storage_replication_factor = '1'
+                    println  "{default values.connect_config_storage_replication_factor - > $values.connect_config_storage_replication_factor}"
+                }
+
+                if ("$values.connect_offset_storage_replication_factor" == 'null') {
+                    values.connect_offset_storage_replication_factor = '1'
+                    println  "{default values.connect_offset_storage_replication_factor - > $values.connect_offset_storage_replication_factor}"
+                }
+
+                if ("$values.connect_status_storage_replication_factor" == 'null') {
+                    values.connect_status_storage_replication_factor = '1'
+                    println  "{default values.connect_status_storage_replication_factor - > $values.connect_status_storage_replication_factor}"
+                }
+
 //Send values to Ansible
                   ansiblePlaybook (
                     playbook: 'templates/kafka/kafka-broker/playbook.yml',
