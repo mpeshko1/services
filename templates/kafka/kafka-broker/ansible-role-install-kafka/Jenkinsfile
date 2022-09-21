@@ -47,13 +47,78 @@ pipeline {
                 }
 
                 if ("$values.kafka_dns_name" == 'null') {
-                    values.kafka_dns_name = 'kafka1-1.net'
+                    values.kafka_dns_name = 'kafka1-1.spnode.net'
                     println  "{default values.kafka_dns_name - > $values.kafka_dns_name}"
                 }
 
                 if ("$values.port_internal" == 'null') {
                     values.port_internal = '9092'
                     println  "{default values.port_internal - > $values.port_internal}"
+                }
+
+                if ("$values.ip_internal" == 'null') {
+                    values.port_internal = '172.17.0.1'
+                    println  "{default values.ip_internal - > $values.ip_internal}"
+                }
+
+                if ("$values.port_external" == 'null') {
+                    values.port_internal = '9092'
+                    println  "{default values.port_external - > $values.port_external}"
+                }
+
+                if ("$values.ip_external" == 'null') {
+                    values.port_internal = '172.17.0.1'
+                    println  "{default values.ip_external - > $values.ip_external}"
+                }
+
+                if ("$values.port_monitoring" == 'null') {
+                    values.port_internal = '9201'
+                    println  "{default values.port_monitoring - > $values.port_monitoring}"
+                }
+
+                if ("$values.ip_monitoring" == 'null') {
+                    values.port_internal = '172.17.0.1'
+                    println  "{default values.ip_monitoring - > $values.ip_monitoring}"
+                }
+
+                if ("$values.broker_id" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.broker_id - > $values.broker_id}"
+                }
+
+                if ("$values.kafka_heap_opts" == 'null') {
+                    values.port_internal = '10'
+                    println  "{default values.kafka_heap_opts - > $values.kafka_heap_opts}"
+                }
+
+                if ("$values.kafka_default_replication_factor" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.kafka_default_replication_factor - > $values.kafka_default_replication_factor}"
+                }
+
+                if ("$values.kafka_offsets_topic_replication_factor" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.kafka_offsets_topic_replication_factor - > $values.kafka_offsets_topic_replication_factor}"
+                }
+
+                if ("$values.kafka_min_insync_replicas" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.kafka_min_insync_replicas - > $values.kafka_min_insync_replicas}"
+                }
+
+                if ("$values.kafka_transaction_state_log_min_isr" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.kafka_transaction_state_log_min_isr - > $values.kafka_transaction_state_log_min_isr}"
+                }
+
+                if ("$values.kafka_transaction_state_log_replication_factor" == 'null') {
+                    values.port_internal = '1'
+                    println  "{default values.kafka_transaction_state_log_replication_factor - > $values.kafka_transaction_state_log_replication_factor}"
+                }
+
+                if ("$values.zookeeper_parameters" == 'null') {
+                    values.port_internal = '172.17.0.1:2281'
+                    println  "{default values.zookeeper_parameters - > $values.zookeeper_parameters}"
                 }
 
 //Send values to Ansible
