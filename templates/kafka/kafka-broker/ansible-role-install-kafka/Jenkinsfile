@@ -116,9 +116,9 @@ pipeline {
                     println  "{default values.kafka_transaction_state_log_replication_factor - > $values.kafka_transaction_state_log_replication_factor}"
                 }
 
-                if ("$values.zookeeper_parameters" == 'null') {
-                    values.zookeeper_parameters = '172.17.0.1:2281'
-                    println  "{default values.zookeeper_parameters - > $values.zookeeper_parameters}"
+                if ("$zookeeper_parameters" == 'null') {
+                    zookeeper_parameters = '172.17.0.1:2281'
+                    println  "{default values.zookeeper_parameters - > $zookeeper_parameters}"
                 }
 
 //Send values to Ansible
