@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  roles:
+#    - ansible-role-install-preparation
+
+- hosts: all
+  become: true
+  roles:
+#    - ansible-role-install-k8s
+
+- hosts: k8s-master
+  become: true
+  roles:
+#    - ansible-role-cluster-init-master-k8s
+
+- hosts: etcd_node
+  become: true
+  debugger: true
+  roles:
+    - ansible-role-install-etcd

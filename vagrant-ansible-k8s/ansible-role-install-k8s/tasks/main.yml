@@ -1,0 +1,64 @@
+---
+# tasks file for ansible-galaxy-k8s
+
+- name: add Kubernetes apt-key | Add k8s repo
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: add Kubernetes APT repository | Add k8s repo
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: 'kubernetes'
+
+- name: copy docker config | Change docker config file
+  template:
+    src: "{{ item }}"
+    dest: "{{ docker_daemon_config_path }}/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ docker_template_config_path }}/*.j2"
+
+- name: copy mode core | Add system configs
+  template:
+    src: "{{ item }}"
+    dest: "{{ core_mode_path }}/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ core_mode }}/*.j2"
+
+- name: copy config core | Add system configs
+  template:
+    src: "{{ item }}"
+    dest: "{{ core_config_path }}/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - "{{ core_config }}/*.j2"
+
+- name: add config core to OS | Add system configs
+  command: "{{ item }}"
+  loop:
+    - modprobe br_netfilter
+    - modprobe overlay
+    - sysctl --system
+
+- name: "restart the docker service"
+  command: systemctl restart docker
+
+- name: Remove swapfile from /etc/fstab | Disable sawp from fstab
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+- name: Disable swap | Disable sawp
+  command: swapoff -a
+  when: ansible_swaptotal_mb > 0
+
+- name: install packages | Install k8s packages
+  apt:
+    name:
+      - kubelet
+      - kubeadm
+      - kubernetes-cni
+      - kubectl
+    state: present
+    update_cache: yes

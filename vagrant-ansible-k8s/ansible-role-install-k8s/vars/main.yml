@@ -1,0 +1,5 @@
+---
+# vars file for ansible-galaxy-k8s
+docker_daemon_config_path: /etc/docker
+core_mode_path: /etc/modules-load.d/
+core_config_path: /etc/sysctl.d/

@@ -1,0 +1,132 @@
+---
+# tasks file for ansible-galaxy-k8s
+# - name: install packages
+#   apt:
+#     name:
+#       - curl
+#       - git
+#       - apt-transport-https
+#       - software-properties-common
+#       - ca-certificates
+#       - golang
+#     state: present
+#     update_cache: yes
+
+# - name: "create directory for etcd bin"
+#   file:
+#     path: "{{ dir_etcd }}"
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: 0700
+
+# - name: download etcd from google cloud
+#   get_url:
+#     url: "{{ url_etcd }}"
+#     dest: /tmp/etcd.tar.gs
+#     force: True
+
+# - name: "Extract the contents of the tarball"
+#   unarchive:
+#     src: /tmp/etcd.tar.gs
+#     dest: "{{ dir_etcd }}"
+#     extra_opts:
+#       - --strip-components=1
+#     decrypt: True
+#     remote_src: True
+
+# - name: "add /opt/etcd/bin/ to the $PATH environment variable"
+#   lineinfile:
+#     path: /etc/profile
+#     line: export PATH="$PATH:/opt/etcd/bin"
+#     state: present
+#     create: True
+#     insertafter: EOF
+
+# - name: copy system etcd config
+#   template:
+#     src: "{{ item }}"
+#     dest: "/etc/systemd/system/{{ item | basename | regex_replace('.j2','') }}"
+#   with_fileglob:
+#     - "{{ etcd_system_template_config_path }}"
+
+# - name: "Create a data directory"
+#   file:
+#     path: /var/lib/etcd/{{ inventory_hostname }}.etcd
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: 0755
+###########
+
+- name: copy system etcd config
+  template:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/kubelet.service.d/{{ item | basename | regex_replace('.j2','') }}"
+    owner: root
+    group: root
+  with_fileglob:
+    - "{{ kubelet_system_template_config_path }}"
+
+- name: Restart kubelet
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: kubelet
+
+- name: Create a PKI directory
+  file:
+    path: /etc/kubernetes/pki/etcd/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Create directory for etcd configuration
+  file:
+    path: /etc/etcd
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: copy system etcd config
+  template:
+    src: "{{ item }}"
+    dest: "/etc/etcd/{{ item | basename | regex_replace('.j2','') }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_fileglob:
+    - "{{ etcd_system_template_config_path }}"
+
+- name: Create certificates for each member
+  shell: "{{ item }}"
+  loop:
+    - "kubeadm init phase certs etcd-server --config=/etc/etcd/kubeadmcfg.yaml"
+    - "kubeadm init phase certs etcd-peer --config=/etc/etcd/kubeadmcfg.yaml"
+    - "kubeadm init phase certs etcd-healthcheck-client --config=/etc/etcd/kubeadmcfg.yaml"
+    - "kubeadm init phase certs apiserver-etcd-client --config=/etc/etcd/kubeadmcfg.yaml"
+
+- name: Create the static pod manifests
+  shell: kubeadm init phase etcd local --config=/etc/etcd/kubeadmcfg.yaml
+
+- name: Check configs
+  shell: |
+    docker run --rm -it \
+    --net host \
+    -v /etc/kubernetes:/etc/kubernetes registry.k8s.io/etcd:"$(kubeadm config images list | grep 'etcd:' | cut -d: -f2)" etcdctl \
+    --cert /etc/kubernetes/pki/etcd/peer.crt \
+    --key /etc/kubernetes/pki/etcd/peer.key \
+    --cacert /etc/kubernetes/pki/etcd/ca.crt \
+    --endpoints https://"{{ hostvars[inventory_hostname]['ansible_facts']['enp0s9']['ipv4']['address'] }}":2379 endpoint health --cluster
+  register: etcd_status
+
+- debug:
+    msg: "{{ etcd_status }}"
+
+# - name: "Start the etcd service"
+#   command: systemctl restart etcd
+
+# - name: "Enable the etcd service"
+#   command: systemctl enable etcd

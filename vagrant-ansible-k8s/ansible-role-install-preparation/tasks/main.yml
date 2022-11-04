@@ -1,0 +1,99 @@
+---
+# Install recomended packages
+# https://setplexapps.atlassian.net/wiki/spaces/IN/pages/502497307/Nora+preparation+of+the+server+deploy+of+components
+- name: apt upgrade | Update
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: add nginx apt-key | Add nginx key
+  apt_key:
+    url: http://nginx.org/keys/nginx_signing.key
+    state: present
+
+- name: add docker apt-key | Add docker key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add nginx repo | Add nginx repo
+  apt_repository:
+    repo: ppa:nginx/stable
+    state: present
+    update_cache: yes
+    filename: nginx
+
+- name: add docker repo | Add docker repo
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+    state: present
+    update_cache: yes
+    filename: docker
+
+- name: install packages | Install defaul packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - certbot
+      - containerd.io
+      - curl
+      - docker-ce
+      - docker-ce-cli
+      - git
+      - gnupg-agent
+      - haveged
+      - htop
+      - iptables-persistent
+      - lbzip2
+      - libmysqlclient-dev
+      - mc
+      - mysql-client
+      - netdiag
+      - netfilter-persistent
+      - nginx
+      - python3-pip
+      - python3-certbot
+      - python3-certbot-nginx
+      - python3-mysqldb
+      - python-dev
+      - software-properties-common
+      - traceroute
+      - wget
+    state: present
+    update_cache: yes
+
+- name: pip update | Update pip
+  pip:
+    name:
+      - pip
+    extra_args: --upgrade
+    executable: pip
+
+- name: pip install packages | Install pip packages
+  pip:
+    name:
+      - docker
+      - docker-compose
+      - boto
+      - mysqlclient
+    executable: pip
+    state: latest
+
+- name: pip3 update | Update pip3
+  pip:
+    name:
+      - pip
+    extra_args: --upgrade
+    executable: pip3
+
+- name: pip3 install packages | Install pip3 packages
+  pip:
+    name:
+      - setuptools
+      - docker
+      - docker-compose
+      - boto
+      - mysqlclient
+    executable: pip3
+    state: latest

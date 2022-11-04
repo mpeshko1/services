@@ -1,0 +1,5 @@
+---
+# defaults file for ansible-galaxy-k8s
+etcd_system_template_config_path: "{{ role_path }}/templates/kubeadmcfg/kubeadmcfg.yaml.j2"
+kubelet_system_template_config_path: "{{ role_path }}/templates/system/20-etcd-service-manager.conf.j2"
+etcd_config_template_path: "{{ role_path }}/templates/config/etcd.conf.yaml.j2"
